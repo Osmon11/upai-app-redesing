@@ -1,0 +1,19 @@
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
+<rect width="25" height="25" fill="url(#pattern0)"/>
+</mask>
+<g mask="url(#mask0)">
+<rect width="25" height="25" fill="url(#pattern1)"/>
+<rect width="25" height="25" fill="#FF6B00"/>
+<rect width="25" height="25" fill="#225196"/>
+</g>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0" transform="scale(0.0104167)"/>
+</pattern>
+<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0" transform="scale(0.0104167)"/>
+</pattern>
+<image id="image0" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAD/0lEQVR4nO2dXYgOURjHf9YiG9bHknyUFMqqLSVKKUUrX3shm1y4cOGK3IgryZ3CnZTkxo2UtKJWZEspJYuSQklJvhZrd32363Ux+9Za78yZmffMeebM+/zq3Ly98zz/8/xnzpw5Z95dUBRFURRFURRF8YOJwEmgB3gPHB/+THHAfOAeUBrVHgELBXXVBBuAT/xf/HLrA9rE1BWYMcAhYJDw4pfbH+AYUCeitIBMBi5hLvzodg2YKqC3UCwBnpC8+OX2HFjmXHVB2A4MEF3g38Mt6jsDw7GUmIwlGMP/EF3YD8BaYDXwxvDdEnAGGOewH17SBNzEXMw7wJwRx80EumIcdxuY7aAfXrIceEm8M3l8hePrCa4c0/GvgVUZ9sNLdgHfiS7cD2B3jFg7gW+GWD+B/VZ74CkTCM5o01n7CliRIG4L8CJG3PPU8BLGPOAu5iJ1AbNSxJ8OdMaI3w0sqKIfXrIGeEd0YcpPtGOryFN+gh4y5OoB1leRxyv2YJ679wPbLObcBPQacg4SmDXGYt5cMQm4iHlIeAoszSD/IuBxjPxXgMYM8osSt/MdZNt56ZNAhM3k7/KXGAadk+QGuE5A3xrgrUGbjYmACNOB6+R/CjiXbKfCIvj2EJTVw6AIPi8D2FwOcU5RFsKqXRAUoZF4S8FdBMvGeSfu0vYtcvC8MIXgRmqaSZwguEp8oZ5As2lT6D7BnrUIdZhnOgNAu5RAC7Rj3hbtROgNjIMGYc+AZglhlmkm6EtUXw+4FjWX6NnOVXIwPlqkkaBPYf39yr9bpJlzOkLMBfwa7+NST/Q60ilXQhoJHxfv4OFjewLqCX9y7sfRDXlHiIBfFGPMN7GM8IU8JxOOcyHJL7tInhM6qFyDs0kDpZk+tYR8fiFFLF8J62tYbazykcruL3aRPCcsoXINelwkDxv/GlwkzwkNVK7B76SB0uxAlSzG8hkrddAfMQijBgijBgijBgijBgijBgijBgijBgijBgijBgiTdwOagKPAA4JtP9OrIiO3CLuHj53hXHXGhHXaNm3Al4h8cVsvsDUDfa7qIJK4DfNb1UnaELDFssbCGtCEnTN/dPuM3eHISh3yeA/YRzavtEwD9mYQ1zlZXwEPI3JU27ot6izsENQfEn9lghirQmL0WdRppQ553BGzFd8LnXm8B9QUaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwaoAwNv+mg5MNaQvkSmeaK2DAugozaTbTvdCZxoB7KY6pljQ5fdGZmI1k995OWGstsM5UHHHUoRJwuAZ0pqKV4B/uhL1IVU3rB25g54zyRaeiKIqiKIqiKIqi1AB/AbDWgqVyV9ViAAAAAElFTkSuQmCC"/>
+</defs>
+</svg>
