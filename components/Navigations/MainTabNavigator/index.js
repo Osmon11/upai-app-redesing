@@ -173,18 +173,16 @@ export default function MainTabNavigator() {
             }}
           >
             <View style={{ flex: 1, backgroundColor: '#fff' }}></View>
-            <Svg width={75} height={61} viewBox="0 0 75 61">
-              <Path
-                d="M75.2 0v61H0V0c4.1 0 7.4 3.1 7.9 7.1C10 21.7 22.5 33 37.7 33c15.2 0 27.7-11.3 29.7-25.9.5-4 3.9-7.1 7.9-7.1h-.1z"
-                fill={'#fff'}
-              />
-            </Svg>
+            <Svg width="73" height="83" viewBox="0 0 73 83" fill="none" >
+<Path fill-rule="evenodd" clip-rule="evenodd" d="M3.74594 1.36587C3.47967 0.562792 2.74122 0 1.89514 0C0.848485 0 0 0.848484 0 1.89514V79C0 81.2091 1.79086 83 4 83H69C71.2091 83 73 81.2091 73 79V1.89514C73 0.848485 72.1515 0 71.1049 0C70.2588 0 69.5203 0.562793 69.2541 1.36587C64.7016 15.0958 51.7574 25 36.5 25C21.2426 25 8.29838 15.0958 3.74594 1.36587Z" fill="white"/>
+</Svg>
             <View style={{ flex: 1, backgroundColor: '#fff' }}></View>
           </View>
           <TouchableOpacity
             style={{
               flex: 1,
-              top: -32,
+              position:'absolute',
+              top:-14,
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: '#fff',
@@ -200,7 +198,7 @@ export default function MainTabNavigator() {
         <TouchableOpacity
           style={{
             flex: 1,
-            height: 61,
+            height: 60,
             backgroundColor: '#fff',
           }}
           activeOpacity={1}
@@ -228,7 +226,7 @@ export default function MainTabNavigator() {
             width: 0,
           },
           elevation: 5,
-          height: scalePoint * 66,
+          height: 60,
           backgroundColor: 'transparent',
         },
       }}
