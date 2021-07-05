@@ -14,18 +14,14 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "icon": "./assets/icon.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.example.upai",
       "buildNumber": "3.3.2",
       "infoPlist": {
-        "LSApplicationQueriesSchemes": [
-          "upai"
-        ],
+        "LSApplicationQueriesSchemes": ["upai"],
         "NSCameraUsageDescription": "Приложение запрашивает доступ к камере для считывания qr кода и загрузки сделаных вами снимков",
         "NSPhotoLibraryUsageDescription": "Приложение запрашивет доступ к галереи для загрузки выбраной вами фотографии "
       }
@@ -36,11 +32,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": [
-        "NOTIFICATIONS",
-        "CAMERA",
-        "MEDIA_LIBRARY"
-      ],
+      "permissions": ["NOTIFICATIONS", "CAMERA", "MEDIA_LIBRARY"],
       "versionCode": 6,
       "googleServicesFile": "./google-services.json",
       "package": "com.up.upaii",
@@ -50,15 +42,12 @@
           "autoVerify": true,
           "data": [
             {
-              "scheme": "https",
-              "host": "*.upai.kg",
+              "scheme": "app",
+              "host": "upai://referal",
               "pathPrefix": "/"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
     },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -12,22 +12,38 @@ import {
   Share,
   Linking,
   Clipboard,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import DialogAlert from '../../../../Common/DialogAlert';
-import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
-import referalsQuestionIcon from '../../../../Images/referalsQuestionIcon.png';
-import copyLinkIcon from '../../../../Images/referalsScreenCopyLinkIcon.png';
-import shareLinkIcon from '../../../../Images/referalsScreenShareLinkIcon.png';
-import MyReferals from '../MyReferalsScreen/MyReferals';
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../../../config';
-const window = Dimensions.get('window');
+import { useNavigation } from "@react-navigation/native";
+import DialogAlert from "../../../../Common/DialogAlert";
+import HeaderInStackScreens from "../../../../Common/HeaderInStackScreens";
+import referalsQuestionIcon from "../../../../Images/referalsQuestionIcon.png";
+import copyLinkIcon from "../../../../Images/referalsScreenCopyLinkIcon.png";
+import shareLinkIcon from "../../../../Images/referalsScreenShareLinkIcon.png";
+import MyReferals from "../MyReferalsScreen/MyReferals";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../../../config";
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
+import dynamicLinks from "@react-native-firebase/dynamic-links";
+
+async function buildLink(phoneNumber) {
+  const link = await dynamicLinks().buildLink({
+    link: `upai://referal/?phone=${phoneNumber}`,
+    // domainUriPrefix is created in your Firebase console
+    domainUriPrefix: `https://upairef.page.link/${phoneNumber}`,
+    // optional setup which updates Firebase analytics campaign
+    // "banner". This also needs setting up before hand
+    // analytics: {
+    //   campaign: "banner",
+    // },
+  });
+  console.log(link);
+  return link;
+}
 
 export default function ReferalsScreen() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   React.useEffect(() => {
     getAllInfo();
     getALlReferals();
@@ -36,44 +52,40 @@ export default function ReferalsScreen() {
   const [modalTxt, setModalTxt] = useState();
   const [allReferals, setAllReferals] = useState([]);
   const getAllInfo = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
-    getInUrl(data.phone);
-  };
-  const getInUrl = async (phone) => {
-    setValue('upai://referal/?phone=' + phone);
+    setValue(buildLink(data.phone));
   };
   const navigation = useNavigation();
   const sendUrl = async () => {
-    if(Platform.OS == 'android'){
+    if (Platform.OS == "android") {
       Share.share({
         title: value,
       });
-    }else{
+    } else {
       Share.share({
         url: value,
       });
     }
-   
   };
   const copy = async () => {
     Clipboard.setString(value);
     const text = await Clipboard.getString();
     setAnswerModal(true);
-    setModalTxt('Ссылка скопирована \n' + text);
+    setModalTxt("Ссылка скопирована \n" + text);
   };
   const getALlReferals = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/referral/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/referral/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -89,13 +101,13 @@ export default function ReferalsScreen() {
           <View style={styles.mainContentBox}>
             <Text style={styles.mainText}>Реферальная система</Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate('AboutReferalScreen')}
+              onPress={() => navigation.navigate("AboutReferalScreen")}
             >
               <Image
                 style={{
                   width: scalePoint * 20,
                   height: scalePoint * 20,
-                  resizeMode: 'contain',
+                  resizeMode: "contain",
                 }}
                 source={referalsQuestionIcon}
               />
@@ -103,24 +115,24 @@ export default function ReferalsScreen() {
           </View>
           <View style={styles.textContentBox}>
             <Text style={styles.textContent}>
-              Хочешь добавить свою компанию в УПАЙ {'\n'}
-              Укажите название , номер и мы свяжемся с вами. {'\n'}
-              {'\n'}Пригласи друга по уникальной ссылке и получай бонусы Получай
+              Хочешь добавить свою компанию в УПАЙ {"\n"}
+              Укажите название , номер и мы свяжемся с вами. {"\n"}
+              {"\n"}Пригласи друга по уникальной ссылке и получай бонусы Получай
               бонусы приглашая друзей
             </Text>
           </View>
           <View style={styles.textInputBox}>
             <TextInput
               style={styles.textInput}
-              placeholder={value}
+              // placeholder={value}
               editable={false}
             />
           </View>
           <View
             style={{
-              marginTop: '10%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              marginTop: "10%",
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
             <TouchableOpacity style={styles.btnStyle} onPress={copy}>
@@ -139,7 +151,7 @@ export default function ReferalsScreen() {
         </View>
       </ScrollView>
       <DialogAlert
-        visible={'none'}
+        visible={"none"}
         answerModal={answerModal}
         setAnswerModal={setAnswerModal}
         message={modalTxt}
@@ -153,74 +165,74 @@ export default function ReferalsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '10%',
-    width: '100%',
+    marginTop: Platform.OS === "ios" ? "15%" : "10%",
+    width: "100%",
     height: scalePoint * 23,
   },
   mainContentBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '8%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: "8%",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   textContentBox: {
-    marginTop: '5%',
+    marginTop: "5%",
   },
   textContent: {
     fontSize: 14,
     lineHeight: 16,
-    color: '#515151',
+    color: "#515151",
   },
   textInputBox: {
-    marginTop: '10%',
-    width: '100%',
+    marginTop: "10%",
+    width: "100%",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 10,
   },
   textInput: {
-    width: '100%',
-    padding: '4%',
+    width: "100%",
+    padding: "4%",
     fontSize: 16,
     lineHeight: 18,
-    color: '#a6a6a6',
+    color: "#a6a6a6",
   },
   btnStyle: {
-    width: '48%',
+    width: "48%",
     height: scalePoint * 45,
-    backgroundColor: '#ff6b00',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#ff6b00",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
 
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   btnIcon: {
     width: scalePoint * 20,
     height: scalePoint * 20,
-    resizeMode: 'contain',
-    marginRight: '3%',
+    resizeMode: "contain",
+    marginRight: "3%",
   },
   btnTxt: {
     fontSize: 12,
     lineHeight: 14,
-    color: '#fff',
+    color: "#fff",
   },
   componentsMargin: {
-    marginTop: '10%',
+    marginTop: "10%",
   },
   contentBox: {
-    marginTop: '15%',
-    marginBottom: '5%',
+    marginTop: "15%",
+    marginBottom: "5%",
   },
 });
