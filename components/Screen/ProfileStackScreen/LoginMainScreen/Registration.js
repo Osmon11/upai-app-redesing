@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -7,29 +7,30 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import { CheckBox, Separator } from 'react-native-btr';
+import { useNavigation } from "@react-navigation/native";
+import { CheckBox, Separator } from "react-native-btr";
 
-import phoneIcon from '../../../Images/PhoneIcon.png';
-import passIcon from '../../../Images/PassIcon.png';
-import { AGREEMENT, API } from '../../../config';
-import * as Linking from 'expo-linking';
-import AsyncStorage from '@react-native-community/async-storage';
-import DialogAlert from '../../../Common/DialogAlert';
+import phoneIcon from "../../../Images/PhoneIcon.png";
+import passIcon from "../../../Images/PassIcon.png";
+import { AGREEMENT, API } from "../../../config";
+import * as Linking from "expo-linking";
+import AsyncStorage from "@react-native-community/async-storage";
+import DialogAlert from "../../../Common/DialogAlert";
+import { regReferal } from "./Login";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function RegistrationScreen({ open }) {
-  const [value, numberInput] = useState('Введите номер');
-  const [value1, passInput] = useState('Введите код с сообщения');
-  const [value2, rePassInput] = useState('Придумайте пароль');
-  const [num, setNum] = useState('996');
-  const [numPhone, setNumPhone] = useState('996');
-  const [pin, setPin] = useState('');
-  const [pass2, setPass2] = useState('');
+  const [value, numberInput] = useState("Введите номер");
+  const [value1, passInput] = useState("Введите код с сообщения");
+  const [value2, rePassInput] = useState("Придумайте пароль");
+  const [num, setNum] = useState("996");
+  const [numPhone, setNumPhone] = useState("996");
+  const [pin, setPin] = useState("");
+  const [pass2, setPass2] = useState("");
   const [getpin, setPinInput] = useState(false);
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState(false);
@@ -43,30 +44,35 @@ export default function RegistrationScreen({ open }) {
       password: pass2,
     };
     try {
-      const response = await fetch(API + 'users/token/', {
-        method: 'POST', // или 'PUT'
+      const response = await fetch(API + "users/token/", {
+        method: "POST", // или 'PUT'
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
       });
       const json = await response.json();
-
+      const referrer = await AsyncStorage.getItem("referrer");
+      if (Boolean(referrer) && Boolean(json.access)) {
+        regReferal(referrer, json.access);
+      }
       if (json.access) {
-        await AsyncStorage.setItem('token', json.access);
-        navigation.navigate('ProfileStackScreen', {screen:'PrivacyPolicyScreen'});
+        await AsyncStorage.setItem("token", json.access);
+        navigation.navigate("ProfileStackScreen", {
+          screen: "PrivacyPolicyScreen",
+        });
       } else {
         setAnswerModal(true);
         setModalTxt(json.detail);
       }
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
 
   const getNum = (e) => {
-    let value = e.replace(/\s+/g, '');
-    let isBackspace = e === 'Backspace';
+    let value = e.replace(/\s+/g, "");
+    let isBackspace = e === "Backspace";
 
     if (
       (e.length === 1 && /^[^\d\s]+$/.test(e)) ||
@@ -77,16 +83,16 @@ export default function RegistrationScreen({ open }) {
 
     setNum(
       value
-        .split('')
+        .split("")
         .reverse()
-        .join('')
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-        .split('')
+        .join("")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        .split("")
         .reverse()
-        .join('')
+        .join("")
         .trim()
     );
-    setNumPhone(value.replace(/\s/g, ''));
+    setNumPhone(value.replace(/\s/g, ""));
   };
 
   const getPinCode = async () => {
@@ -96,10 +102,10 @@ export default function RegistrationScreen({ open }) {
         password: pass2,
       };
       try {
-        const response = await fetch(API + 'users/pre-register/', {
-          method: 'POST', // или 'PUT'
+        const response = await fetch(API + "users/pre-register/", {
+          method: "POST", // или 'PUT'
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
         });
@@ -119,7 +125,7 @@ export default function RegistrationScreen({ open }) {
           setModalTxt(json.error);
         }
       } catch (error) {
-        console.error('Ошибка:', error);
+        console.error("Ошибка:", error);
       }
     } else {
       const data = {
@@ -128,10 +134,10 @@ export default function RegistrationScreen({ open }) {
         password: pass2,
       };
       try {
-        const response = await fetch(API + 'users/register/', {
-          method: 'POST', // или 'PUT'
+        const response = await fetch(API + "users/register/", {
+          method: "POST", // или 'PUT'
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
         });
@@ -153,9 +159,9 @@ export default function RegistrationScreen({ open }) {
         }
 
         setPinInput(false);
-        setPin('');
+        setPin("");
       } catch (error) {
-        console.error('Ошибка:', error);
+        console.error("Ошибка:", error);
       }
     }
   };
@@ -166,7 +172,7 @@ export default function RegistrationScreen({ open }) {
           <Image style={styles.textInputsIcon} source={phoneIcon} />
           <TextInput
             style={styles.textInputStyle}
-            keyboardType="number-pad"
+            keyboardType='number-pad'
             maxLength={19}
             value={num}
             placeholder={value}
@@ -180,7 +186,7 @@ export default function RegistrationScreen({ open }) {
             <TextInput
               style={styles.textInputStyle}
               placeholder={value1}
-              keyboardType="number-pad"
+              keyboardType='number-pad'
               value={pin}
               maxLength={4}
               onChangeText={(text) => setPin(text)}
@@ -201,21 +207,21 @@ export default function RegistrationScreen({ open }) {
 
       <View
         style={{
-          alignItems: 'center',
-          marginTop: '5%',
+          alignItems: "center",
+          marginTop: "5%",
         }}
       >
         {open && (
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginBottom: '2%',
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: "2%",
             }}
           >
             <CheckBox
               checked={toggleCheckBox}
-              color={'#225196'}
+              color={"#225196"}
               onPress={(newValue) => setToggleCheckBox(!toggleCheckBox)}
             />
             <TouchableOpacity
@@ -224,9 +230,9 @@ export default function RegistrationScreen({ open }) {
             >
               <Text
                 style={{
-                  borderBottomColor: '#225196',
+                  borderBottomColor: "#225196",
                   borderBottomWidth: 1,
-                  color: '#225196',
+                  color: "#225196",
                   marginLeft: 5,
                 }}
               >
@@ -244,12 +250,12 @@ export default function RegistrationScreen({ open }) {
         >
           <Text
             style={{
-              color: '#fff',
+              color: "#fff",
               fontSize: 16,
               lineHeight: 19,
             }}
           >
-            {getpin ? 'Зарегистрироваться' : 'Получить пин'}
+            {getpin ? "Зарегистрироваться" : "Получить пин"}
           </Text>
         </TouchableOpacity>
       </View>
@@ -264,49 +270,49 @@ export default function RegistrationScreen({ open }) {
 }
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
-    alignItems: 'center',
-    alignSelf: 'center',
+    width: "90%",
+    alignItems: "center",
+    alignSelf: "center",
   },
   btnSignIn: {
     width: scalePoint * 233,
     height: scalePoint * 45,
-    backgroundColor: '#225196',
-    alignItems: 'center',
+    backgroundColor: "#225196",
+    alignItems: "center",
     borderRadius: 30,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   btnSignInOff: {
     width: scalePoint * 233,
     height: scalePoint * 45,
-    backgroundColor: 'grey',
-    alignItems: 'center',
+    backgroundColor: "grey",
+    alignItems: "center",
     borderRadius: 30,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   inputBox: {
-    width: '100%',
-    marginTop: '5%',
+    width: "100%",
+    marginTop: "5%",
     height: 45,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderWidth: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
   },
   textInputsIcon: {
     width: 18,
     height: 18,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   textInputStyle: {
-    width: '80%',
+    width: "80%",
     height: 40,
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 16,
     lineHeight: 18,
-    fontFamily: 'SfPro',
-    color: '#225196',
+    fontFamily: "SfPro",
+    color: "#225196",
   },
 });

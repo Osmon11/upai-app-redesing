@@ -35,28 +35,6 @@ export default function ReferalsScreen() {
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
   const [allReferals, setAllReferals] = useState([]);
-  // const generate = async (phone) => {
-  //   let data = await fetch(
-  //     "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyB-GsnkDBtwGYt3Kw1g9jtLKn94D7al34s",
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         dynamicLinkInfo: {
-  //           domainUriPrefix: `https://upairef.page.link?referal=${phone}`,
-  //           link: `https://upai.page.link?referal=${phone}`,
-  //           androidInfo: {
-  //             androidPackageName: "com.up.upaii",
-  //           },
-  //           iosInfo: {
-  //             iosBundleId: "com.example.upai",
-  //           },
-  //         },
-  //       }),
-  //     }
-  //   ).then((res) => res.json().then((data) => data));
-  //   console.log(data);
-  //   return data.shortLink;
-  // };
   const getAllInfo = async () => {
     const token = await AsyncStorage.getItem("token");
     const resp = await fetch(API + "users/profile/", {
@@ -66,16 +44,52 @@ export default function ReferalsScreen() {
       },
     });
     const data = await resp.json();
+
     if (data.code === "user_not_found") {
       navigation.navigate("ProfileStackScreen", {
         screen: "LoginMainScreen",
       });
     }
-    setValue(
-      Boolean(data.referral_link)
+    let refLink =
+      data.referral_link !== null
         ? data.referral_link.shortLink
-        : "ссылка не найдена"
-    );
+        : await fetch(
+            "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyB-GsnkDBtwGYt3Kw1g9jtLKn94D7al34s",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                dynamicLinkInfo: {
+                  domainUriPrefix: "https://upai.one/referral",
+                  link: `https://upai.kg/referral/?referral=${data.phone}`,
+                  androidInfo: {
+                    androidPackageName: "com.up.upaii",
+                  },
+                  iosInfo: {
+                    iosBundleId: "com.example.upai",
+                  },
+                },
+              }),
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => data.shortLink);
+
+    if (refLink) {
+      setValue(refLink);
+      fetch(API + "users/profile/", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          referral_link: { shortLink: refLink },
+        }),
+      }).then((res) => res.json().then((data) => console.log(data)));
+    } else {
+      setValue("ссылка не найдена");
+    }
   };
 
   const navigation = useNavigation();

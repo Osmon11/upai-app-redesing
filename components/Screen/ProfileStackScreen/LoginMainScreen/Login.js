@@ -21,7 +21,7 @@ import { API } from "../../../config";
 import AsyncStorage from "@react-native-community/async-storage";
 import DialogAlert from "../../../Common/DialogAlert";
 
-const regReferal = async (referrer, token) => {
+export const regReferal = async (referrer, token) => {
   let data = await fetch(API + "users/referral/" + referrer + "/", {
     method: "POST", // или 'PUT'
     headers: {
@@ -36,13 +36,7 @@ const regReferal = async (referrer, token) => {
     .catch((error) => {
       console.error("Ошибка:", error);
     });
-  // alert(`${JSON.stringify(data)}`);
   AsyncStorage.removeItem("referrer");
-  if (data.messages) {
-    alert(data.messages[0].message);
-  } else if (data.non_field_errors) {
-    alert(data.non_field_errors[0]);
-  }
 };
 
 const window = Dimensions.get("window");
@@ -73,6 +67,7 @@ export default function Login() {
       });
       const json = await response.json();
       const referrer = await AsyncStorage.getItem("referrer");
+
       if (Boolean(referrer) && Boolean(json.access)) {
         regReferal(referrer, json.access);
       }
