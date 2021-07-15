@@ -36,6 +36,7 @@ export default function ProfileSettingScreen(props) {
           <View
             style={{
               marginTop: '5%',
+              marginBottom: '15%',
             }}
           >
             <SetPass />
