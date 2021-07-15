@@ -21,7 +21,7 @@ import request from 'superagent';
 import AsyncStorage from '@react-native-community/async-storage';
 import DialogAlert from '../../../Common/DialogAlert';
 import AnimatedLoader from 'react-native-animated-loader';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const scalePoint = width / 380;
@@ -259,7 +259,9 @@ export default function SetProfileInfo() {
           message={modalTxt}
           funcOk={() => {
             setAnswerModal(false);
-            navigation.navigate('LoginMainScreen');
+            navigation.dispatch(
+                CommonActions.reset({ routes: [{ name: 'ProfileScreen' }] })
+              )
           }}
         />
       </View>
