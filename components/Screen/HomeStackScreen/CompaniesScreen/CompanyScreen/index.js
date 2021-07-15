@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect, createRef } from "react";
 import {
   Image,
   Text,
@@ -9,33 +9,33 @@ import {
   Dimensions,
   Platform,
   KeyboardAvoidingView,
-} from 'react-native';
+} from "react-native";
 
-import { BoxShadow } from 'react-native-shadow';
-import { AntDesign } from '@expo/vector-icons';
-import { ActionSheet, Root } from 'native-base';
+import { BoxShadow } from "react-native-shadow";
+import { AntDesign } from "@expo/vector-icons";
+import { ActionSheet, Root } from "native-base";
 
-import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
+import HeaderInStackScreens from "../../../../Common/HeaderInStackScreens";
 
-import callIcon from '../../../../Images/callIcon.png';
-import instagramIcon from '../../../../Images/instagramIcon.png';
-import percentIcon from '../../../../Images/percentIcon.png';
-import AboutUs from './AboutUs';
-import CompanyInfo from './CompanyInfo';
-import Gallery from './Gallery';
-import Reviews from './Reviews';
-import SendReview from './SendReview';
-import { API } from '../../../../config';
-import AsyncStorage from '@react-native-community/async-storage';
-import HotCashesSlider from './HotCashbackScreen/HotCashesSlider';
+import callIcon from "../../../../Images/callIcon.png";
+import instagramIcon from "../../../../Images/instagramIcon.png";
+import percentIcon from "../../../../Images/percentIcon.png";
+import AboutUs from "./AboutUs";
+import CompanyInfo from "./CompanyInfo";
+import Gallery from "./Gallery";
+import Reviews from "./Reviews";
+import SendReview from "./SendReview";
+import { API } from "../../../../config";
+import AsyncStorage from "@react-native-community/async-storage";
+import HotCashesSlider from "./HotCashbackScreen/HotCashesSlider";
 
-import AnimatedLoader from 'react-native-animated-loader';
-import DialogAlert from '../../../../Common/DialogAlert';
-import { useLinkBuilder, useRoute } from '@react-navigation/native';
+import AnimatedLoader from "react-native-animated-loader";
+import DialogAlert from "../../../../Common/DialogAlert";
+import { useLinkBuilder, useRoute } from "@react-navigation/native";
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 const scalePoint = width / 380;
-import * as Linking from 'expo-linking';
+import * as Linking from "expo-linking";
 
 export default function CompanyScreen({ route, navigation }) {
   const [auth, setAuth] = useState(false);
@@ -48,7 +48,7 @@ export default function CompanyScreen({ route, navigation }) {
   const [webPage, setWebPage] = useState();
   const [workingDays, setWorkingDays] = useState();
   const [lowBalance, setLowBalance] = useState(false);
-  const [complaintMessage, setComplaintMessage] = useState('Жалоба отправлена');
+  const [complaintMessage, setComplaintMessage] = useState("Жалоба отправлена");
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
   const [viewLoader, setViewLoader] = React.useState(false);
@@ -64,19 +64,19 @@ export default function CompanyScreen({ route, navigation }) {
     getCompanyById();
   }, [navigation]);
   const getHot = async () => {
-    const resp = await fetch(API + 'hot-cashback/?shop_id=' + itemId);
+    const resp = await fetch(API + "hot-cashback/?shop_id=" + itemId);
     const dat = await resp.json();
     setHot(dat.results);
   };
 
   const getFullInfo = async () => {
     const inUrl = await Linking.getInitialURL();
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
     setToken(token);
-    const resp = await fetch(API + 'users/profile/', {
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -85,7 +85,7 @@ export default function CompanyScreen({ route, navigation }) {
   };
 
   const getInfo = async () => {
-    const result = await AsyncStorage.getItem('token');
+    const result = await AsyncStorage.getItem("token");
     if (result != null) {
       setAuth(true);
     } else {
@@ -94,20 +94,19 @@ export default function CompanyScreen({ route, navigation }) {
   };
 
   const getCompanyById = async () => {
-    let resp = await fetch(API + 'shop/' + itemId + '/', {
+    let resp = await fetch(API + "shop/" + itemId + "/", {
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
       },
     });
 
     let json = await resp?.json();
-
-    setDataCompany(json == '' || undefined ? null : json);
+    setDataCompany(json == "" || undefined ? null : json);
     let number = json?.phone;
     let instagram = json?.instagram;
     let website = json?.web_site;
     let workingDays = json?.working_days;
-    setPhoneNum(number && number?.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 '));
+    setPhoneNum(number && number?.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 "));
     setInstaPage(instagram && instagram);
     setLowBalance(json?.speed ? true : false);
     setWebPage(website && website);
@@ -116,7 +115,7 @@ export default function CompanyScreen({ route, navigation }) {
 
   const getAllreview = async () => {
     let resp = await fetch(
-      API + 'shop/' + itemId + '/review/?offset=0&limit=' + revLim
+      API + "shop/" + itemId + "/review/?offset=0&limit=" + revLim
     );
     let req = await resp.json();
     setReview(req.results);
@@ -130,12 +129,12 @@ export default function CompanyScreen({ route, navigation }) {
       parent: id,
       opinion: text,
     };
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'shop/review/reply/', {
-      method: 'POST',
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "shop/review/reply/", {
+      method: "POST",
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
@@ -145,26 +144,26 @@ export default function CompanyScreen({ route, navigation }) {
   };
   const addComplaint = () => {
     const btns = [
-      'Спам',
-      'Изображение обнаженного тела...',
-      'Враждебные высказывания или...',
-      'Насилие или опасные организации',
-      'Продажа незаконных или подлежа...',
-      'Травля или преследование',
-      'Нарушение прав на интелектуаль...',
-      'Самоубийство',
-      'Нанесение себе увечий или расст...',
-      'Мошенничество или обман',
-      'Ложная информация',
-      'Мне это не нравится',
-      'Другое',
+      "Спам",
+      "Изображение обнаженного тела...",
+      "Враждебные высказывания или...",
+      "Насилие или опасные организации",
+      "Продажа незаконных или подлежа...",
+      "Травля или преследование",
+      "Нарушение прав на интелектуаль...",
+      "Самоубийство",
+      "Нанесение себе увечий или расст...",
+      "Мошенничество или обман",
+      "Ложная информация",
+      "Мне это не нравится",
+      "Другое",
     ];
 
     ActionSheet.show(
       {
         options: btns,
         cancelButtonIndex: 13,
-        title: 'Выберите способ...',
+        title: "Выберите способ...",
         destructiveButtonIndex: 11,
       },
       (buttonIndex) => {
@@ -172,64 +171,64 @@ export default function CompanyScreen({ route, navigation }) {
           case 0:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('spam');
+            report("spam");
 
             break;
           case 1:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('nudity');
+            report("nudity");
 
             break;
           case 2:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('hate');
+            report("hate");
             break;
           case 3:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('violence');
+            report("violence");
             break;
           case 4:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('illegal');
+            report("illegal");
             break;
           case 5:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('harassment');
+            report("harassment");
             break;
           case 6:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('intellectual');
+            report("intellectual");
             break;
           case 7:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('suicide');
+            report("suicide");
             break;
           case 8:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('scam');
+            report("scam");
             break;
           case 9:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('false');
+            report("false");
             break;
           case 10:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('dislike');
+            report("dislike");
             break;
           case 11:
             setAnswerModal(true);
             setModalTxt(complaintMessage);
-            report('other');
+            report("other");
             break;
           default:
             break;
@@ -242,12 +241,12 @@ export default function CompanyScreen({ route, navigation }) {
       category: message,
       shop: itemId,
     };
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'report/', {
-      method: 'POST',
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "report/", {
+      method: "POST",
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
@@ -257,14 +256,14 @@ export default function CompanyScreen({ route, navigation }) {
   const shadowOpt3 = {
     width: 26,
     height: 26,
-    color: '#000',
+    color: "#000",
     border: 3,
     radius: 10,
     opacity: 0.05,
     x: 0,
     y: 0,
     style: {
-      alignSelf: 'center',
+      alignSelf: "center",
     },
   };
 
@@ -273,18 +272,18 @@ export default function CompanyScreen({ route, navigation }) {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
         }}
       >
         <AnimatedLoader
           visible={viewLoader}
-          overlayColor="rgba(255,255,255,1)"
-          source={require('../../../../Common/loader.json')}
-          animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+          overlayColor='rgba(255,255,255,1)'
+          source={require("../../../../Common/loader.json")}
+          animationStyle={{ width: 100, height: 100, resizeMode: "cover" }}
           speed={1}
         ></AnimatedLoader>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+          behavior={Platform.OS === "ios" ? "position" : "height"}
         >
           <ScrollView
             showsVerticalScrollIndicator={false}
@@ -295,7 +294,7 @@ export default function CompanyScreen({ route, navigation }) {
             </View>
             <View
               style={{
-                marginTop: Platform.OS === 'ios' ? '5%' : '5%',
+                marginTop: Platform.OS === "ios" ? "5%" : "5%",
               }}
             >
               <View style={styles.firstBox}>
@@ -309,7 +308,7 @@ export default function CompanyScreen({ route, navigation }) {
                               style={{
                                 width: scalePoint * 10,
                                 height: scalePoint * 10,
-                                resizeMode: 'contain',
+                                resizeMode: "contain",
                               }}
                               source={percentIcon}
                             />
@@ -318,7 +317,7 @@ export default function CompanyScreen({ route, navigation }) {
                             style={{
                               fontSize: 12,
                               lineHeight: 14,
-                              color: '#fff',
+                              color: "#fff",
                             }}
                           >
                             {data ? data.cashback : 0}%
@@ -397,9 +396,9 @@ export default function CompanyScreen({ route, navigation }) {
                       <BoxShadow setting={shadowOpt3}>
                         <View style={styles.instaIconBox}>
                           <AntDesign
-                            name="infocirlceo"
+                            name='infocirlceo'
                             size={scalePoint * 15}
-                            color="#ff0909"
+                            color='#ff0909'
                           />
                         </View>
                       </BoxShadow>
@@ -409,11 +408,11 @@ export default function CompanyScreen({ route, navigation }) {
                 </View>
               </View>
             </View>
-            <View style={{ marginTop: '5%' }}>
+            <View style={{ marginTop: "5%" }}>
               <View style={styles.secondMainBox}>
                 <View
                   style={
-                    lowBalance ? styles.speedOfCashbackBox : { display: 'none' }
+                    lowBalance ? styles.speedOfCashbackBox : { display: "none" }
                   }
                 >
                   <Text style={styles.secondBoxTxt}>
@@ -421,7 +420,7 @@ export default function CompanyScreen({ route, navigation }) {
                   </Text>
                 </View>
                 <AboutUs
-                  about={data ? data : 'пусто'}
+                  about={data ? data : "пусто"}
                   data={data}
                   itemId={itemId}
                 />
@@ -442,7 +441,7 @@ export default function CompanyScreen({ route, navigation }) {
                   />
                 </View>
                 <View style={styles.screensBox}>
-                  <Gallery gallery={data ? data.gallery : ''} />
+                  <Gallery gallery={data ? data.gallery : ""} />
                 </View>
                 <View style={styles.companyInfoBox}>
                   <Reviews
@@ -458,8 +457,8 @@ export default function CompanyScreen({ route, navigation }) {
                   <SendReview
                     shop={itemId}
                     open={() =>
-                      navigation.navigate('ProfileStackScreen', {
-                        screen: 'LoginMainStackScreen',
+                      navigation.navigate("ProfileStackScreen", {
+                        screen: "LoginMainStackScreen",
                       })
                     }
                     getAllreview={getAllreview}
@@ -485,28 +484,28 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   scrollBox: {
-    width: '100%',
-    alignSelf: 'center',
-    backgroundColor: '#fff',
+    width: "100%",
+    alignSelf: "center",
+    backgroundColor: "#fff",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
-    width: '95%',
-    alignSelf: 'center',
+    marginTop: Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
+    width: "95%",
+    alignSelf: "center",
   },
   firstBox: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignSelf: "center",
   },
   accountImgFirstShadowCircle: {
     width: scalePoint * 142,
     height: scalePoint * 142,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: scalePoint * 142 * 0.5,
-    justifyContent: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowRadius: 13,
     shadowOpacity: 0.15,
     shadowOffset: {
@@ -514,27 +513,27 @@ const styles = StyleSheet.create({
       height: 0,
     },
     elevation: 10,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
   },
   accountImgSecondShadowCircle: {
     width: scalePoint * 124,
     height: scalePoint * 124,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: scalePoint * 124 * 0.5,
-    justifyContent: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowRadius: 13,
     shadowOpacity: 0.15,
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     elevation: 8,
   },
   accountImgThirdShadowCircle: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowRadius: 13,
     shadowOpacity: 0.1,
     shadowOffset: {
@@ -542,138 +541,138 @@ const styles = StyleSheet.create({
       height: 0,
     },
     elevation: 8,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: scalePoint * 107 * 0.5,
     width: scalePoint * 107,
     height: scalePoint * 107,
-    alignItems: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    alignSelf: "center",
   },
   cashbacksCircle: {
     width: scalePoint * 45,
     height: scalePoint * 45,
     borderRadius: scalePoint * 45 * 0.5,
-    backgroundColor: '#ff0707',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
+    backgroundColor: "#ff0707",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
     zIndex: 999,
-    alignSelf: 'flex-end',
-    left: '80%',
-    top: '-6%',
+    alignSelf: "flex-end",
+    left: "80%",
+    top: "-6%",
   },
   percentCircle: {
-    position: 'absolute',
-    top: '60%',
-    left: '-10%',
+    position: "absolute",
+    top: "60%",
+    left: "-10%",
     zIndex: 10,
     width: scalePoint * 16,
     height: scalePoint * 16,
     borderRadius: scalePoint * 16 * 0.5,
     borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: '#27ae60',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderColor: "#fff",
+    backgroundColor: "#27ae60",
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 9999,
   },
   accountImgBox: {
-    marginLeft: '5%',
-    width: '40%',
+    marginLeft: "5%",
+    width: "40%",
   },
   accountImg: {
-    alignSelf: 'center',
+    alignSelf: "center",
     borderRadius: scalePoint * 107 * 0.5,
     width: scalePoint * 107,
     height: scalePoint * 107,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   mainTxtBox: {
-    width: '50%',
-    marginLeft: '5%',
+    width: "50%",
+    marginLeft: "5%",
   },
   mainTxt: {
     fontSize: 24,
     lineHeight: 28,
-    color: '#313131',
+    color: "#313131",
   },
   numberAndInstaBox: {
-    marginLeft: '5%',
+    marginLeft: "5%",
   },
   numberBox: {
-    flexDirection: 'row',
-    marginTop: '15%',
+    flexDirection: "row",
+    marginTop: "15%",
   },
   numberIconBox: {
     width: 26,
     height: 26,
     borderRadius: 10,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
   numberText: {
     fontSize: 12,
     lineHeight: 14,
-    alignSelf: 'center',
-    paddingLeft: '3%',
-    color: '#535353',
+    alignSelf: "center",
+    paddingLeft: "3%",
+    color: "#535353",
   },
   instaBox: {
-    flexDirection: 'row',
-    marginTop: '5%',
+    flexDirection: "row",
+    marginTop: "5%",
   },
   instaIconBox: {
     width: 26,
     height: 26,
     borderRadius: 10,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
   instaLoginText: {
     fontSize: 12,
     lineHeight: 14,
-    alignSelf: 'center',
-    paddingLeft: '3%',
-    color: '#535353',
+    alignSelf: "center",
+    paddingLeft: "3%",
+    color: "#535353",
   },
   speedOfCashbackBox: {
-    width: '86%',
-    alignSelf: 'center',
+    width: "86%",
+    alignSelf: "center",
     borderWidth: 1,
-    borderColor: '#ff6b00',
+    borderColor: "#ff6b00",
     borderRadius: 10,
-    marginLeft: '5%',
-    marginRight: '5%',
-    marginBottom: '10%',
+    marginLeft: "5%",
+    marginRight: "5%",
+    marginBottom: "10%",
   },
   secondMainBox: {
-    width: '100%',
-    marginTop: '5%',
-    justifyContent: 'center',
-    marginBottom: '10%',
+    width: "100%",
+    marginTop: "5%",
+    justifyContent: "center",
+    marginBottom: "10%",
   },
   secondBoxTxt: {
     fontSize: 16,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center",
     paddingVertical: 15,
     paddingHorizontal: 25,
-    color: '#ff6b00',
+    color: "#ff6b00",
   },
   screensBox: {
     flex: 1,
-    marginTop: '5%',
-    marginBottom: '10%',
-    width: '100%',
-    alignSelf: 'center',
+    marginTop: "5%",
+    marginBottom: "10%",
+    width: "100%",
+    alignSelf: "center",
   },
   companyInfoBox: {
     flex: 1,
-    marginTop: '5%',
-    marginBottom: '10%',
-    width: '95%',
-    alignSelf: 'center',
+    marginTop: "5%",
+    marginBottom: "10%",
+    width: "95%",
+    alignSelf: "center",
   },
 });

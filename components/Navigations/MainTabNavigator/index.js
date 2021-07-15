@@ -37,76 +37,81 @@ const scalePoint = window.width / 380;
 
 export default function MainTabNavigator() {
   const [auth, setAuth] = React.useState(false);
-  const [phone, setPhone] = React.useState("");
-
-  const [l, setData] = React.useState(null);
+  const [dataLink, setDataLink] = React.useState(false);
 
   React.useEffect(() => {
-    getAllInfo();
     getInfo();
   });
-  function handleDeepLink(event) {
-    let data = Linking.parse(event.url);
-    setData(data);
-    if (data.path == "CompanyScreen/") {
+  function handleDeepLink(data) {
+    // alert(`after***${JSON.stringify(data)}`);
+    if (data.path.split("/")[0] === "shop") {
       navigation.navigate("CompanyScreen", {
-        itemId: data?.queryParams.itemId,
+        itemId: data.path.split("/")[1],
       });
     }
-    if (data.path == "referal/") {
-      getAllInfo();
+    if (data.path.split("/")[1] === "referral") {
       navigation.navigate("HomeStackScreen", { screen: "ReferalsStackScreen" });
-      regReferal(data?.queryParams.phone);
+      regReferal(data.path.split("/")[2]);
     }
   }
   const navigation = useNavigation();
-  const getAllInfo = async () => {
+  const regReferal = async (referrer) => {
     const token = await AsyncStorage.getItem("token");
-    const resp = await fetch(API + "users/profile/", {
+    AsyncStorage.setItem("referrer", referrer);
+    // if (!token) {
+    //   navigation.navigate("ProfileStackScreen", {
+    //     screen: "LoginMainScreen",
+    //   });
+    //   return;
+    // }
+    let data = await fetch(API + "users/referral/" + referrer + "/", {
+      method: "POST", // или 'PUT'
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
-    });
-    const data = await resp.json();
-    setPhone(data.phone);
-  };
-  const regReferal = async (referred) => {
-    const token = await AsyncStorage.getItem("token");
-    alert(referred);
-    const datas = {
-      referrer: phone,
-      referred: referred,
-    };
-    try {
-      const response = await fetch(API + "users/referral/" + referred + "/", {
-        method: "POST", // или 'PUT'
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datas), // данные могут быть 'строкой' или {объектом}!
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => data)
+      .catch((error) => {
+        console.error("Ошибка:", error);
       });
-      const json = await response.json();
-      if (json.messages) {
-        alert(json.messages[0].message);
-      } else if (json.non_field_errors) {
-        alert(json.non_field_errors[0]);
-      }
-    } catch (error) {
-      console.error("Ошибка:", error);
+    if (data.code === "token_not_valid") {
+      navigation.navigate("ProfileStackScreen", {
+        screen: "LoginMainScreen",
+      });
+      return;
+    }
+    AsyncStorage.removeItem("referrer");
+    // alert(JSON.stringify(data));
+    if (data.messages) {
+      alert(data.messages[0].message);
+    } else if (data.non_field_errors) {
+      alert(data.non_field_errors[0]);
     }
   };
   React.useEffect(() => {
-    async function getInitialURL() {
+    const getInitialURL = async () => {
+      setDataLink(true);
       const initialURL = await Linking.getInitialURL();
-      if (initialURL) setData(Linking.parse(initialURL));
-    }
-    Linking.addEventListener("url", handleDeepLink);
-    if (!l) {
+      let data = Linking.parse(initialURL);
+      alert(`before***${JSON.stringify(data)}`);
+      handleDeepLink(data);
+    };
+    if (!dataLink) {
       getInitialURL();
     }
-
+    Linking.addEventListener("url", (event) => {
+      let data = Linking.parse(event.url);
+      handleDeepLink(data);
+    });
+    return () => {
+      Linking.removeEventListener("url");
+    };
+  }, [dataLink]);
+  React.useEffect(() => {
     const subscription = Notifications.addNotificationResponseReceivedListener(
       (response) => {
         const data = response.notification.request.content.data;
@@ -134,9 +139,7 @@ export default function MainTabNavigator() {
       setHasPermission(status == "granted");
     })();
     return () => {
-      Linking.removeEventListener("url");
       subscription.remove();
-      setData(null);
     };
   }, []);
 

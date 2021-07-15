@@ -25,22 +25,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { API } from "../../../../config";
 const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
-import dynamicLinks from "@react-native-firebase/dynamic-links";
-
-async function buildLink(phoneNumber) {
-  const link = await dynamicLinks().buildLink({
-    link: `upai://referal/?phone=${phoneNumber}`,
-    // domainUriPrefix is created in your Firebase console
-    domainUriPrefix: `https://upairef.page.link/${phoneNumber}`,
-    // optional setup which updates Firebase analytics campaign
-    // "banner". This also needs setting up before hand
-    // analytics: {
-    //   campaign: "banner",
-    // },
-  });
-  console.log(link);
-  return link;
-}
 
 export default function ReferalsScreen() {
   const [value, setValue] = useState("");
@@ -51,6 +35,28 @@ export default function ReferalsScreen() {
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
   const [allReferals, setAllReferals] = useState([]);
+  // const generate = async (phone) => {
+  //   let data = await fetch(
+  //     "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyB-GsnkDBtwGYt3Kw1g9jtLKn94D7al34s",
+  //     {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         dynamicLinkInfo: {
+  //           domainUriPrefix: `https://upairef.page.link?referal=${phone}`,
+  //           link: `https://upai.page.link?referal=${phone}`,
+  //           androidInfo: {
+  //             androidPackageName: "com.up.upaii",
+  //           },
+  //           iosInfo: {
+  //             iosBundleId: "com.example.upai",
+  //           },
+  //         },
+  //       }),
+  //     }
+  //   ).then((res) => res.json().then((data) => data));
+  //   console.log(data);
+  //   return data.shortLink;
+  // };
   const getAllInfo = async () => {
     const token = await AsyncStorage.getItem("token");
     const resp = await fetch(API + "users/profile/", {
@@ -60,19 +66,24 @@ export default function ReferalsScreen() {
       },
     });
     const data = await resp.json();
-    setValue(buildLink(data.phone));
-  };
-  const navigation = useNavigation();
-  const sendUrl = async () => {
-    if (Platform.OS == "android") {
-      Share.share({
-        title: value,
-      });
-    } else {
-      Share.share({
-        url: value,
+    if (data.code === "user_not_found") {
+      navigation.navigate("ProfileStackScreen", {
+        screen: "LoginMainScreen",
       });
     }
+    setValue(
+      Boolean(data.referral_link)
+        ? data.referral_link.shortLink
+        : "ссылка не найдена"
+    );
+  };
+
+  const navigation = useNavigation();
+  const sendUrl = async () => {
+    Share.share({
+      message: value,
+      url: value,
+    });
   };
   const copy = async () => {
     Clipboard.setString(value);
@@ -122,11 +133,7 @@ export default function ReferalsScreen() {
             </Text>
           </View>
           <View style={styles.textInputBox}>
-            <TextInput
-              style={styles.textInput}
-              // placeholder={value}
-              editable={false}
-            />
+            <TextInput style={styles.textInput}>{value}</TextInput>
           </View>
           <View
             style={{
@@ -199,9 +206,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#225196",
     borderRadius: 10,
+    overflow: "hidden",
   },
   textInput: {
-    width: "100%",
     padding: "4%",
     fontSize: 16,
     lineHeight: 18,

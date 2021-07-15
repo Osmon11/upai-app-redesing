@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -11,26 +11,50 @@ import {
   Keyboard,
   Platform,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import phoneIcon from '../../../Images/PhoneIcon.png';
-import passIcon from '../../../Images/PassIcon.png';
-import { API } from '../../../config';
-import AsyncStorage from '@react-native-community/async-storage';
-import DialogAlert from '../../../Common/DialogAlert';
+import phoneIcon from "../../../Images/PhoneIcon.png";
+import passIcon from "../../../Images/PassIcon.png";
+import { API } from "../../../config";
+import AsyncStorage from "@react-native-community/async-storage";
+import DialogAlert from "../../../Common/DialogAlert";
 
-const window = Dimensions.get('window');
+const regReferal = async (referrer, token) => {
+  let data = await fetch(API + "users/referral/" + referrer + "/", {
+    method: "POST", // или 'PUT'
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => data)
+    .catch((error) => {
+      console.error("Ошибка:", error);
+    });
+  // alert(`${JSON.stringify(data)}`);
+  AsyncStorage.removeItem("referrer");
+  if (data.messages) {
+    alert(data.messages[0].message);
+  } else if (data.non_field_errors) {
+    alert(data.non_field_errors[0]);
+  }
+};
+
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 export default function Login() {
   const navigation = useNavigation();
 
-  const [value, numbersInput] = useState('Введите номер');
-  const [value1, passInput] = useState('Введите пароль');
-  const [phone, setPhone] = useState('996');
-  const [prettyPhoneNum, setPrettyPhoneNum] = useState('996');
-  const [pass, setPass] = useState('');
+  const [value, numbersInput] = useState("Введите номер");
+  const [value1, passInput] = useState("Введите пароль");
+  const [phone, setPhone] = useState("996");
+  const [prettyPhoneNum, setPrettyPhoneNum] = useState("996");
+  const [pass, setPass] = useState("");
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState(false);
 
@@ -40,25 +64,28 @@ export default function Login() {
       password: pass,
     };
     try {
-      const response = await fetch(API + 'users/token/', {
-        method: 'POST', // или 'PUT'
+      const response = await fetch(API + "users/token/", {
+        method: "POST", // или 'PUT'
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
       });
       const json = await response.json();
-      console.log('user', json);
+      const referrer = await AsyncStorage.getItem("referrer");
+      if (Boolean(referrer) && Boolean(json.access)) {
+        regReferal(referrer, json.access);
+      }
 
       if (json.phone) {
         setAnswerModal(true);
-        setModalTxt('Телефон: ' + json.password);
+        setModalTxt("Телефон: " + json.password);
       } else if (json.password) {
         setAnswerModal(true);
-        setModalTxt('Пароль: ' + json.password);
+        setModalTxt("Пароль: " + json.password);
       } else if (json.access) {
-        await AsyncStorage.setItem('token', json.access);
-        navigation.navigate('ProfileStackScreen', { screen: 'ProfileScreen' });
+        await AsyncStorage.setItem("token", json.access);
+        navigation.navigate("ProfileStackScreen", { screen: "ProfileScreen" });
       } else if (json.error) {
         setAnswerModal(true);
         setModalTxt(json.error);
@@ -67,23 +94,23 @@ export default function Login() {
         setModalTxt(json.detail);
       }
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
   const getPhoneNum = (text) => {
     let value = text;
     setPrettyPhoneNum(
       value
-        .split('')
+        .split("")
         .reverse()
-        .join('')
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-        .split('')
+        .join("")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        .split("")
         .reverse()
-        .join('')
+        .join("")
         .trim()
     );
-    setPhone(value.replace(/\s/g, ''));
+    setPhone(value.replace(/\s/g, ""));
   };
 
   return (
@@ -92,7 +119,7 @@ export default function Login() {
         <Image style={styles.textInputsIcon} source={phoneIcon} />
         <TextInput
           style={styles.textInputStyle}
-          keyboardType="number-pad"
+          keyboardType='number-pad'
           placeholder={value}
           onFocus={() => {}}
           value={prettyPhoneNum}
@@ -113,8 +140,8 @@ export default function Login() {
       </View>
       <View
         style={{
-          alignItems: 'center',
-          marginTop: '5%',
+          alignItems: "center",
+          marginTop: "5%",
         }}
       >
         <TouchableOpacity
@@ -136,45 +163,45 @@ export default function Login() {
 }
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
-    alignItems: 'center',
-    alignSelf: 'center',
+    width: "90%",
+    alignItems: "center",
+    alignSelf: "center",
   },
   btnSignIn: {
     width: scalePoint * 163,
     height: scalePoint * 45,
-    backgroundColor: '#225196',
-    alignItems: 'center',
+    backgroundColor: "#225196",
+    alignItems: "center",
     borderRadius: 30,
   },
   inputBox: {
-    width: '100%',
-    marginTop: '5%',
+    width: "100%",
+    marginTop: "5%",
     height: 45,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderWidth: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
   },
   textInputsIcon: {
     width: 18,
     height: 18,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   textInputStyle: {
-    width: '80%',
+    width: "80%",
     height: 40,
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 16,
     lineHeight: 18,
-    fontFamily: 'SfPro',
-    color: '#225196',
+    fontFamily: "SfPro",
+    color: "#225196",
   },
   btnTxt: {
-    marginTop: '8%',
-    color: '#fff',
+    marginTop: "8%",
+    color: "#fff",
     fontSize: 16,
     lineHeight: 19,
   },

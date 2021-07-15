@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,40 +6,40 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import InviteIcon from '../../../Images/profileMenuInviteIcon.png';
-import CashbackIcon from '../../../Images/FireCashbacksIcon.png';
-import SettingIcon from '../../../Images/profileMenuSettingIcon.png';
-import FaqIcon from '../../../Images/profileMenuFaqIcon.png';
-import BusinessProfileIcon from '../../../Images/profileMenuBusinessProfileIcon.png';
-import ShareIcon from '../../../Images/profileMenuShareIcon.png';
-import LogOutIcon from '../../../Images/profileMenuLogOutIcon.png';
-import myStoreIcon from '../../../Images/profileMenuMyStoreIcon.png';
-import storeSettingIcon from '../../../Images/profileMenuStoreSettingIcon.png';
-import aboutIcon from '../../../Images/AboutIcon.png';
-import ReplanishIcon from '../../../Images/ReplanishAccountImg.png';
+import InviteIcon from "../../../Images/profileMenuInviteIcon.png";
+import CashbackIcon from "../../../Images/FireCashbacksIcon.png";
+import SettingIcon from "../../../Images/profileMenuSettingIcon.png";
+import FaqIcon from "../../../Images/profileMenuFaqIcon.png";
+import BusinessProfileIcon from "../../../Images/profileMenuBusinessProfileIcon.png";
+import ShareIcon from "../../../Images/profileMenuShareIcon.png";
+import LogOutIcon from "../../../Images/profileMenuLogOutIcon.png";
+import myStoreIcon from "../../../Images/profileMenuMyStoreIcon.png";
+import storeSettingIcon from "../../../Images/profileMenuStoreSettingIcon.png";
+import aboutIcon from "../../../Images/AboutIcon.png";
+import ReplanishIcon from "../../../Images/ReplanishAccountImg.png";
 
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-community/async-storage";
 
-import { Share } from 'react-native';
-import ExitDialog from '../../../Common/ExitDialog';
+import { Share } from "react-native";
+import ExitDialog from "../../../Common/ExitDialog";
 
 export default function ProfileScreenMenu({ data }) {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
   const shareAppIos = () => {
     Share.share({
-      title: 'Cкачай приложение UPAI и получай кэшбэк',
-      message: 'https://apps.apple.com/ru/app/upai/id1553749845',
+      title: "Cкачай приложение UPAI и получай кэшбэк",
+      message: "https://apps.apple.com/ru/app/upai/id1553749845",
     });
   };
   const shareAppAndroid = () => {
     Share.share({
-      title: 'Cкачай приложение UPAI и получай кэшбэк',
-      message: 'https://play.google.com/store/apps/details?id=com.up.upaii',
+      title: "Cкачай приложение UPAI и получай кэшбэк",
+      message: "https://play.google.com/store/apps/details?id=com.up.upaii",
     });
   };
 
@@ -47,7 +47,7 @@ export default function ProfileScreenMenu({ data }) {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
       }}
     >
       {data && data.shop !== null ? (
@@ -55,7 +55,7 @@ export default function ProfileScreenMenu({ data }) {
           <TouchableOpacity
             style={styles.btnStyle}
             onPress={() =>
-              navigation.navigate('CompanyScreen', { itemId: data.shop })
+              navigation.navigate("CompanyScreen", { itemId: data.shop })
             }
           >
             <View style={styles.btnContent}>
@@ -66,7 +66,7 @@ export default function ProfileScreenMenu({ data }) {
 
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('CashbackSettingScreen')}
+            onPress={() => navigation.navigate("CashbackSettingScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={CashbackIcon} />
@@ -77,7 +77,7 @@ export default function ProfileScreenMenu({ data }) {
       ) : (
         <TouchableOpacity
           style={styles.btnStyle}
-          onPress={() => navigation.navigate('ReferalsScreen')}
+          onPress={() => navigation.navigate("ReferalsScreen")}
         >
           <View style={styles.btnContent}>
             <Image style={styles.btnIcon} source={InviteIcon} />
@@ -90,7 +90,7 @@ export default function ProfileScreenMenu({ data }) {
         <>
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('WalletSettingsScreen')}
+            onPress={() => navigation.navigate("WalletSettingsScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={SettingIcon} />
@@ -99,7 +99,7 @@ export default function ProfileScreenMenu({ data }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('FaqScreen')}
+            onPress={() => navigation.navigate("FaqScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={FaqIcon} />
@@ -108,7 +108,7 @@ export default function ProfileScreenMenu({ data }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('BusinessProfileScreen')}
+            onPress={() => navigation.navigate("BusinessProfileScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={BusinessProfileIcon} />
@@ -118,7 +118,7 @@ export default function ProfileScreenMenu({ data }) {
           <TouchableOpacity
             style={styles.btnStyle}
             onPress={() => {
-              Platform.OS === 'android' ? shareAppAndroid() : shareAppIos();
+              Platform.OS === "android" ? shareAppAndroid() : shareAppIos();
             }}
           >
             <View style={styles.btnContent}>
@@ -133,7 +133,7 @@ export default function ProfileScreenMenu({ data }) {
         <>
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('AboutAppScreen')}
+            onPress={() => navigation.navigate("AboutAppScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={aboutIcon} />
@@ -142,7 +142,7 @@ export default function ProfileScreenMenu({ data }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('ReplanishAccountScreen')}
+            onPress={() => navigation.navigate("ReplanishAccountScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={ReplanishIcon} />
@@ -151,7 +151,7 @@ export default function ProfileScreenMenu({ data }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnStyle}
-            onPress={() => navigation.navigate('FaqScreen')}
+            onPress={() => navigation.navigate("FaqScreen")}
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={FaqIcon} />
@@ -161,7 +161,7 @@ export default function ProfileScreenMenu({ data }) {
           <TouchableOpacity
             style={styles.btnStyle}
             onPress={() =>
-              navigation.navigate('CompanySettingsScreen', {
+              navigation.navigate("CompanySettingsScreen", {
                 shopId: data.shop,
               })
             }
@@ -232,9 +232,11 @@ export default function ProfileScreenMenu({ data }) {
       <ExitDialog
         answerModal={isVisible}
         funcOk={() => {
-          AsyncStorage.removeItem('token');
+          AsyncStorage.removeItem("token");
           setIsVisible(false);
-          navigation.navigate('LoginMainScreen');
+          navigation.navigate("ProfileStackScreen", {
+            screen: "LoginMainScreen",
+          });
         }}
         setAnswerModal={setIsVisible}
       />
@@ -243,29 +245,29 @@ export default function ProfileScreenMenu({ data }) {
 }
 const styles = StyleSheet.create({
   btnStyle: {
-    width: '90%',
+    width: "90%",
     height: 40,
     borderTopWidth: 1,
-    borderTopColor: '#ebebeb',
-    alignSelf: 'center',
-    justifyContent: 'center',
+    borderTopColor: "#ebebeb",
+    alignSelf: "center",
+    justifyContent: "center",
   },
   btnContent: {
-    marginTop: '5%',
-    flexDirection: 'row',
-    marginBottom: '5%',
+    marginTop: "5%",
+    flexDirection: "row",
+    marginBottom: "5%",
   },
   btnIcon: {
     width: 19,
     height: 19,
-    resizeMode: 'contain',
-    marginLeft: '10%',
-    marginRight: '7%',
+    resizeMode: "contain",
+    marginLeft: "10%",
+    marginRight: "7%",
   },
   btnText: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#313131',
-    fontFamily: 'SfPro',
+    color: "#313131",
+    fontFamily: "SfPro",
   },
 });
