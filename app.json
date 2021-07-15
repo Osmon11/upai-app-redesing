@@ -32,7 +32,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": ["NOTIFICATIONS", "CAMERA", "MEDIA_LIBRARY"],
+      
       "versionCode": 6,
       "googleServicesFile": "./google-services.json",
       "package": "com.up.upaii",
