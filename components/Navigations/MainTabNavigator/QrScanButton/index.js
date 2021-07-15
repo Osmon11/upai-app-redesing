@@ -4,13 +4,17 @@ import qrIconIOS from '../../../Images/qrIconTabMenu.png';
 
 const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
-export default function QrScanButton() {
+export default function QrScanButton({ hideIcon }) {
   return (
     <View
-      style={{
-        position: 'absolute',
-        alignItems: 'center',
-      }}
+      style={
+        hideIcon
+          ? { display: 'none' }
+          : {
+              position: 'absolute',
+              alignItems: 'center',
+            }
+      }
     >
       <View style={styles.btnStyles}>
         <Image source={qrIconIOS} style={styles.qrIcon} />
@@ -30,9 +34,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -24,
     borderWidth: 1,
-    borderColor: 'rgba(0,0, 0, 0.9)',
-
-    borderColor: '#fff',
+    borderColor: 'rgba(255,255, 255, 0.1)',
   },
   qrIcon: {
     width: scalePoint * 36,
