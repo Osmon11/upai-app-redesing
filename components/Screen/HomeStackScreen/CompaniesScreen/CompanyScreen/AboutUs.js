@@ -38,7 +38,7 @@ export default function AboutUs(props) {
         <Text style={styles.AboutUsContentText}>{props.about.about}</Text>
         <TouchableOpacity
           style={styles.shareBtn}
-          onPress={() => onShare(props.data.share_link.shortLink)}
+          onPress={() => onShare(props.data.share_link)}
         >
           <Image style={styles.shareIcon} source={shareIcon} />
           <Text style={styles.shareBtnText}>Поделиться заведением</Text>
