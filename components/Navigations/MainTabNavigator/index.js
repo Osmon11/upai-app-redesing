@@ -98,7 +98,7 @@ export default function MainTabNavigator() {
       setDataLink(true);
       const initialURL = await Linking.getInitialURL();
       let data = Linking.parse(initialURL);
-      alert(`before***${JSON.stringify(data)}`);
+      
       handleDeepLink(data);
     };
     if (!dataLink) {
