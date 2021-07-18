@@ -63,6 +63,7 @@ export default function CompanySettingsScreen({ route }) {
   const [selectedId, setSelectedId] = useState(null);
   const [img, setImg] = useState();
   const [homeImg, sethomeImg] = useState();
+
   const wrkdays = [
     {
       label: 'Monday',
@@ -97,6 +98,7 @@ export default function CompanySettingsScreen({ route }) {
   React.useEffect(() => {
     getAllInfo();
   }, []);
+
   React.useEffect(() => {
     workingDays &&
       wrkdays.map((el) => {
@@ -108,6 +110,7 @@ export default function CompanySettingsScreen({ route }) {
           : workingDays[el.label].from_;
       });
   }, [workingDays]);
+
   const getAllCategories = async (name) => {
     const resp = await fetch(API + 'category/');
     const data = await resp.json();
@@ -465,7 +468,7 @@ export default function CompanySettingsScreen({ route }) {
               <Text style={styles.infoBoxText}>Кэшбэк</Text>
               <View style={styles.inputBox}>
                 <TextInput
-                  style={styles.textInputStyle}
+                  style={styles.pick}
                   placeholder={cashbacksPrecent}
                   value={data ? data.cashback : ''}
                   onChangeText={changeText('cashback')}
@@ -569,7 +572,7 @@ export default function CompanySettingsScreen({ route }) {
           <View style={styles.infoBox}>
             <Text style={styles.infoBoxText}>Рабочее время</Text>
             <View style={styles.inputBox}>
-              <View style={{ paddingVertical: '3%' }}>
+              <View style={{ paddingVertical: '3%', width: '100%' }}>
                 {wrkdays &&
                   wrkdays.map((el) => (
                     <View style={styles.workTimeBox} key={el.label}>
@@ -813,7 +816,7 @@ const styles = StyleSheet.create({
   },
   infoBoxText: {
     alignSelf: 'flex-start',
-    marginLeft: '10%',
+    marginLeft: 19,
     fontSize: 16,
     lineHeight: 19,
     color: '#515151',
@@ -823,16 +826,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 1,
     borderColor: '#225196',
-    borderRadius: 6,
-    marginTop: '5%',
+    borderRadius: 10,
+    marginTop: 7,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   pick: {
     color: 'grey',
-    padding: '5%',
-    fontSize: 14,
+    paddingVertical: 11,
+    paddingHorizontal: 19,
+    fontSize: 12,
+    lineHeight: 18,
+    fontFamily: 'Roboto',
+    width: '100%',
   },
   inputBox1: {
     width: '100%',
@@ -844,9 +851,10 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     width: '90%',
-    padding: '2%',
-    marginLeft: '5%',
-    fontSize: 16,
+    paddingVertical: 11,
+    paddingHorizontal: 19,
+    fontSize: 12,
+    fontFamily: 'Roboto',
     lineHeight: 18,
   },
   descriptionTxt: {
@@ -858,6 +866,7 @@ const styles = StyleSheet.create({
   },
   workTimeBox: {
     flexDirection: 'row',
+    width: '100%',
   },
   workDaysAndTimeBox: {
     flexDirection: 'row',
@@ -924,7 +933,7 @@ const styles = StyleSheet.create({
   },
   declineBtn: {
     width: '48%',
-    height: scalePoint * 45,
+    height: 45,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#ff6b00',
@@ -932,7 +941,7 @@ const styles = StyleSheet.create({
   },
   saveBtn: {
     width: '48%',
-    height: scalePoint * 45,
+    height: 45,
     borderRadius: 10,
     backgroundColor: '#ff6b00',
     justifyContent: 'center',
@@ -942,12 +951,14 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     alignSelf: 'center',
     color: '#ff6b00',
+    fontFamily: 'SfPro',
   },
   saveBtnTxt: {
     fontSize: 14,
     lineHeight: 16,
     alignSelf: 'center',
     color: '#fff',
+    fontFamily: 'SfPro',
   },
 });
 const pickerSelectStyles = StyleSheet.create({

@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     color: '#313131',
+    fontFamily: 'SfPro',
   },
   commentTxt: {
     fontSize: 10,

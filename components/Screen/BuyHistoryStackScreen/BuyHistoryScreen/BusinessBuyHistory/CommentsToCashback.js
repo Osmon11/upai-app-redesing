@@ -27,11 +27,8 @@ export default function CommentsToCashback({ close, coment }) {
     close;
   });
   return (
-    <View>
-      <View
-        style={{ flexDirection: 'row', marginBottom: '5%', width: '98%' }}
-        onPress={close}
-      >
+    <View style={styles.container}>
+      <View style={{ flexDirection: 'row', width: '98%' }} onPress={close}>
         <BoxShadow setting={shadowOpt}>
           <View style={styles.iconBox}>
             <Image style={styles.boxImage} source={cashbacksIncomeIcon} />
@@ -50,17 +47,26 @@ export default function CommentsToCashback({ close, coment }) {
             </View>
           </View>
           <View style={{ flexDirection: 'row', marginTop: '1%' }}>
-          <Text style={styles.cashbacksComesDate}>
-              {new Date(coment.created).getHours()<=9 ? '0'+ new Date(coment.created).getHours():new Date(coment.created).getHours()}:
-              {new Date(coment.created).getMinutes()<=9 ? '0'+new Date(coment.created).getMinutes():new Date(coment.created).getMinutes()}
+            <Text style={styles.cashbacksComesDate}>
+              {new Date(coment.created).getHours() <= 9
+                ? '0' + new Date(coment.created).getHours()
+                : new Date(coment.created).getHours()}
+              :
+              {new Date(coment.created).getMinutes() <= 9
+                ? '0' + new Date(coment.created).getMinutes()
+                : new Date(coment.created).getMinutes()}
             </Text>
-            
+
             <Text style={styles.cashbacksComesTime}>
-              {new Date(coment.created).getDate()<=9 ? '0'+new Date(coment.created).getDate():new Date(coment.created).getDate()}.
-              {new Date(coment.created).getMonth() <=9 ? '0'+(new Date(coment.created).getMonth()+1):new Date(coment.created).getMonth()+1}.
-              {new Date(coment.created).getFullYear()}
+              {new Date(coment.created).getDate() <= 9
+                ? '0' + new Date(coment.created).getDate()
+                : new Date(coment.created).getDate()}
+              .
+              {new Date(coment.created).getMonth() <= 9
+                ? '0' + (new Date(coment.created).getMonth() + 1)
+                : new Date(coment.created).getMonth() + 1}
+              .{new Date(coment.created).getFullYear()}
             </Text>
-            
           </View>
         </View>
       </View>
@@ -115,12 +121,15 @@ const styles = StyleSheet.create({
     color: '#27AE60',
     alignSelf: 'flex-end',
   },
+  commentBox: {
+    flexDirection: 'row',
+  },
   cashbackSum: {
     fontFamily: 'SfPro',
     fontSize: 10,
     lineHeight: 12,
     color: '#515151',
-    marginTop:'8%',
+    marginTop: '8%',
     alignSelf: 'flex-end',
   },
   commentTxt: {
@@ -152,14 +161,14 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: '300',
     textAlign: 'justify',
+    fontFamily: 'SfPro',
   },
   box: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 24,
   },
-  commentBox: {
-    width: '90%',
-  },
+
   closeCommentsBtn: {
     width: '5%',
     alignSelf: 'center',

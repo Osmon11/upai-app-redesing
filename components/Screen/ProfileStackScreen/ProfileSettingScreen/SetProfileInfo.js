@@ -178,6 +178,7 @@ export default function SetProfileInfo() {
           <View
             style={{
               alignSelf: 'center',
+              marginBottom: 65,
             }}
           >
             <AnimatedLoader

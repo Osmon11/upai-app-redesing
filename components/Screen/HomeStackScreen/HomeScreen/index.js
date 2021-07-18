@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   headerBox: {
     width: '95%',
     alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
+    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : 43,
     height: scalePoint * 23,
     zIndex: 9999,
     marginLeft: '1%',

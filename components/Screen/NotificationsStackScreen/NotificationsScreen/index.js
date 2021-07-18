@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
   headerBox: {
     width: '100%',
     height: scalePoint * 23,
+    marginTop: 20,
   },
   mainTxtBox: {
     flexDirection: 'row',

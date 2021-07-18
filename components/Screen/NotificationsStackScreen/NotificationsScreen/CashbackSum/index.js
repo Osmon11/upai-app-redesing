@@ -30,9 +30,9 @@ export default function CashbackSum({ cashBackGet }) {
     color: '#A0A0A0',
     border: 2,
     radius: 10,
-    opacity: 0.1,
-    x: -1,
-    y: 1.5,
+    opacity: 0.05,
+    x: 0,
+    y: 2,
   };
   useEffect(() => {
     setTimeout(() => {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     width: '85%',
-    fontFamily: 'Roboto',
+    fontFamily: 'SfPro',
   },
   cashbacksComesDate: {
     fontSize: 10,
