@@ -32,7 +32,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   React.useEffect(() => {
     getInfo();
-    
+
     const unsubscribe = navigation.addListener('focus', () => {
       setViewLoader(true);
       getInfo();

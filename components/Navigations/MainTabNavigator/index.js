@@ -1,38 +1,38 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Dimensions, Platform, TouchableOpacity } from "react-native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Dimensions, Platform, TouchableOpacity } from 'react-native';
 
-import HomeStakScreen from "../../Screen/HomeStackScreen";
-import BuyHistoryStackScreen from "../../Screen/BuyHistoryStackScreen";
-import ProfileStackScreen from "../../Screen/ProfileStackScreen";
-import NotificationsStackScreen from "../../Screen/NotificationsStackScreen";
-import QrStackScreen from "../../Screen/QrStackScreen";
-import QrScanButton from "./QrScanButton";
+import HomeStakScreen from '../../Screen/HomeStackScreen';
+import BuyHistoryStackScreen from '../../Screen/BuyHistoryStackScreen';
+import ProfileStackScreen from '../../Screen/ProfileStackScreen';
+import NotificationsStackScreen from '../../Screen/NotificationsStackScreen';
+import QrStackScreen from '../../Screen/QrStackScreen';
+import QrScanButton from './QrScanButton';
 
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
-import NotificationIconSVG from "../../Common/TabIcons/NotificationsIosSVG";
-import HomeIconIOS from "../../Common/TabIcons/HomeIconIOS";
-import ProfileIconIOS from "../../Common/TabIcons/ProfileIconIOS";
+import { Entypo } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage';
+import NotificationIconSVG from '../../Common/TabIcons/NotificationsIosSVG';
+import HomeIconIOS from '../../Common/TabIcons/HomeIconIOS';
+import ProfileIconIOS from '../../Common/TabIcons/ProfileIconIOS';
 import {
   getFocusedRouteNameFromRoute,
   useNavigation,
-} from "@react-navigation/native";
-import LoginMainScreen from "../../Screen/ProfileStackScreen/LoginMainScreen";
+} from '@react-navigation/native';
+import LoginMainScreen from '../../Screen/ProfileStackScreen/LoginMainScreen';
 const Tab = createBottomTabNavigator();
-import * as Linking from "expo-linking";
-import * as Notifications from "expo-notifications";
-import { View, Text } from "native-base";
-import { API } from "../../config";
-import RegistrationScreen from "../../Screen/ProfileStackScreen/LoginMainScreen/Registration";
-import Svg, { Path } from "react-native-svg";
-const prefix = Linking.makeUrl("/");
-const window = Dimensions.get("window");
+import * as Linking from 'expo-linking';
+import * as Notifications from 'expo-notifications';
+import { View, Text } from 'native-base';
+import { API } from '../../config';
+import RegistrationScreen from '../../Screen/ProfileStackScreen/LoginMainScreen/Registration';
+import Svg, { Path } from 'react-native-svg';
+const prefix = Linking.makeUrl('/');
+const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
 
 export default function MainTabNavigator() {
@@ -44,31 +44,31 @@ export default function MainTabNavigator() {
     getInfo();
   });
   function handleDeepLink(data) {
-    if (data.path === "company/") {
-      navigation.navigate("CompanyScreen", {
+    if (data.path === 'company/') {
+      navigation.navigate('CompanyScreen', {
         itemId: data.queryParams.id,
       });
     }
-    if (data.path === "referral/") {
+    if (data.path === 'referral/') {
       regReferal(data.queryParams.referral);
     }
   }
   const navigation = useNavigation();
   const regReferal = async (referrer) => {
-    const token = await AsyncStorage.getItem("token");
+    const token = await AsyncStorage.getItem('token');
     // alert(`after***${JSON.stringify(referrer)}`);
-    AsyncStorage.setItem("referrer", referrer);
+    AsyncStorage.setItem('referrer', referrer);
     if (!token) {
-      navigation.navigate("ProfileStackScreen", {
-        screen: "LoginMainScreen",
+      navigation.navigate('ProfileStackScreen', {
+        screen: 'LoginMainScreen',
       });
       return;
     }
-    let data = await fetch(API + "users/referral/" + referrer + "/", {
-      method: "POST", // или 'PUT'
+    let data = await fetch(API + 'users/referral/' + referrer + '/', {
+      method: 'POST', // или 'PUT'
       headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => {
@@ -76,33 +76,33 @@ export default function MainTabNavigator() {
       })
       .then((data) => data)
       .catch((error) => {
-        console.error("Ошибка:", error);
+        console.error('Ошибка:', error);
       });
-    if (data.code === "token_not_valid") {
-      navigation.navigate("ProfileStackScreen", {
-        screen: "LoginMainScreen",
+    if (data.code === 'token_not_valid') {
+      navigation.navigate('ProfileStackScreen', {
+        screen: 'LoginMainScreen',
       });
       return;
     }
-    AsyncStorage.removeItem("referrer");
+    AsyncStorage.removeItem('referrer');
   };
   React.useEffect(() => {
     const getInitialURL = async () => {
       setDataLink(true);
       const initialURL = await Linking.getInitialURL();
       let data = Linking.parse(initialURL);
-      
+
       handleDeepLink(data);
     };
     if (!dataLink) {
       getInitialURL();
     }
-    Linking.addEventListener("url", (event) => {
+    Linking.addEventListener('url', (event) => {
       let data = Linking.parse(event.url);
       handleDeepLink(data);
     });
     return () => {
-      Linking.removeEventListener("url");
+      Linking.removeEventListener('url');
     };
   }, [dataLink]);
   React.useEffect(() => {
@@ -110,14 +110,14 @@ export default function MainTabNavigator() {
       (response) => {
         const data = response.notification.request.content.data;
 
-        if (data.kind != "new_shop") {
-          navigation.navigate("NotificationsScreen", {
-            screen: "NotificationMainScreen",
+        if (data.kind != 'new_shop') {
+          navigation.navigate('NotificationsScreen', {
+            screen: 'NotificationMainScreen',
             params: { status: data.kind },
           });
-        } else if (data.kind == "new_shop") {
-          navigation.navigate("ProfileStackScreen", {
-            screen: "CompanySettingsScreen",
+        } else if (data.kind == 'new_shop') {
+          navigation.navigate('ProfileStackScreen', {
+            screen: 'CompanySettingsScreen',
             params: { shopId: data.new_shop_id },
           });
         }
@@ -130,7 +130,7 @@ export default function MainTabNavigator() {
     );
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status == "granted");
+      setHasPermission(status == 'granted');
     })();
     return () => {
       subscription.remove();
@@ -138,7 +138,7 @@ export default function MainTabNavigator() {
   }, []);
 
   const getInfo = async () => {
-    const result = await AsyncStorage.getItem("token");
+    const result = await AsyncStorage.getItem('token');
     if (result != null) {
       setAuth(true);
     } else {
@@ -148,7 +148,7 @@ export default function MainTabNavigator() {
 
   const tabVisible = (val, index) => {
     const routeName = getFocusedRouteNameFromRoute(val);
-    const hideOnScreens = ["ProfileSettingScreen"];
+    const hideOnScreens = ['ProfileSettingScreen'];
     if (hideOnScreens.indexOf(routeName) > -1) {
       setHideIcon(true);
       return false;
@@ -165,16 +165,16 @@ export default function MainTabNavigator() {
           onPress={onPress}
           style={{
             flex: 1,
-            alignItems: "center",
+            alignItems: 'center',
           }}
           activeOpacity={1}
         >
           <View
             style={{
-              flexDirection: "row",
-              position: "absolute",
+              flexDirection: 'row',
+              position: 'absolute',
               top: 0,
-              backgroundColor: "transparent`",
+              backgroundColor: 'transparent`',
             }}
           >
             <View style={{ flex: 1, backgroundColor: "#fff" }}></View>
@@ -191,11 +191,11 @@ export default function MainTabNavigator() {
           <TouchableOpacity
             style={{
               flex: 1,
-              position: "absolute",
+              position: 'absolute',
               top: -14,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "transparent",
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'transparent',
             }}
             onPress={onPress}
           >
@@ -209,7 +209,7 @@ export default function MainTabNavigator() {
           style={{
             flex: 1,
             height: 60,
-            backgroundColor: "#fff",
+            backgroundColor: '#fff',
           }}
           activeOpacity={1}
           onPress={onPress}
@@ -222,10 +222,10 @@ export default function MainTabNavigator() {
 
   return (
     <Tab.Navigator
-      initialRouteName='Tabs'
+      initialRouteName="Tabs"
       tabBarOptions={{
-        activeTintColor: "#ff6b00",
-        inactiveTintColor: "#225196",
+        activeTintColor: '#ff6b00',
+        inactiveTintColor: '#225196',
         showLabel: false,
         style: {
           height: 60,
@@ -234,61 +234,61 @@ export default function MainTabNavigator() {
       }}
     >
       <Tab.Screen
-        name='HomeStackScreen'
+        name="HomeStackScreen"
         component={HomeStakScreen}
         options={{
-          tabBarColor: "#fff",
+          tabBarColor: '#fff',
           tabBarIcon: ({ color }) =>
-            Platform.OS === "ios" ? (
+            Platform.OS === 'ios' ? (
               <HomeIconIOS
                 width={scalePoint * 24}
                 height={scalePoint * 24}
                 color={color}
               />
             ) : (
-              <Entypo name='home' size={24} color={color} />
+              <Entypo name="home" size={24} color={color} />
             ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
       />
       <Tab.Screen
-        name='NotificationsScreen'
+        name="NotificationsScreen"
         component={auth ? NotificationsStackScreen : LoginMainScreen}
         options={{
-          tabBarColor: "#fff",
+          tabBarColor: '#fff',
           tabBarIcon: ({ color }) =>
-            Platform.OS === "ios" ? (
+            Platform.OS === 'ios' ? (
               <NotificationIconSVG
                 width={scalePoint * 17}
                 height={scalePoint * 20}
                 color={color}
               />
             ) : (
-              <MaterialIcons name='notifications' size={24} color={color} />
+              <MaterialIcons name="notifications" size={24} color={color} />
             ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
       />
       <Tab.Screen
-        name='QrScanButton'
+        name="QrScanButton"
         component={auth ? QrStackScreen : LoginMainScreen}
         options={{
-          tabBarColor: "#fff",
+          tabBarColor: '#fff',
           tabBarIcon: () => <QrScanButton hideIcon={hideIcon} />,
           tabBarButton: (props) => <TabBarCustomButton {...props} isSelected />,
         }}
       />
 
       <Tab.Screen
-        name='BuyHistoryScreen'
+        name="BuyHistoryScreen"
         component={auth ? BuyHistoryStackScreen : LoginMainScreen}
         options={{
-          tabBarColor: "#fff",
+          tabBarColor: '#fff',
           tabBarIcon: ({ color }) =>
-            Platform.OS === "ios" ? (
-              <SimpleLineIcons name='clock' size={20} color={color} />
+            Platform.OS === 'ios' ? (
+              <SimpleLineIcons name="clock" size={20} color={color} />
             ) : (
-              <AntDesign name='clockcircle' size={23} color={color} />
+              <AntDesign name="clockcircle" size={23} color={color} />
             ),
           tabBarButton: (props) => (
             <TabBarCustomButton {...props} isSelected={false} />
@@ -296,21 +296,21 @@ export default function MainTabNavigator() {
         }}
       />
       <Tab.Screen
-        name='ProfileStackScreen'
+        name="ProfileStackScreen"
         component={auth ? ProfileStackScreen : LoginMainScreen}
         initialParams={auth}
         options={({ route }) => ({
           tabBarVisible: tabVisible(route, 6),
-          tabBarColor: "#fff",
+          tabBarColor: '#fff',
           tabBarIcon: ({ color }) =>
-            Platform.OS === "ios" ? (
+            Platform.OS === 'ios' ? (
               <ProfileIconIOS
                 width={scalePoint * 22}
                 height={scalePoint * 24}
                 color={color}
               />
             ) : (
-              <FontAwesome name='user' size={24} color={color} />
+              <FontAwesome name="user" size={24} color={color} />
             ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         })}

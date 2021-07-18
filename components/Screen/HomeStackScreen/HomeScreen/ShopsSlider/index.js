@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '95%',
     alignSelf: 'center',
+    marginLeft: 5,
   },
   nameOfCategoryGroup: {
     fontSize: 16,

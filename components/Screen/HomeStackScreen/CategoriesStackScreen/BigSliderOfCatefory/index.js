@@ -24,7 +24,9 @@ export default function BigSliderOfCategory({ category, categoryName }) {
     getAllCatById();
   }, []);
   const getAllCatById = async () => {
-    let resp = await fetch(API + 'shop/?offset=0&category=' + category + '&limit=5');
+    let resp = await fetch(
+      API + 'shop/?offset=0&category=' + category + '&limit=5'
+    );
     let req = await resp.json();
     setData(req.results);
   };
@@ -109,7 +111,6 @@ const styles = StyleSheet.create({
   nameOfCategoryGroup: {
     fontSize: 16,
     lineHeight: 18,
-    marginLeft: '5%',
   },
   allBtnTxt: {
     fontSize: 14,

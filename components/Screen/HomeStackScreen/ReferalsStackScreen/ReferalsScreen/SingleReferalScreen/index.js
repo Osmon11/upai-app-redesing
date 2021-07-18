@@ -13,55 +13,20 @@ import { Card } from 'react-native-shadow-cards';
 import HeaderInStackScreens from '../../../../../Common/HeaderInStackScreens';
 import referalsImg from '../../../../../Images/reviewsAccountImg.png';
 import AsyncStorage from '@react-native-community/async-storage';
+import EmptyAvatar from '../../../../../Images/emptyProfileAccountImg.png';
 import { API } from '../../../../../config';
-const cashbacksList = [
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-  {
-    date: '27.01.20',
-    sum: '27',
-  },
-];
 
 const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
 
 export default function SingleReferalScreen({ route }) {
   const { data } = route.params;
+
   React.useEffect(() => {
     getRefByID();
   }, []);
   const [one, setOnest] = React.useState();
+
   const getRefByID = async () => {
     const token = await AsyncStorage.getItem('token');
     const resp = await fetch(API + 'users/referral/' + data?.id + '/revenue/', {
@@ -71,14 +36,7 @@ export default function SingleReferalScreen({ route }) {
       },
     });
     const datas = await resp.json();
-    setOnest(datas.results);
-  };
-  const myReferalsList = {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
+    setOnest(datas?.results);
   };
 
   return (
@@ -98,7 +56,12 @@ export default function SingleReferalScreen({ route }) {
             onPress={() => navigation.navigate('SingleReferalScreen')}
           >
             <View style={styles.imgBox}>
-              <Image style={styles.imgStyle} source={{ uri: data.avatar }} />
+              <Image
+                style={styles.imgStyle}
+                source={
+                  data.avatar !== null ? { uri: data.avatar } : EmptyAvatar
+                }
+              />
             </View>
             <View
               style={{
@@ -187,7 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   mainContent: {
-    width: '95%',
+    width: '90%',
     alignSelf: 'center',
   },
   headerBox: {
@@ -204,7 +167,6 @@ const styles = StyleSheet.create({
     color: '#313131',
     fontSize: 24,
     lineHeight: 26,
-    marginLeft: '10%',
   },
   referalsListItem: {
     width: '100%',
@@ -213,7 +175,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: '10%',
     paddingBottom: '5%',
-    marginLeft: '1%',
   },
   imgBox: {
     width: scalePoint * 50,

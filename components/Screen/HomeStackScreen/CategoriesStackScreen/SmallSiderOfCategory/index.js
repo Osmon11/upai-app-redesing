@@ -26,7 +26,9 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
     getAllCatById();
   }, []);
   const getAllCatById = async () => {
-    let resp = await fetch(API + 'shop/?offset=0&category=' + category + '&limit=5');
+    let resp = await fetch(
+      API + 'shop/?offset=0&category=' + category + '&limit=5'
+    );
     let req = await resp.json();
     setData(req.results);
   };
@@ -121,7 +123,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   nameOfCategoryGroup: {
-    marginLeft: '5%',
     fontSize: 16,
     lineHeight: 18,
     fontFamily: 'Roboto',
