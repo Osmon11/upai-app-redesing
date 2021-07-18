@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-import { ActionSheet, Root } from 'native-base';
+import { Root } from 'native-base';
 import HeaderInStackScreens from '../../../Common/HeaderInStackScreens';
 import SetProfileInfo from './SetProfileInfo';
 import SetPass from './setPass';
@@ -23,7 +23,6 @@ export default function ProfileSettingScreen(props) {
     <Root>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
         >
           <View style={styles.headerBox}>

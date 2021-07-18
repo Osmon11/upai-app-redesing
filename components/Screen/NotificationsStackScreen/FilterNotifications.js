@@ -24,8 +24,8 @@ export default function FilterNotificationsScreen() {
   const navigation = useNavigation();
 
   const [choice, setChoice] = useState({
-    label: 'Отправленные',
-    value: 'success',
+    label: 'Отклоненные',
+    value: 'decline',
   });
   const [date, setDate] = useState(new Date());
   const [sortModal, setSortModal] = useState(false);

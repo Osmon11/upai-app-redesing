@@ -32,7 +32,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   React.useEffect(() => {
     getInfo();
-    
+
     const unsubscribe = navigation.addListener('focus', () => {
       setViewLoader(true);
       getInfo();
@@ -84,7 +84,7 @@ export default function HomeScreen() {
         </View>
         {auth && (
           <View style={styles.profileBox}>
-            <ProfileInfo />
+            <ProfileInfo loader={viewLoader} />
           </View>
         )}
         <View style={styles.contentContainer}>

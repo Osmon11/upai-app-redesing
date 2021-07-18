@@ -13,6 +13,7 @@ import waitingCashbacksIcon from '../../../../Images/waitingCashbacksIcon.png';
 import declinedCashbacksIcon from '../../../../Images/declinedCashbacksIcon.png';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
@@ -22,7 +23,7 @@ export default function CashbackSum({ cashBackGet }) {
   const [from, setFrom] = React.useState();
   const [to, setTo] = React.useState();
 
-  const [viewLoader, setViewLoader] = React.useState(false);
+  const [viewLoader, setViewLoader] = React.useState(true);
   const shadowOpt = {
     width: 51,
     height: 50,
@@ -33,6 +34,11 @@ export default function CashbackSum({ cashBackGet }) {
     x: -1,
     y: 1.5,
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setViewLoader(false);
+    }, 2000);
+  }, []);
   return (
     <View style={{ backgroundColor: '#fff' }}>
       <AnimatedLoader

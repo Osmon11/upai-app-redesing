@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     width: '95%',
-    marginTop: '5%',
+    marginTop: 10,
     alignSelf: 'center',
     height: 45,
     borderColor: '#225196',
@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     color: '#fff',
-    fontSize: 16,
-    lineHeight: 19,
+    fontSize: 14,
+    lineHeight: 16,
     paddingLeft: '5%',
     paddingRight: '5%',
   },

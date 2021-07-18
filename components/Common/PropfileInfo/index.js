@@ -8,7 +8,7 @@ import { API } from '../../config';
 const width = Dimensions.get('window').width;
 const scalePoint = width / 380;
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ loader }) {
   const [data, setData] = useState([]);
   const [businessStatus, setBusinessStatus] = useState(true);
   React.useEffect(() => {
@@ -16,6 +16,9 @@ export default function ProfileInfo() {
       getFullInfo();
     }
   }, [data]);
+  React.useEffect(() => {
+    getFullInfo();
+  }, [loader]);
   const getFullInfo = async () => {
     const token = await AsyncStorage.getItem('token');
     const resp = await fetch(API + 'users/profile/', {

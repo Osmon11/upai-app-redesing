@@ -6,8 +6,10 @@ import {
   Platform,
   Dimensions,
   ScrollView,
+  Image,
 } from 'react-native';
 import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
+import optimaLogo from '../../../../Images/OptimaLogo.png';
 
 const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
@@ -19,18 +21,33 @@ export default function ReplanishAccount() {
         <View style={styles.headerBox}>
           <HeaderInStackScreens />
         </View>
-        <View>
-          <Text style={styles.contentName}>Как пополнить кошелек?</Text>
-          <Text style={styles.contentTxt}>
-            1. Вам необходимо в терминале выбрать "Электронные кошельки"
+        <View style={styles.optimaLogoBox}>
+          <Image source={optimaLogo} style={styles.optimaLogo} />
+        </View>
+
+        <View style={styles.textContainer}>
+          <Text style={styles.contentName}>
+            Пополнить лицевой счет Вы сможее с помощью электронного кошелька
+            Элсом.
+          </Text>
+          <Text style={{ ...styles.contentName, marginBottom: '5%' }}>
+            Для этого вам необходимо:
           </Text>
           <Text style={styles.contentTxt}>
-            2. Выберите услугу "Upai - Пополнение баланса"
+            1. Откройте на телефоне приложение онлайн-банкинг Оптима24
           </Text>
           <Text style={styles.contentTxt}>
-            3. Введите следующий реквизит "Укажите номер телефона"
+            2. Перейдите в раздел «переводы» и выберите подраздел «перевод на
+            карту/счёт»
           </Text>
-          <Text style={styles.centralContentTxt}>Комиссия системы: 5.00%</Text>
+          <Text style={styles.contentTxt}>
+            3. Далее вводите номер карты нашей компании: 4169 6151 8802 7175 -
+            О.Р. Далее впишите нужную сумму перевода и затем нажимаете кнопку
+            «оплатить»
+          </Text>
+        </View>
+        <View style={styles.simpleContainer}>
+          <Text style={styles.contentTitle}>Пример оплаты</Text>
         </View>
       </View>
     </ScrollView>
@@ -51,9 +68,31 @@ const styles = StyleSheet.create({
     height: scalePoint * 25,
   },
   contentName: {
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: '5%',
     marginTop: '5%',
+    fontFamily: 'Roboto',
+    color: '#393939',
+  },
+  optimaLogoBox: {
+    width: 105,
+    height: 105,
+    borderColor: '#C4C4C4',
+    borderWidth: 1,
+    borderRadius: 4,
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  optimaLogo: {
+    width: 80,
+    height: 82,
+  },
+  textContainer: {
+    borderBottomWidth: 1,
+    paddingBottom: 20,
+    borderBottomColor: '#D9D9D9',
   },
   contentTxt: {
     width: '90%',
@@ -77,5 +116,13 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     fontFamily: 'RobotoLight',
     fontWeight: '700',
+  },
+  simpleContainer: {
+    marginTop: 20,
+  },
+  contentTitle: {
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    lineHeight: 27,
   },
 });

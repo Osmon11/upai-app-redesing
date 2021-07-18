@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import referalsImg from '../../../../Images/reviewsAccountImg.png';
 import EmptyComponent from '../../../../Common/EmptyComponent';
+import EmptyAvatar from '../../../../Images/emptyProfileAccountImg.png';
 
 const myReferalsList = [
   {
@@ -52,8 +53,11 @@ const myReferalsList = [
 const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
 
-export default function MyReferals({all}) {
+export default function MyReferals({ all }) {
   const navigation = useNavigation();
+
+  console.log('ref', all);
+
   return (
     <View>
       <View style={styles.showbleView}>
@@ -63,46 +67,57 @@ export default function MyReferals({all}) {
         <TouchableOpacity
           style={styles.allPageBtn}
           onPress={() => {
-            navigation.navigate('MyReferalsScreen', {all:all});
+            navigation.navigate('MyReferalsScreen', { all: all });
           }}
         >
           <Text style={styles.allPageBtnTxt}>Все</Text>
         </TouchableOpacity>
       </View>
       <View>
-        {all.map((item, index) => {
-          if(index <=6){
-            return(
-          
-          <TouchableOpacity
-            key={index}
-            style={styles.referalsListItem}
-            onPress={() => navigation.navigate('SingleReferalScreen',{data:item})}
-          >
-            <View style={styles.imgBox}>
-              <Image style={styles.imgStyle} source={{uri:item.avatar}} />
-            </View>
-            <View style={styles.nameTxtBox}>
-              <Text style={styles.nameTxt}>{item.fullname}</Text>
-              <View style={styles.smallTxtBox}>
-                <Text style={styles.smallTxt}>{item.phone}</Text>
-                <Text style={styles.smallTxt}>{item.date}</Text>
-              </View>
-            </View>
-            <View style={styles.sumsTxtBox}>
-              <Text style={styles.sumNumber}>{item.total_revenue}</Text>
-              <Text style={styles.sumTxt}>сом</Text>
-            </View>
-          </TouchableOpacity>
-        )
-          }
-          }
-        )
-        
-        }
+        {all && all.length > 0 ? (
+          all.map((item, index) => {
+            if (index <= 6) {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.referalsListItem}
+                  onPress={() =>
+                    navigation.navigate('SingleReferalScreen', { data: item })
+                  }
+                >
+                  <View style={styles.imgBox}>
+                    <Image
+                      style={styles.imgStyle}
+                      source={
+                        item.avatar !== null
+                          ? { uri: item.avatar }
+                          : EmptyAvatar
+                      }
+                    />
+                  </View>
+                  <View style={styles.nameTxtBox}>
+                    <Text style={styles.nameTxt}>{item.fullname}</Text>
+                    <View style={styles.smallTxtBox}>
+                      <Text style={styles.smallTxt}>{item.phone}</Text>
+                      <Text style={styles.smallTxt}>{item.date}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.sumsTxtBox}>
+                    <Text style={styles.sumNumber}>{item.total_revenue}</Text>
+                    <Text style={styles.sumTxt}>сом</Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }
+          })
+        ) : (
+          <View style={{ marginTop: '5%' }}>
+            <EmptyComponent />
+          </View>
+        )}
         {/* 
         if the list is empty use 
-          <EmptyComponent />
+         
         */}
       </View>
     </View>

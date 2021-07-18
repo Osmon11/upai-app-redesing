@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.45,
     shadowRadius: 2.22,
     elevation: 3,
-    marginTop:3.5,
-    marginLeft: scalePoint * 4,
+    marginTop: 3.5,
+    marginLeft: 4,
   },
   sliderImg: {
     width: width * 0.98,

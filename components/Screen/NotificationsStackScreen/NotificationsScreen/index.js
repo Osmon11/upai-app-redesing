@@ -45,6 +45,7 @@ export default function NotificationsScreen({ route }) {
   React.useEffect(() => {
     console.log('status', route?.params.status);
     console.log('from', route?.params.from);
+    console.log('to', route?.params.to);
     setS(status ? '&kind=' + status && status : '');
     setFromd(fromd ? '&from_date=' + fromd : '');
     setNotificationHandler(tod ? '&to_date=' + tod : '');
@@ -101,6 +102,7 @@ export default function NotificationsScreen({ route }) {
       }
     );
     const res = await req.json();
+    console.log(res);
     req && setViewLoader(false);
     console.log('res', res);
     setCashBackGet(res.results);

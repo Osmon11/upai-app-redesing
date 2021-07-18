@@ -17,6 +17,7 @@ import referalsImg from '../../../../Images/reviewsAccountImg.png';
 import filterIcon from '../../../../Images/filterIcon.png';
 import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
 import EmptyComponent from '../../../../Common/EmptyComponent';
+import EmptyAvatar from '../../../../Images/emptyProfileAccountImg.png';
 
 const myReferalsList = [
   {
@@ -101,9 +102,10 @@ const myReferalsList = [
 const window = Dimensions.get('window');
 const scalePoint = window.width / 380;
 
-export default function MyReferalsScreen({route}) {
-  const {all} = route.params
+export default function MyReferalsScreen({ route }) {
+  const { all } = route.params;
   const navigation = useNavigation();
+  console.log('data', route?.params);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'position' : null}
@@ -130,45 +132,61 @@ export default function MyReferalsScreen({route}) {
         </View>
 
         <View>
-          {all.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.referalsListItem}
-              onPress={() => navigation.navigate('SingleReferalScreen')}
-            >
-              <View style={styles.imgBox}>
-                <Image style={styles.imgStyle} source={{uri:item.avatar}} />
-              </View>
-              <View
-                style={{
-                  width: '60%',
-                }}
+          {all && all.length > 0 ? (
+            all.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.referalsListItem}
+                onPress={() => navigation.navigate('SingleReferalScreen')}
               >
-                <Text style={styles.nameTxt}>{item.fullname}</Text>
+                <View style={styles.imgBox}>
+                  <Image
+                    style={styles.imgStyle}
+                    source={
+                      item.avatar !== null ? { uri: item.avatar } : EmptyAvatar
+                    }
+                  />
+                </View>
                 <View
                   style={{
-                    marginTop: '3%',
-                    flexDirection: 'row',
+                    width: '60%',
                   }}
                 >
-                  <Text style={styles.smallTxt}>{item.phone}</Text>
-                  <Text style={styles.smallTxt}>{item.date}</Text>
+                  <Text style={styles.nameTxt}>{item.fullname}</Text>
+                  <View
+                    style={{
+                      marginTop: '3%',
+                      flexDirection: 'row',
+                    }}
+                  >
+                    <Text style={styles.smallTxt}>{item.phone}</Text>
+                    <Text style={styles.smallTxt}>{item.date}</Text>
+                  </View>
                 </View>
-              </View>
-              <View
-                style={{
-                  width: '20%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Text style={styles.sumNumber}>{item.total_revenue}</Text>
-                <Text style={styles.sumTxt}>сом</Text>
-              </View>
-            </TouchableOpacity>
-            /// if list empty use
-            //<EmptyComponent />
-          ))}
+                <View
+                  style={{
+                    width: '20%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text style={styles.sumNumber}>{item.total_revenue}</Text>
+                  <Text style={styles.sumTxt}>сом</Text>
+                </View>
+              </TouchableOpacity>
+              /// if list empty use
+            ))
+          ) : (
+            <View
+              style={{
+                marginTop: '30%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <EmptyComponent />
+            </View>
+          )}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
