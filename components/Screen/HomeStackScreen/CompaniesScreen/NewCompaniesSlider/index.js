@@ -30,7 +30,7 @@ export default function NewCompaniesSlider() {
   }, []);
 
   const getAllNewCashBack = async () => {
-    const resp = await fetch(API + 'shop/?ordering=newest&limit=5');
+    const resp = await fetch(API + 'shop/?offset=0&ordering=newest&limit=5');
     const data = await resp.json();
     setNewCash(data.results);
   };

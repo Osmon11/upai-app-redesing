@@ -40,7 +40,7 @@ export default function HistoryOfBuys({ route }) {
     } else {
       getAll();
     }
-  }, []);
+  }, [route?.params]);
 
   const getAll = async (val) => {
     const token = await AsyncStorage.getItem('token');

@@ -108,7 +108,7 @@ export default function SetProfileInfo() {
       const json = await response.json();
       setViewLoader(false);
       setAnswerModal(true);
-      setModalTxt("Фото успешно измененно");
+      setModalTxt("Фото успешно изменено");
       getFullInfo();
     } catch (error) {
       setViewLoader(false);
@@ -192,8 +192,8 @@ export default function SetProfileInfo() {
                       borderRadius: scalePoint * 107 * 0.5,
                     }}
                     source={
-                      data.avatar !== null
-                        ? { uri: data.avatar }
+                      data?.avatar !== null
+                        ? { uri: data?.avatar }
                         : emptyProfileAccountImg
                     }
                   />

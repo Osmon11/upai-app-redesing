@@ -84,7 +84,7 @@ export default function HomeScreen() {
         </View>
         {auth && (
           <View style={styles.profileBox}>
-            <ProfileInfo />
+            <ProfileInfo nav={viewLoader}/>
           </View>
         )}
         <View style={styles.contentContainer}>

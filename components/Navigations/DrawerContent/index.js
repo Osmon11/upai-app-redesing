@@ -75,7 +75,7 @@ export function DrawerContent(props) {
             </View>
           )}
         />
-        {auth ? <ProfileInfo /> : null}
+        {auth ? <ProfileInfo nav={props} /> : null}
         <View style={auth ? styles.menuLinks : styles.notAuthMenuLink}>
           <DrawerItem
             pressColor={"#fff"}

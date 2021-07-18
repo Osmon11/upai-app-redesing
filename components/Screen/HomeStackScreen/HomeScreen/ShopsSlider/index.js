@@ -26,7 +26,7 @@ export default function ShopsSlider() {
   }, []);
 
   const getAllHotCashBack = async () => {
-    const resp = await fetch(API + 'shop/?ordering=rating&limit=10&category=3');
+    const resp = await fetch(API + 'shop/?offset=0&ordering=rating&limit=10&category=3');
     const data = await resp.json();
     setHotCash(data.results);
   };

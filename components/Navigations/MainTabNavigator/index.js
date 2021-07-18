@@ -177,7 +177,7 @@ export default function MainTabNavigator() {
               backgroundColor: "transparent`",
             }}
           >
-            <View style={{ flex: 1, backgroundColor: "#d7d7d7" }}>
+            <View style={{ flex: 1, backgroundColor: "#fff" }}></View>
               <Svg width='73' height='83' viewBox='0 0 73 83' fill='none'>
                 <Path
                   fill-rule='evenodd'
@@ -186,7 +186,7 @@ export default function MainTabNavigator() {
                   fill='white'
                 />
               </Svg>
-            </View>
+            <View style={{ flex: 1, backgroundColor: "#fff" }}></View>
           </View>
           <TouchableOpacity
             style={{
@@ -229,7 +229,7 @@ export default function MainTabNavigator() {
         showLabel: false,
         style: {
           height: 60,
-          backgroundColor: "rgba(0,0,0,0.1)",
+          backgroundColor: "#d7d7d7",
         },
       }}
     >

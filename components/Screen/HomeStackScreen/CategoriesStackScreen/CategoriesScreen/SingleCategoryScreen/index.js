@@ -30,14 +30,14 @@ export default function SingleCategoryScreen({ route }) {
   const [viewLoader, setViewLoader] = React.useState(true);
   React.useEffect(() => {
     setViewLoader(false);
-  }, []);
+  }, [route]);
   React.useEffect(() => {
     reloadPage();
   });
 
   const reloadPage = () => {
     setName(route.params?.name);
-    if (route.params?.markets) {
+    if (route.params?.markets && !route.params?.filter) {
       setData(route.params?.markets);
     } else {
       if (route.params?.filter !== '' || route.params?.filter !== undefined) {

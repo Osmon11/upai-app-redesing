@@ -115,7 +115,7 @@ export default function FilterBuyHistoryScreen() {
                   }-${
                     date.getMonth() <= 9
                       ? '0' + (date.getMonth() + 1)
-                      : date.getMonth() + 1
+                      : (date.getMonth() + 1)
                   }-${date.getFullYear()}`,
                   to: `${
                     date2.getDate() <= 9
@@ -124,7 +124,7 @@ export default function FilterBuyHistoryScreen() {
                   }-${
                     date2.getMonth() <= 9
                       ? '0' + (date2.getMonth() + 1)
-                      : date2.getMonth() + 1
+                      : (date2.getMonth() + 1)
                   }-${date2.getFullYear()}`,
                   filtered: true,
                 });

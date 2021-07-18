@@ -43,11 +43,7 @@ export default function NotificationsScreen({ route }) {
   const { to } = route?.params;
 
   React.useEffect(() => {
-    console.log('status', route?.params.status);
-    console.log('from', route?.params.from);
-    setS(status ? '&kind=' + status && status : '');
-    setFromd(fromd ? '&from_date=' + fromd : '');
-    setNotificationHandler(tod ? '&to_date=' + tod : '');
+    
     getAll();
 
     getFullInfo();
@@ -55,11 +51,12 @@ export default function NotificationsScreen({ route }) {
     const unsubscribe = navigation.addListener('focus', () => {
       setViewLoader(true);
       getFullInfo();
+      getAll();
     });
     return () => {
       unsubscribe;
     };
-  }, [route?.params.status]);
+  }, [route]);
 
   const getFullInfo = async () => {
     const token = await AsyncStorage.getItem('token');
@@ -78,14 +75,7 @@ export default function NotificationsScreen({ route }) {
   const getAll = async () => {
     console.log('date', from);
     const token = await AsyncStorage.getItem('token');
-    console.log(
-      API +
-        `users/notification/?offset=0&limit=50${
-          status !== undefined ? `&kind=${status}` : ``
-        }${from !== undefined ? `&from_date=${from}` : ``}${
-          to !== undefined ? `&to_date=${to}` : ``
-        }`
-    );
+   
     const req = await fetch(
       API +
         `users/notification/?offset=0&limit=50${
@@ -101,8 +91,7 @@ export default function NotificationsScreen({ route }) {
       }
     );
     const res = await req.json();
-    req && setViewLoader(false);
-    console.log('res', res);
+    res && setViewLoader(false);
     setCashBackGet(res.results);
   };
 

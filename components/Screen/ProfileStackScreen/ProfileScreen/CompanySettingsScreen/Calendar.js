@@ -25,7 +25,10 @@ export default function Calendar({ all }) {
             all[0].style.backgroundColor = 'white';
           }
           all.splice(index, index == 0 ? index+1 : index);
-          setViewLoader(false)
+          setTimeout(() => {
+            setViewLoader(false)
+          }, 1000);
+          
         } else {
           status = true;
         }
@@ -39,7 +42,9 @@ export default function Calendar({ all }) {
         containerStyle: [], // extra styling for day container
         allowDisabled: true, // allow custom style to apply to disabled dates
       });
-      setViewLoader(false)
+      setTimeout(() => {
+        setViewLoader(false)
+      }, 1000);
     }
     
     

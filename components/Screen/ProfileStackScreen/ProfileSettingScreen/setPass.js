@@ -21,34 +21,41 @@ export default function SetPass() {
   const [modalTxt, setModalTxt] = useState();
 
   const changePass = async () => {
-    let data = {
-      old_password: oldPass,
-      new_password: newPass,
-    };
-    const token = await AsyncStorage.getItem('token');
-    try {
-      const response = await fetch(API + 'users/change-password/', {
-        method: 'PUT', // или 'PUT'
-        headers: {
-          Authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
-      });
-      const json = await response.json();
-      if (json.message) {
-        setAnswerModal(true);
-        setModalTxt(json.message);
-      } else if (json.new_password) {
-        setAnswerModal(true);
-        setModalTxt(json.new_password[0]);
-      } else if (json.old_password) {
-        setAnswerModal(true);
-        setModalTxt(json.old_password[0]);
+    
+    if(newPass == reNewPass){
+      let data = {
+        old_password: oldPass,
+        new_password: newPass,
+      };
+      const token = await AsyncStorage.getItem('token');
+      try {
+        const response = await fetch(API + 'users/change-password/', {
+          method: 'PUT', // или 'PUT'
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+        });
+        const json = await response.json();
+        if (json.message) {
+          setAnswerModal(true);
+          setModalTxt(json.message);
+        } else if (json.new_password) {
+          setAnswerModal(true);
+          setModalTxt(json.new_password[0]);
+        } else if (json.old_password) {
+          setAnswerModal(true);
+          setModalTxt(json.old_password[0]);
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
       }
-    } catch (error) {
-      console.error('Ошибка:', error);
+    }else{
+      setAnswerModal(true);
+      setModalTxt('Пароли не совпадают');
     }
+    
   };
   return (
     <View>

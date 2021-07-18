@@ -530,8 +530,8 @@ export default function CompanySettingsScreen({ route }) {
               showsHorizontalScrollIndicator={false}
               style={styles.addPhotoSection}
             >
-              {data && data.gallery !== ''
-                ? data.gallery.map((el) => (
+              {data && data.gallery !== undefined
+                ? data?.gallery.map((el) => (
                     <View style={styles.mainImgBox} key={el.id}>
                       <TouchableOpacity
                         style={styles.deletePhotoBtn}

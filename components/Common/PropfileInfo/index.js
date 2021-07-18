@@ -8,14 +8,15 @@ import { API } from '../../config';
 const width = Dimensions.get('window').width;
 const scalePoint = width / 380;
 
-export default function ProfileInfo() {
+export default function ProfileInfo({nav}) {
   const [data, setData] = useState([]);
   const [businessStatus, setBusinessStatus] = useState(true);
+  
   React.useEffect(() => {
-    if (data.length === 0) {
+      setData([])
       getFullInfo();
-    }
-  }, [data]);
+    
+  }, [nav]);
   const getFullInfo = async () => {
     const token = await AsyncStorage.getItem('token');
     const resp = await fetch(API + 'users/profile/', {
@@ -25,12 +26,13 @@ export default function ProfileInfo() {
       },
     });
     const data = await resp.json();
+    setData(data);
     if (data.code === 'token_not_valid') {
       navigation.navigate('ProfileStackScreen', {
         screen: 'LoginMainScreen',
       });
     }
-    setData(data);
+    
   };
   return (
     <View style={styles.profileInfo}>

@@ -24,7 +24,7 @@ export default function ProfileSettingScreen(props) {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
         <KeyboardAvoidingView
           style={{ flex: 1 }}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
+          behavior={Platform.OS == 'ios' ? 'padding' : 'padding'}
         >
           <View style={styles.headerBox}>
             <HeaderInStackScreens nav={true} />
@@ -36,7 +36,7 @@ export default function ProfileSettingScreen(props) {
           <View
             style={{
               marginTop: '5%',
-              marginBottom: '18%',
+              marginBottom: '20%',
             }}
           >
             <SetPass />
@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   profileInfoBox: {
-    marginTop: '5%',
+    marginTop: '6%',
   },
 });
