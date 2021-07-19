@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -10,105 +10,23 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import referalsImg from '../../../../Images/reviewsAccountImg.png';
-import filterIcon from '../../../../Images/filterIcon.png';
-import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
-import EmptyComponent from '../../../../Common/EmptyComponent';
-import EmptyAvatar from '../../../../Images/emptyProfileAccountImg.png';
+import HeaderInStackScreens from "../../../../Common/HeaderInStackScreens";
+import EmptyComponent from "../../../../Common/EmptyComponent";
+import EmptyAvatar from "../../../../Images/emptyProfileAccountImg.png";
 
-const myReferalsList = [
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-  {
-    image: referalsImg,
-    name: 'Азим Дженалиев',
-    referalID: 'ID123456789',
-    date: '27.10.2020',
-    sum: '1500',
-  },
-];
-
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function MyReferalsScreen({ route }) {
   const { all } = route.params;
   const navigation = useNavigation();
-  console.log('data', route?.params);
+  console.log("data", route?.params);
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'position' : null}
+      behavior={Platform.OS === "ios" ? "position" : null}
       style={styles.container}
     >
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
@@ -117,18 +35,6 @@ export default function MyReferalsScreen({ route }) {
         </View>
         <View style={styles.mainContentBox}>
           <Text style={styles.mainText}>Мои рефералы</Text>
-          {/* <TouchableOpacity
-            onPress={() => navigation.navigate('FilterReferalsScreen')}
-          >
-            <Image
-              style={{
-                width: scalePoint * 20,
-                height: scalePoint * 20,
-                resizeMode: 'contain',
-              }}
-              source={filterIcon}
-            />
-          </TouchableOpacity> */}
         </View>
 
         <View>
@@ -137,7 +43,9 @@ export default function MyReferalsScreen({ route }) {
               <TouchableOpacity
                 key={index}
                 style={styles.referalsListItem}
-                onPress={() => navigation.navigate('SingleReferalScreen')}
+                onPress={() =>
+                  navigation.navigate("SingleReferalScreen", { data: item })
+                }
               >
                 <View style={styles.imgBox}>
                   <Image
@@ -149,25 +57,29 @@ export default function MyReferalsScreen({ route }) {
                 </View>
                 <View
                   style={{
-                    width: '60%',
+                    width: "60%",
                   }}
                 >
-                  <Text style={styles.nameTxt}>{item.fullname}</Text>
+                  <Text style={styles.nameTxt}>
+                    {Boolean(item.fullname) ? item.fullname : "Нет имени"}
+                  </Text>
                   <View
                     style={{
-                      marginTop: '3%',
-                      flexDirection: 'row',
+                      marginTop: "3%",
+                      flexDirection: "row",
                     }}
                   >
                     <Text style={styles.smallTxt}>{item.phone}</Text>
-                    <Text style={styles.smallTxt}>{item.date}</Text>
+                    <Text style={styles.smallTxt}>
+                      {item.created.split("T")[0]}
+                    </Text>
                   </View>
                 </View>
                 <View
                   style={{
-                    width: '20%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    width: "20%",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
                   <Text style={styles.sumNumber}>{item.total_revenue}</Text>
@@ -179,9 +91,9 @@ export default function MyReferalsScreen({ route }) {
           ) : (
             <View
               style={{
-                marginTop: '30%',
-                alignItems: 'center',
-                justifyContent: 'center',
+                marginTop: "30%",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <EmptyComponent />
@@ -195,70 +107,70 @@ export default function MyReferalsScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '10%',
-    width: '100%',
+    marginTop: Platform.OS === "ios" ? "15%" : "10%",
+    width: "100%",
     height: scalePoint * 23,
   },
   mainContentBox: {
-    marginTop: '10%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginTop: "10%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginLeft: "5%",
+    marginRight: "5%",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   referalsListItem: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '5%',
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "5%",
     borderBottomWidth: 1,
-    borderColor: '#ebebeb',
-    paddingBottom: '5%',
-    marginLeft: '2%',
+    borderColor: "#ebebeb",
+    paddingBottom: "5%",
+    marginLeft: "2%",
   },
   imgBox: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: '3%',
+    marginRight: "3%",
   },
   imgStyle: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   nameTxt: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#515151',
+    color: "#515151",
   },
   smallTxt: {
     fontSize: 12,
     lineHeight: 13,
-    color: '#8e8e8e',
-    marginRight: '5%',
+    color: "#8e8e8e",
+    marginRight: "5%",
   },
   sumNumber: {
     fontSize: 10,
     lineHeight: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   sumTxt: {
     fontSize: 10,
     lineHeight: 12,
-    color: '#515151',
+    color: "#515151",
   },
 });
