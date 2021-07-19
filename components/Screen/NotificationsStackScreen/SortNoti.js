@@ -16,7 +16,7 @@ const scalePoint = window.width / 380;
 export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
   const [label1, setLabel1] = useState({
     label: 'Отклоненные',
-    value: 'decline',
+    value: 'error',
   });
   const [label2, setLabel2] = useState({
     label: 'В ожидании',
@@ -26,14 +26,28 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
     label: 'Отправленные',
     value: 'success',
   });
-  const [choice1, setChoice1] = useState(true);
+  const [label4, setLabel4] = useState({
+    label: 'Все, за весь период',
+    value: 'all',
+  });
+  const [choice1, setChoice1] = useState(false);
   const [choice2, setChoice2] = useState(false);
   const [choice3, setChoice3] = useState(false);
+  const [choice4, setChoice4] = useState(true);
+  const getChoice4 = () => {
+    getResult(label4);
+    setChoice4(true);
+    setChoice3(false);
+    setChoice2(false);
+    setChoice1(false);
+    setAnswerModal(false);
+  };
   const getChoice1 = () => {
     getResult(label1);
     setChoice1(true);
     setChoice2(false);
     setChoice3(false);
+    setChoice4(false);
     setAnswerModal(false);
   };
   const getChoice2 = () => {
@@ -41,6 +55,7 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
     setChoice2(true);
     setChoice1(false);
     setChoice3(false);
+    setChoice4(false);
     setAnswerModal(false);
   };
   const getChoice3 = () => {
@@ -48,6 +63,7 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
     setChoice3(true);
     setChoice2(false);
     setChoice1(false);
+    setChoice4(false);
     setAnswerModal(false);
   };
   return (
@@ -60,9 +76,24 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
     >
       <DialogContent style={styles.answerModalBox}>
         <View style={styles.container}>
+        <TouchableOpacity
+            onPress={() => getChoice4()}
+            style={styles.chooseLine}
+          >
+            <View style={styles.txtBox}>
+              <Text style={styles.txt}>{label4.label}</Text>
+            </View>
+            <View>
+              {choice4 ? (
+                <AntDesign name="checkcircle" size={17} color="#225196" />
+              ) : (
+                <FontAwesome5 name="circle" size={17} color="#225196" />
+              )}
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => getChoice1()}
-            style={styles.chooseLine}
+            style={styles.chooseLine2}
           >
             <View style={styles.txtBox}>
               <Text style={styles.txt}>{label1.label}</Text>
@@ -111,15 +142,17 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
   );
 }
 const styles = StyleSheet.create({
+  
   container: {
     alignSelf: 'center',
     width: scalePoint * 343,
     height: scalePoint * 125,
+    marginTop:'-7%'
   },
   answerModalBox: {
     backgroundColor: '#fff',
     width: scalePoint * 343,
-    height: scalePoint * 125,
+    height: scalePoint * 135,
     justifyContent: 'center',
     alignItems: 'center',
     padding: '2%',

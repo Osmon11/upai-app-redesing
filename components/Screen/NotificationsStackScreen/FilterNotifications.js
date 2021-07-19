@@ -24,8 +24,8 @@ export default function FilterNotificationsScreen() {
   const navigation = useNavigation();
 
   const [choice, setChoice] = useState({
-    label: 'Отклоненные',
-    value: 'decline',
+    label: 'Все, за весь период',
+    value: 'all',
   });
   const [date, setDate] = useState(new Date());
   const [sortModal, setSortModal] = useState(false);
@@ -162,7 +162,8 @@ export default function FilterNotificationsScreen() {
           <TouchableOpacity
             style={styles.filterBtn}
             onPress={() => {
-              if (new Date(date) < new Date(dateTo)) {
+              if(choice.value !== 'all'){
+                if (new Date(date) < new Date(dateTo)) {
                 navigation.navigate('NotificationMainScreen', {
                   status: choice.value,
 
@@ -191,6 +192,15 @@ export default function FilterNotificationsScreen() {
                   to: undefined,
                 });
               }
+              }else{
+                navigation.navigate('NotificationMainScreen', {
+                  status: undefined,
+
+                  from: undefined,
+                  to: undefined,
+                });
+              }
+              
             }}
           >
             <Text style={styles.btnText}>Сортировать</Text>

@@ -52,7 +52,7 @@ export default function CompanyInfo(props) {
         setStatus('Закрыто');
       } else {
         setStatus(
-          `${props.data?.working_days[day]?.from_} - ${props.data?.working_days[day]?.to}`
+          `${fromH}:${fromM} - ${toH}:${toM}`
         );
       }
     }
