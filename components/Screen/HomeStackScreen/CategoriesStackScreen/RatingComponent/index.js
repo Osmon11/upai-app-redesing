@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
-import StarRating from 'react-native-star-rating';
+import React, { useState, useEffect } from "react";
+import { Text, View } from "react-native";
+import StarRating from "react-native-star-rating";
 
 export default function RatingComponent({ rate, review, reviewStatus }) {
   const [starCount, setStarCount] = useState(0);
@@ -15,44 +15,44 @@ export default function RatingComponent({ rate, review, reviewStatus }) {
     ];
   };
   return (
-    <View style={{ flexDirection: 'row', width: '100%' }}>
+    <View style={{ flexDirection: "row", width: "100%" }}>
       <View
         style={{
-          alignSelf: 'center',
+          alignSelf: "center",
         }}
       >
         <StarRating
           starSize={11}
           disabled={false}
           maxStars={5}
-          rating={starCount}
-          fullStarColor={'red'}
+          rating={parseInt(starCount)}
+          fullStarColor={"red"}
           starStyle={{ marginRight: 1 }}
         />
       </View>
       <Text
         style={{
-          alignSelf: 'center',
-          color: '#ff0707',
+          alignSelf: "center",
+          color: "#ff0707",
           fontSize: 12,
           paddingLeft: 5,
         }}
       >
-        {starCount}{' '}
+        {starCount}{" "}
       </Text>
       <Text
         style={
           reviewStatus
             ? {
-                alignSelf: 'center',
-                color: '#313131',
+                alignSelf: "center",
+                color: "#313131",
                 fontSize: 11,
-                fontFamily: 'RobotoLight',
+                fontFamily: "RobotoLight",
               }
-            : { display: 'none' }
+            : { display: "none" }
         }
       >
-        ({`${review} ${declOfNum(review, ['отзыв', 'отзыва', 'отзывов'])}`})
+        ({`${review} ${declOfNum(review, ["отзыв", "отзыва", "отзывов"])}`})
       </Text>
     </View>
   );

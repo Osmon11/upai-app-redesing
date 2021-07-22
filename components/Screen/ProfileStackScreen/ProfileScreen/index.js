@@ -45,9 +45,9 @@ export default function ProfileScreen() {
 
   const [viewLoader, setViewLoader] = React.useState(true);
 
-  // React.useEffect(() => {
-  //   getInfo();
-  // });
+  React.useEffect(() => {
+    getInfo();
+  });
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();

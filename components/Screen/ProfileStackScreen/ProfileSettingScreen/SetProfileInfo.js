@@ -131,7 +131,6 @@ export default function SetProfileInfo() {
       },
     });
     const data = await resp.json();
-    console.log(data);
     setData(data && data);
   };
   const setText = (prop) => (text) => {

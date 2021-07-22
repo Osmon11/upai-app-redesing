@@ -59,7 +59,7 @@ export default function RegistrationScreen({ open }) {
       if (json.access) {
         await AsyncStorage.setItem("token", json.access);
         navigation.navigate("ProfileStackScreen", {
-          screen: "PrivacyPolicyScreen",
+          screen: "ProfileScreen",
         });
       } else {
         setAnswerModal(true);

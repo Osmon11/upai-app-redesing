@@ -1,38 +1,31 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
+import React, { useState } from "react";
+import { View, StyleSheet, Image, Text, Dimensions } from "react-native";
 
-import emptyProfileAccountImg from '../../Images/emptyProfileAccountImg.png';
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../config';
+import emptyProfileAccountImg from "../../Images/emptyProfileAccountImg.png";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../config";
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 const scalePoint = width / 380;
 
-export default function ProfileInfo({nav}) {
+export default function ProfileInfo({ nav }) {
   const [data, setData] = useState([]);
   const [businessStatus, setBusinessStatus] = useState(true);
-  
+
   React.useEffect(() => {
-      setData([])
-      getFullInfo();
-    
+    setData([]);
+    getFullInfo();
   }, [nav]);
   const getFullInfo = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
     setData(data);
-    if (data.code === 'token_not_valid') {
-      navigation.navigate('ProfileStackScreen', {
-        screen: 'LoginMainScreen',
-      });
-    }
-    
   };
   return (
     <View style={styles.profileInfo}>
@@ -56,14 +49,14 @@ export default function ProfileInfo({nav}) {
         <View style={styles.accountInfo}>
           <Text style={styles.accountName}>
             {data && data?.fullname && String(data?.fullname).length > 15
-              ? String(data?.fullname).substring(0, 15) + '...'
+              ? String(data?.fullname).substring(0, 15) + "..."
               : data?.fullname
               ? data?.fullname
-              : ''}
+              : ""}
           </Text>
           <Text style={styles.accountID}>{data ? data.phone : null}</Text>
         </View>
-        <View style={businessStatus ? styles.cashSumBox : { display: 'none' }}>
+        <View style={businessStatus ? styles.cashSumBox : { display: "none" }}>
           <Text style={styles.cashSumTxt}>{data && data.balance} сом</Text>
         </View>
       </View>
@@ -73,15 +66,15 @@ export default function ProfileInfo({nav}) {
 
 const styles = StyleSheet.create({
   profileInfo: {
-    width: '93%',
-    alignSelf: 'center',
+    width: "93%",
+    alignSelf: "center",
     zIndex: 0,
   },
   halfSideBox: {
-    flexDirection: 'row',
-    width: '100%',
-    alignSelf: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    width: "100%",
+    alignSelf: "center",
+    alignItems: "center",
   },
   profileImage: {
     marginRight: scalePoint * 13,
@@ -89,11 +82,11 @@ const styles = StyleSheet.create({
   accountImg: {
     width: scalePoint * 60,
     height: scalePoint * 60,
-    resizeMode: 'cover',
+    resizeMode: "cover",
     borderRadius: scalePoint * 10,
   },
   photoShadow: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -103,38 +96,38 @@ const styles = StyleSheet.create({
 
     elevation: 3,
     borderRadius: scalePoint * 10,
-    borderColor: 'rgba(146,146,146,0.3)',
+    borderColor: "rgba(146,146,146,0.3)",
   },
   emptyPhoto: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   accountInfo: {
-    marginLeft: '2%',
-    width: '53%',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    marginLeft: "2%",
+    width: "53%",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   accountName: {
     fontSize: 16,
     lineHeight: 19,
   },
   accountID: {
-    marginTop: '1%',
+    marginTop: "1%",
     fontSize: 14,
     lineHeight: 16,
-    color: '#8d8d8d',
+    color: "#8d8d8d",
   },
   cashSumBox: {
-    width: '30%',
+    width: "30%",
     height: scalePoint * 38,
     width: scalePoint * 78,
     borderRadius: scalePoint * 5,
-    backgroundColor: '#ff6b00',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#ff6b00",
+    justifyContent: "center",
+    alignItems: "center",
   },
   cashSumTxt: {
     fontSize: 12,
-    color: '#fff',
+    color: "#fff",
   },
 });

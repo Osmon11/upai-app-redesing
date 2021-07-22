@@ -74,9 +74,9 @@ export default function CasbackSettingsScreen({ route }) {
   const [selectedId, setSelectedId] = useState(null);
   const [viewLoader, setViewLoader] = React.useState(false);
   React.useEffect(() => {
-    if (route?.params && route?.params.cashId != undefined) {
-      setCashId(route.params.cashId);
-      getFullInfoHotCash(route.params.cashId);
+    if (route?.params && route?.params.shopId != undefined) {
+      setCashId(route.params.shopId);
+      getFullInfoHotCash(route.params.shopId);
     }
     getAllCategories();
   }, []);

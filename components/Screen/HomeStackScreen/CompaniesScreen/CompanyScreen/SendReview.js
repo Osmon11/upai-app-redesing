@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,34 +6,34 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import StarRating from 'react-native-star-rating';
-import { BoxShadow } from 'react-native-shadow';
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../../../config';
-import DialogAlert from '../../../../Common/DialogAlert';
+} from "react-native";
+import StarRating from "react-native-star-rating";
+import { BoxShadow } from "react-native-shadow";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../../../config";
+import DialogAlert from "../../../../Common/DialogAlert";
 
 export default function SendReview({ shop, open, getAllreview }) {
   const shadowOpt = {
     width: 290,
     height: 78,
-    color: '#000',
+    color: "#000",
     border: 7,
     radius: 10,
     opacity: 0.07,
     x: 0,
     y: 3,
     style: {
-      alignSelf: 'center',
-      marginTop: '15%',
+      alignSelf: "center",
+      marginTop: "15%",
     },
   };
   const [starCount, setStarCount] = useState(1);
-  const [feedback, setFeedback] = useState('');
+  const [feedback, setFeedback] = useState("");
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
   const sendFeedBackOrRedirect = async () => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
 
     if (token !== null) {
       sendFeedBack();
@@ -48,27 +48,27 @@ export default function SendReview({ shop, open, getAllreview }) {
         rate: starCount,
         opinion: feedback,
       };
-      const token = await AsyncStorage.getItem('token');
+      const token = await AsyncStorage.getItem("token");
       try {
         const response = await fetch(API + `shop/${shop}/review/`, {
-          method: 'POST', // или 'PUT'
+          method: "POST", // или 'PUT'
           headers: {
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
         });
         const json = await response.json();
-        
+
         getAllreview();
-        setFeedback('');
+        setFeedback("");
         setStarCount(1);
       } catch (error) {
-        console.error('Ошибка:', error);
+        console.error("Ошибка:", error);
       }
     } else {
       setAnswerModal(true);
-      setModalTxt('Введите сообщение');
+      setModalTxt("Введите сообщение");
     }
   };
   return (
@@ -78,8 +78,8 @@ export default function SendReview({ shop, open, getAllreview }) {
           style={{
             fontSize: 14,
             lineHeight: 16,
-            color: '#515151',
-            alignSelf: 'center',
+            color: "#515151",
+            alignSelf: "center",
           }}
         >
           Поставить рейтинг и оставить отзыв
@@ -87,42 +87,42 @@ export default function SendReview({ shop, open, getAllreview }) {
       </View>
       <View
         style={{
-          width: '35%',
-          alignSelf: 'center',
-          marginTop: '5%',
+          width: "35%",
+          alignSelf: "center",
+          marginTop: "5%",
         }}
       >
         <StarRating
           starSize={17}
           disabled={false}
           maxStars={5}
-          rating={starCount}
+          rating={parseInt(starCount)}
           selectedStar={(rating) => setStarCount(rating)}
-          fullStarColor={'red'}
+          fullStarColor={"red"}
         />
       </View>
       <BoxShadow setting={shadowOpt}>
         <View
           style={{
-            alignSelf: 'center',
-            width: '100%',
+            alignSelf: "center",
+            width: "100%",
             height: 78,
             borderWidth: 0.5,
-            borderColor: '#929292',
+            borderColor: "#929292",
             borderRadius: 10,
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           }}
         >
           <TextInput
             style={{
-              paddingLeft: '5%',
-              paddingTop: '5%',
+              paddingLeft: "5%",
+              paddingTop: "5%",
               fontSize: 14,
               lineHeight: 16,
             }}
             multiline
             numberOfLines={1}
-            placeholder="Отзыв"
+            placeholder='Отзыв'
             value={feedback}
             onChangeText={(text) => setFeedback(text)}
           />
@@ -130,13 +130,13 @@ export default function SendReview({ shop, open, getAllreview }) {
       </BoxShadow>
       <TouchableOpacity
         style={{
-          alignSelf: 'center',
-          marginTop: '10%',
+          alignSelf: "center",
+          marginTop: "10%",
           width: 140,
           height: 40,
-          backgroundColor: '#ff6b00',
+          backgroundColor: "#ff6b00",
           borderRadius: 10,
-          justifyContent: 'center',
+          justifyContent: "center",
         }}
         onPress={sendFeedBackOrRedirect}
       >
@@ -144,8 +144,8 @@ export default function SendReview({ shop, open, getAllreview }) {
           style={{
             fontSize: 14,
             lineHeight: 16,
-            alignSelf: 'center',
-            color: '#fff',
+            alignSelf: "center",
+            color: "#fff",
           }}
         >
           Отправить

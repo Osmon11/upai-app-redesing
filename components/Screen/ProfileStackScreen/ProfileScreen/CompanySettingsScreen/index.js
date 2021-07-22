@@ -96,11 +96,13 @@ export default function CompanySettingsScreen({ route }) {
   ];
 
   React.useEffect(() => {
-    getAllInfo();
-  }, []);
+    if (!Boolean(data)) {
+      getAllInfo();
+    }
+  }, [data]);
 
   React.useEffect(() => {
-    workingDays &&
+    if (workingDays) {
       wrkdays.map((el) => {
         workingDays[el.label].to == null
           ? (workingDays[el.label].to = "00:00")
@@ -109,6 +111,7 @@ export default function CompanySettingsScreen({ route }) {
           ? (workingDays[el.label].from_ = "00:00")
           : workingDays[el.label].from_;
       });
+    }
   }, [workingDays]);
 
   const getAllCategories = async (name) => {
@@ -133,7 +136,19 @@ export default function CompanySettingsScreen({ route }) {
     let resp = await fetch(API + "shop/" + shopId + "/");
     let data = await resp.json();
     setData(data);
-
+    if (data && data.working_days) {
+      for (let day in data.working_days) {
+        if (
+          data.working_days[day].active &&
+          data.working_days[day].from_.length > 5
+        ) {
+          let newDay = data.working_days[day],
+            from_ = newDay.from_.substr(0, 5),
+            to = newDay.to.substr(0, 5);
+          data.working_days[day] = { ...newDay, from_, to };
+        }
+      }
+    }
     setWorkingDays(data && data.working_days);
     getAllCategories(data.categories[0]);
     setImg(data.logo);
@@ -167,7 +182,6 @@ export default function CompanySettingsScreen({ route }) {
     };
 
     setWorkingDays({ ...workingDays, [activeLabel]: one });
-    // changeMarketInfo({ ...workingDays, [activeLabel]: one });
 
     hideTimePickerFrom();
     changeMarketInfo("save");
@@ -185,7 +199,6 @@ export default function CompanySettingsScreen({ route }) {
     };
 
     setWorkingDays({ ...workingDays, [activeLabel]: one });
-    // changeMarketInfo({ ...workingDays, [activeLabel]: one });
     hideTimePicker();
     changeMarketInfo("save");
   };
@@ -199,7 +212,6 @@ export default function CompanySettingsScreen({ route }) {
     };
     setWorkingDays({ ...workingDays, [label]: one });
     changeMarketInfo("save");
-    // changeMarketInfo({ ...workingDays, [label]: one });
   };
 
   const choosePhotoFromGallery = async (name) => {
@@ -241,10 +253,6 @@ export default function CompanySettingsScreen({ route }) {
   const changeMarketInfo = async (s) => {
     setViewLoader(true);
     const token = await AsyncStorage.getItem("token");
-
-    delete data.logo;
-    delete data.main_image;
-    delete data.gallery;
 
     workingDays &&
       wrkdays.map((el) => {
@@ -416,30 +424,6 @@ export default function CompanySettingsScreen({ route }) {
                 />
               </View>
             </View>
-            {/* <View style={styles.infoBox}>
-              <Text style={styles.infoBoxText}>
-                Категория {selectedValue && selectedValue.label}
-              </Text>
-              <View style={styles.inputBox}>
-                {categories && (
-                  <RNPickerSelect
-                    items={categories}
-                    placeholder={
-                      {
-                      label: 'Выберите категорию',
-                      value: 'empty',
-                    }}
-                    
-                    style={pickerSelectStyles}
-                    onValueChange={(item, i) =>
-                      setSelectedValue({ val: item, name: i })
-                    }
-                    useNativeAndroidPickerStyle={false}
-                    inputAndroidContainer={{ paddingLeft: '5%' }}
-                  />
-                )}
-              </View>
-            </View> */}
             <View style={styles.infoBox}>
               <Text style={styles.infoBoxText}>Категории</Text>
               <TouchableOpacity
@@ -447,21 +431,6 @@ export default function CompanySettingsScreen({ route }) {
                 onPress={() => setModalVisible(true)}
               >
                 <Text style={styles.pick}>{nameOfCategory}</Text>
-                {/* {categories && (
-                <RNPickerSelect
-                  items={categories}
-                  placeholder={{
-                    label: 'Выберите категорию',
-                    value: 'empty',
-                  }}
-                  style={pickerSelectStyles}
-                  onValueChange={(item, i) =>
-                    setSelectedValue({ val: item, name: i })
-                  }
-                  useNativeAndroidPickerStyle={false}
-                  inputAndroidContainer={{ paddingLeft: '5%' }}
-                />
-              )} */}
               </TouchableOpacity>
             </View>
             <View style={styles.infoBox}>
@@ -534,7 +503,7 @@ export default function CompanySettingsScreen({ route }) {
               style={styles.addPhotoSection}
             >
               {data && data.gallery !== undefined
-                ? data?.gallery.map((el) => (
+                ? data.gallery.map((el) => (
                     <View style={styles.mainImgBox} key={el.id}>
                       <TouchableOpacity
                         style={styles.deletePhotoBtn}
