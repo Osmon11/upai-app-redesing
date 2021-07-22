@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -8,24 +8,24 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-} from 'react-native';
+} from "react-native";
 
-import HeaderInStackScreens from '../../../../../Common/HeaderInStackScreens';
-import CalendarHotCash from './CalendarHotCash';
+import HeaderInStackScreens from "../../../../../Common/HeaderInStackScreens";
+import CalendarHotCash from "./CalendarHotCash";
 
-import qrIconIOS from '../../../../../Images/qrIconTabMenu.png';
-import hotCashClockImg from '../../../../../Images/hotCashesClockImg.png';
-import fireCashSumIcon from '../../../../../Images/fireCashSumImg.png';
-import phoneIcon from '../../../../../Images/сompanyCallIcon.png';
-import AnimatedLoader from 'react-native-animated-loader';
-import { API } from '../../../../../config';
-import { AntDesign } from '@expo/vector-icons';
-import DialogAlert from '../../../../../Common/DialogAlert';
-import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import qrIconIOS from "../../../../../Images/qrIconTabMenu.png";
+import hotCashClockImg from "../../../../../Images/hotCashesClockImg.png";
+import fireCashSumIcon from "../../../../../Images/fireCashSumImg.png";
+import phoneIcon from "../../../../../Images/сompanyCallIcon.png";
+import AnimatedLoader from "react-native-animated-loader";
+import { API } from "../../../../../config";
+import { AntDesign } from "@expo/vector-icons";
+import DialogAlert from "../../../../../Common/DialogAlert";
+import AsyncStorage from "@react-native-community/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
-const window = Dimensions.get('window');
-const width = Dimensions.get('screen').width;
+const window = Dimensions.get("window");
+const width = Dimensions.get("screen").width;
 const scalePoint = window.width / 380;
 export default function HotCashbacksInfoScreen({ route }) {
   const [viewLoader, setViewLoader] = React.useState(true);
@@ -40,7 +40,7 @@ export default function HotCashbacksInfoScreen({ route }) {
   React.useEffect(() => {
     getFullInfo();
     getFullInfoUser();
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       getFullInfo();
       getFullInfoUser();
     });
@@ -50,7 +50,7 @@ export default function HotCashbacksInfoScreen({ route }) {
   }, []);
 
   const getFullInfo = async () => {
-    const resp = await fetch(API + 'hot-cashback/?limit=1000');
+    const resp = await fetch(API + "hot-cashback/?limit=1000");
     const data = await resp.json();
     let one;
     data.results.filter((el) => {
@@ -65,9 +65,9 @@ export default function HotCashbacksInfoScreen({ route }) {
     let sH = new Date(one?.ts_range[0]?.upper).getHours();
     let sM = new Date(one?.ts_range[0]?.upper).getMinutes();
     setTime(
-      `${fH <= 9 ? '0' + fH : fH}:${fM <= 9 ? '0' + fM : fM} - ${
-        sH <= 9 ? '0' + sH : sH
-      }:${sM <= 9 ? '0' + sM : sM}`
+      `${fH <= 9 ? "0" + fH : fH}:${fM <= 9 ? "0" + fM : fM} - ${
+        sH <= 9 ? "0" + sH : sH
+      }:${sM <= 9 ? "0" + sM : sM}`
     );
 
     one.ts_range.forEach((el) => {
@@ -79,11 +79,11 @@ export default function HotCashbacksInfoScreen({ route }) {
     data && setViewLoader(false);
   };
   const getFullInfoUser = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -91,24 +91,24 @@ export default function HotCashbacksInfoScreen({ route }) {
     setProfile(data);
   };
   const deleteHot = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'hot-cashback/' + itemId + '/', {
-      method: 'DELETE',
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "hot-cashback/" + itemId + "/", {
+      method: "DELETE",
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: "Bearer " + token,
       },
     });
     setAnswerModal(false);
     // navigation.navigate("ProfileStackScreen", {screen:'ProfileScreen'})
-    navigation.navigate('HomeMainScreen');
+    navigation.navigate("HomeMainScreen");
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
 
@@ -117,22 +117,22 @@ export default function HotCashbacksInfoScreen({ route }) {
           <View style={styles.upBtnsBox}>
             <View style={styles.deleteBtnBox}>
               <AntDesign
-                name="delete"
+                name='delete'
                 onPress={() => setAnswerModal(true)}
                 size={24}
-                color="#ff6b00"
+                color='#ff6b00'
               />
             </View>
             <View>
               <AntDesign
-                name="edit"
+                name='edit'
                 size={24}
                 onPress={() =>
-                  navigation.navigate('CashbackSettingScreen', {
+                  navigation.navigate("CashbackSettingScreen", {
                     cashId: itemId,
                   })
                 }
-                color="#ff6b00"
+                color='#ff6b00'
               />
             </View>
           </View>
@@ -154,7 +154,7 @@ export default function HotCashbacksInfoScreen({ route }) {
         {data && profile && data.shop == profile.shop && (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('QrMainScreen', { cashback: itemId })
+              navigation.navigate("QrMainScreen", { cashback: itemId })
             }
             style={styles.btnStyles}
           >
@@ -163,13 +163,13 @@ export default function HotCashbacksInfoScreen({ route }) {
         )}
         <View style={styles.mainTxtBox}>
           <Text style={styles.mainTxt}>
-            {data ? data.title : 'название отсутствует'}
+            {data ? data.title : "название отсутствует"}
           </Text>
         </View>
         <View style={styles.contentBox}>
           <Text style={styles.contentTxt}>О горящем кэшбэке</Text>
           <Text style={styles.aboutCashTxt}>
-            {data ? data.description : 'описание отсутствует'}
+            {data ? data.description : "описание отсутствует"}
           </Text>
         </View>
         <View style={styles.contentBox}>
@@ -201,7 +201,7 @@ export default function HotCashbacksInfoScreen({ route }) {
         <DialogAlert
           answerModal={answerModal}
           setAnswerModal={setAnswerModal}
-          message={'Удалить?'}
+          message={"Удалить?"}
           funcOk={deleteHot}
         />
         {/* <View style={styles.contentBox}>
@@ -217,24 +217,24 @@ export default function HotCashbacksInfoScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   mainContent: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '10%',
-    marginBottom: '5%',
-    width: '95%',
-    alignSelf: 'center',
+    marginTop: Platform.OS === "ios" ? "15%" : "10%",
+    marginBottom: "5%",
+    width: "95%",
+    alignSelf: "center",
     height: scalePoint * 20,
   },
   upBtnsBox: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 999,
-    alignSelf: 'flex-end',
-    flexDirection: 'row',
+    alignSelf: "flex-end",
+    flexDirection: "row",
   },
   deleteBtnBox: {
     marginRight: scalePoint * 10,
@@ -244,133 +244,133 @@ const styles = StyleSheet.create({
     height: scalePoint * 199,
   },
   sliderImg: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 199,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   mainTxtBox: {
-    width: '80%',
-    justifyContent: 'center',
-    marginTop: '5%',
-    marginBottom: '10%',
+    width: "80%",
+    justifyContent: "center",
+    marginTop: "5%",
+    marginBottom: "10%",
   },
   mainTxt: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 22,
-    fontWeight: 'bold',
-    color: '#313131',
+    fontWeight: "bold",
+    color: "#313131",
   },
   cashSumBox: {
     width: scalePoint * 45,
     height: scalePoint * 45,
     borderRadius: scalePoint * 45 * 0.5,
-    backgroundColor: '#fff',
-    position: 'absolute',
+    backgroundColor: "#fff",
+    position: "absolute",
     zIndex: 9999,
     right: scalePoint * 20,
     bottom: scalePoint * 20,
 
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   cashSumTxt: {
     fontSize: 12,
-    fontWeight: 'bold',
-    color: '#ff0707',
+    fontWeight: "bold",
+    color: "#ff0707",
     marginLeft: scalePoint * 13,
   },
   fireImgBox: {
     width: scalePoint * 18,
     height: scalePoint * 18,
     borderRadius: scalePoint * 18 * 0.5,
-    backgroundColor: '#ff0707',
-    position: 'absolute',
+    backgroundColor: "#ff0707",
+    position: "absolute",
     zIndex: 9999,
 
     right: scalePoint * 31,
     top: scalePoint * 24,
 
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
 
     borderWidth: 1,
-    borderColor: 'transparent',
+    borderColor: "transparent",
   },
   fireImg: {
     width: scalePoint * 9,
     height: scalePoint * 12,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   contentBox: {
-    marginBottom: '10%',
+    marginBottom: "10%",
   },
   lastContentBox: {
-    marginBottom: '20%',
+    marginBottom: "20%",
   },
   contentTxt: {
     fontSize: 18,
-    color: '#505050',
-    marginLeft: '5%',
+    color: "#505050",
+    marginLeft: "5%",
   },
   aboutCashTxt: {
-    marginTop: '5%',
-    width: '90%',
-    alignSelf: 'center',
+    marginTop: "5%",
+    width: "90%",
+    alignSelf: "center",
     fontSize: 14,
     lineHeight: 20,
-    color: '#000',
+    color: "#000",
   },
   calendarBox: {
-    marginTop: '5%',
-    width: '100%',
+    marginTop: "5%",
+    width: "100%",
 
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: scalePoint * 10,
   },
   cashTimeBox: {
-    marginTop: '5%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '90%',
-    alignSelf: 'center',
+    marginTop: "5%",
+    flexDirection: "row",
+    alignItems: "center",
+    width: "90%",
+    alignSelf: "center",
   },
   cashClockImgBox: {
-    marginRight: '3%',
+    marginRight: "3%",
   },
   clockImg: {
     width: scalePoint * 17,
     height: scalePoint * 17,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   timeTxt: {
     fontSize: 14,
   },
   greenTxt: {
-    color: '#28ea60',
+    color: "#28ea60",
   },
   phoneImg: {
     width: scalePoint * 20,
     height: scalePoint * 20,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   btnStyles: {
     marginTop: scalePoint * 15,
-    backgroundColor: '#ff0909',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+    backgroundColor: "#ff0909",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
     width: scalePoint * 60,
     height: scalePoint * 60,
     borderRadius: scalePoint * 30,
-    alignSelf: 'flex-end',
-    position: 'absolute',
+    alignSelf: "flex-end",
+    position: "absolute",
     zIndex: 999,
 
-    borderColor: '#fff',
+    borderColor: "#fff",
   },
   qrIcon: {
     width: scalePoint * 36,
     height: scalePoint * 36,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 });

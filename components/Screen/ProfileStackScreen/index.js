@@ -1,38 +1,38 @@
-import React from 'react';
+import React from "react";
 import {
   CardStyleInterpolators,
   createStackNavigator,
-} from '@react-navigation/stack';
+} from "@react-navigation/stack";
 
-import ProflieScreen from './ProfileScreen';
-import LoginMainScreen from './LoginMainScreen';
-import ProflieSettingScreen from './ProfileSettingScreen';
-import PrivacyPolicyScreen from './LoginMainScreen/PrivacyPolicyScreen';
-import ReferalsScreen from '../HomeStackScreen/ReferalsStackScreen/ReferalsScreen/index';
-import SingleReferalScreen from '../HomeStackScreen/ReferalsStackScreen/ReferalsScreen/SingleReferalScreen';
-import MyReferalsScreen from '../HomeStackScreen/ReferalsStackScreen/MyReferalsScreen';
-import FilterReferalsScreen from '../HomeStackScreen/ReferalsStackScreen/MyReferalsScreen/FilterReferalsScreen';
-import AboutReferalScreen from '../HomeStackScreen/ReferalsStackScreen/ReferalsScreen/AboutReferalScreen';
-import WalletSettingsScreen from './WalletSettingsScreen';
-import GetMoneyScreen from './GetMoneyScreen';
-import BusinessProfileScreen from './BusinessProfileScreen';
-import FaqScreen from './FaqScreen';
-import CompanySettingsScreen from './ProfileScreen/CompanySettingsScreen';
-import CashbackSettingScreen from '../ProfileStackScreen/ProfileScreen/CompanySettingsScreen/CashbackSettings';
+import ProflieScreen from "./ProfileScreen";
+import LoginMainScreen from "./LoginMainScreen";
+import ProflieSettingScreen from "./ProfileSettingScreen";
+import PrivacyPolicyScreen from "./LoginMainScreen/PrivacyPolicyScreen";
+import ReferalsScreen from "../HomeStackScreen/ReferalsStackScreen/ReferalsScreen/index";
+import SingleReferalScreen from "../HomeStackScreen/ReferalsStackScreen/ReferalsScreen/SingleReferalScreen";
+import MyReferalsScreen from "../HomeStackScreen/ReferalsStackScreen/MyReferalsScreen";
+import FilterReferalsScreen from "../HomeStackScreen/ReferalsStackScreen/MyReferalsScreen/FilterReferalsScreen";
+import AboutReferalScreen from "../HomeStackScreen/ReferalsStackScreen/ReferalsScreen/AboutReferalScreen";
+import WalletSettingsScreen from "./WalletSettingsScreen";
+import GetMoneyScreen from "./GetMoneyScreen";
+import BusinessProfileScreen from "./BusinessProfileScreen";
+import FaqScreen from "./FaqScreen";
+import CompanySettingsScreen from "./ProfileScreen/CompanySettingsScreen";
+import CashbackSettingScreen from "../ProfileStackScreen/ProfileScreen/CompanySettingsScreen/CashbackSettings";
 const Stack = createStackNavigator();
 
-import AsyncStorage from '@react-native-community/async-storage';
-import ProfileScreen from './ProfileScreen';
-import { Platform } from 'react-native';
-import QrStackScreen from '../QrStackScreen';
-import CompanyScreen from '../HomeStackScreen/CompaniesScreen/CompanyScreen';
+import AsyncStorage from "@react-native-community/async-storage";
+import ProfileScreen from "./ProfileScreen";
+import { Platform } from "react-native";
+import QrStackScreen from "../QrStackScreen";
+import CompanyScreen from "../HomeStackScreen/CompaniesScreen/CompanyScreen";
 
-import AboutAppScreen from '../HomeStackScreen/AboutAppScreen';
-import ReplanishAccount from './ProfileScreen/ReplenishScreen/ReplenishThroughOptima';
+import AboutAppScreen from "../HomeStackScreen/AboutAppScreen";
+import ReplanishAccount from "./ProfileScreen/ReplenishScreen/ReplenishThroughOptima";
 
-import AnimatedLoader from 'react-native-animated-loader';
-import { useNavigation } from '@react-navigation/native';
-import AboutBussines from './BusinessProfileScreen/AboutBussines';
+import AnimatedLoader from "react-native-animated-loader";
+import { useNavigation } from "@react-navigation/native";
+import AboutBussines from "./BusinessProfileScreen/AboutBussines";
 
 export default function ProfileStackScreen() {
   const [viewLoader, setViewLoader] = React.useState(true);
@@ -43,7 +43,7 @@ export default function ProfileStackScreen() {
   });
   React.useEffect(() => {
     getInfo;
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       setViewLoader(true);
       getInfo();
     });
@@ -53,7 +53,7 @@ export default function ProfileStackScreen() {
   }, [navigation]);
 
   const getInfo = async () => {
-    const result = await AsyncStorage.getItem('token');
+    const result = await AsyncStorage.getItem("token");
     if (result != null) {
       setAuth(true);
       setViewLoader(false);
@@ -66,9 +66,9 @@ export default function ProfileStackScreen() {
     <>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
 
@@ -76,61 +76,61 @@ export default function ProfileStackScreen() {
         screenOptions={{
           headerShown: false,
           cardStyleInterpolator:
-            Platform.OS === 'ios'
+            Platform.OS === "ios"
               ? CardStyleInterpolators.forHorizontalIOS
               : CardStyleInterpolators.forHorizontalIOS,
         }}
       >
-        <Stack.Screen name="ProfileScreen" component={ProflieScreen} />
-        <Stack.Screen name="LoginMainScreen" component={LoginMainScreen} />
+        <Stack.Screen name='ProfileScreen' component={ProflieScreen} />
+        <Stack.Screen name='LoginMainScreen' component={LoginMainScreen} />
 
-        <Stack.Screen name="AboutBussines" component={AboutBussines} />
+        <Stack.Screen name='AboutBussines' component={AboutBussines} />
 
-        <Stack.Screen name="ReferalsScreen" component={ReferalsScreen} />
-        <Stack.Screen name="MyReferalsScreen" component={MyReferalsScreen} />
+        <Stack.Screen name='ReferalsScreen' component={ReferalsScreen} />
+        <Stack.Screen name='MyReferalsScreen' component={MyReferalsScreen} />
         <Stack.Screen
-          name="SingleReferalScreen"
+          name='SingleReferalScreen'
           component={SingleReferalScreen}
         />
         <Stack.Screen
-          name="ProfileSettingScreen"
+          name='ProfileSettingScreen'
           component={ProflieSettingScreen}
         />
         <Stack.Screen
-          name="FilterReferalsScreen"
+          name='FilterReferalsScreen'
           component={FilterReferalsScreen}
         />
         <Stack.Screen
-          name="AboutReferalScreen"
+          name='AboutReferalScreen'
           component={AboutReferalScreen}
         />
         <Stack.Screen
-          name="WalletSettingsScreen"
+          name='WalletSettingsScreen'
           component={WalletSettingsScreen}
         />
-        <Stack.Screen name="GetMoneyScreen" component={GetMoneyScreen} />
+        <Stack.Screen name='GetMoneyScreen' component={GetMoneyScreen} />
         <Stack.Screen
-          name="BusinessProfileScreen"
+          name='BusinessProfileScreen'
           component={BusinessProfileScreen}
         />
-        <Stack.Screen name="QrCodeScreen" component={QrStackScreen} />
-        <Stack.Screen name="FaqScreen" component={FaqScreen} />
+        <Stack.Screen name='QrCodeScreen' component={QrStackScreen} />
+        <Stack.Screen name='FaqScreen' component={FaqScreen} />
         <Stack.Screen
-          name="CompanySettingsScreen"
+          name='CompanySettingsScreen'
           component={CompanySettingsScreen}
         />
         <Stack.Screen
-          name="CashbackSettingScreen"
+          name='CashbackSettingScreen'
           component={CashbackSettingScreen}
         />
         <Stack.Screen
-          name="PrivacyPolicyScreen"
+          name='PrivacyPolicyScreen'
           component={PrivacyPolicyScreen}
         />
-        <Stack.Screen name="CompanyScreen" component={CompanyScreen} />
-        <Stack.Screen name="AboutAppScreen" component={AboutAppScreen} />
+        <Stack.Screen name='CompanyScreen' component={CompanyScreen} />
+        <Stack.Screen name='AboutAppScreen' component={AboutAppScreen} />
         <Stack.Screen
-          name="ReplanishAccountScreen"
+          name='ReplanishAccountScreen'
           component={ReplanishAccount}
         />
       </Stack.Navigator>

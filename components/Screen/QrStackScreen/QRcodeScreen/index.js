@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -6,21 +6,21 @@ import {
   Dimensions,
   Platform,
   ScrollView,
-} from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
-import { Card } from 'react-native-shadow-cards';
+} from "react-native";
+import QRCode from "react-native-qrcode-svg";
+import { Card } from "react-native-shadow-cards";
 
-import Header from '../../../Common/Header';
-import ProfileInfo from '../../../Common/PropfileInfo';
-import AsyncStorage from '@react-native-community/async-storage';
+import Header from "../../../Common/Header";
+import ProfileInfo from "../../../Common/PropfileInfo";
+import AsyncStorage from "@react-native-community/async-storage";
 
-import { API } from '../../../config';
-import { useNavigation } from '@react-navigation/native';
-import QRreader from './QRreader';
-import AnimatedLoader from 'react-native-animated-loader';
+import { API } from "../../../config";
+import { useNavigation } from "@react-navigation/native";
+import QRreader from "./QRreader";
+import AnimatedLoader from "react-native-animated-loader";
 
-const window = Dimensions.get('window');
-const height = Dimensions.get('window').height * 0.85;
+const window = Dimensions.get("window");
+const height = Dimensions.get("window").height * 0.85;
 const scalePoint = window.width / 380;
 
 export default function QrCodeScreen({ route }) {
@@ -35,19 +35,19 @@ export default function QrCodeScreen({ route }) {
     if (route?.params && route?.params.cashback != undefined) {
       setCashback(route?.params.cashback);
     }
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       getFullInfo();
-     })
-     return () => {
-       unsubscribe;
-     };
+    });
+    return () => {
+      unsubscribe;
+    };
   }, [navigation]);
   const getFullInfo = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -69,12 +69,12 @@ export default function QrCodeScreen({ route }) {
     <View style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
-      <View style={{ width: '100%', flex: 1 }}>
+      <View style={{ width: "100%", flex: 1 }}>
         {!businessStatus && (
           <View style={styles.headerBox}>
             <Header />
@@ -97,8 +97,8 @@ export default function QrCodeScreen({ route }) {
                   <View style={styles.qrImageBox}>
                     <QRCode
                       size={scalePoint * 123}
-                      color={'#225196'}
-                      value={data ? data.phone : 'oops'}
+                      color={"#225196"}
+                      value={data ? data.phone : "oops"}
                     />
                   </View>
                   <View style={styles.cardTxtBox}>
@@ -119,66 +119,66 @@ export default function QrCodeScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    width: '100%',
+    backgroundColor: "#fff",
+    width: "100%",
   },
   headerBox: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? '15%' : '8%',
+    width: "95%",
+    alignSelf: "center",
+    marginTop: Platform.OS === "ios" ? "15%" : "8%",
     height: scalePoint * 23,
   },
   profileBox: {
     marginTop: scalePoint * 7,
-    width: '100%',
+    width: "100%",
     marginBottom: scalePoint * 54,
   },
   contentBox: {
-    width: '100%',
+    width: "100%",
     flex: 1,
   },
   mainTxt: {
     fontSize: 20,
     lineHeight: 24,
-    marginTop: '10%',
+    marginTop: "10%",
   },
   visibleBox: {
-    width: '100%',
+    width: "100%",
   },
   shadowCard: {
     width: scalePoint * 325,
     height: scalePoint * 376,
-    alignSelf: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    alignItems: "center",
     borderRadius: scalePoint * 10,
   },
   qrBox: {
     width: scalePoint * 325,
     height: scalePoint * 376,
     borderRadius: 10,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
   },
   qrImageBox: {
     width: scalePoint * 123,
     height: scalePoint * 123,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: scalePoint * 51,
   },
   cardTxtBox: {
-    width: '85%',
-    alignItems: 'center',
+    width: "85%",
+    alignItems: "center",
     marginTop: scalePoint * 37,
   },
   cardTxt: {
     fontSize: 16,
     lineHeight: 19,
-    textAlign: 'center',
-    color: '#515151',
+    textAlign: "center",
+    color: "#515151",
   },
   qrReaderBox: {
-    width: '100%',
+    width: "100%",
     height: height,
-    marginTop: '15%',
+    marginTop: "15%",
   },
 });

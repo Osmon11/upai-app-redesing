@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -8,21 +8,21 @@ import {
   Image,
   Platform,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native-gesture-handler';
-import Header from '../../../Common/Header';
-import CashbackSum from './CashbackSum';
-import GettingCashbacksList from './GettingCashbacksList';
+import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
+import Header from "../../../Common/Header";
+import CashbackSum from "./CashbackSum";
+import GettingCashbacksList from "./GettingCashbacksList";
 
-import filterIcon from '../../../Images/filterIcon.png';
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../../config';
-import AnimatedLoader from 'react-native-animated-loader';
-import { setNotificationHandler } from 'expo-notifications';
+import filterIcon from "../../../Images/filterIcon.png";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../../config";
+import AnimatedLoader from "react-native-animated-loader";
+import { setNotificationHandler } from "expo-notifications";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function NotificationsScreen({ route }) {
@@ -43,12 +43,11 @@ export default function NotificationsScreen({ route }) {
   const { to } = route?.params;
 
   React.useEffect(() => {
-    
     getAll();
 
     getFullInfo();
 
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       setViewLoader(true);
       getFullInfo();
       getAll();
@@ -59,11 +58,11 @@ export default function NotificationsScreen({ route }) {
   }, [route]);
 
   const getFullInfo = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -73,9 +72,9 @@ export default function NotificationsScreen({ route }) {
   };
 
   const getAll = async () => {
-    console.log('date', from);
-    const token = await AsyncStorage.getItem('token');
-   
+    console.log("date", from);
+    const token = await AsyncStorage.getItem("token");
+
     const req = await fetch(
       API +
         `users/notification/?offset=0&limit=50${
@@ -85,8 +84,8 @@ export default function NotificationsScreen({ route }) {
         }`,
       {
         headers: {
-          Authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
         },
       }
     );
@@ -99,16 +98,16 @@ export default function NotificationsScreen({ route }) {
     <View style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
         <View style={styles.headerBox}>
           <Header />
         </View>
-        <View style={{ width: '95%', alignSelf: 'center' }}>
+        <View style={{ width: "95%", alignSelf: "center" }}>
           <View
             style={
               businessStatus ? styles.mainTxtBox : styles.businessMainTxtBox
@@ -116,21 +115,21 @@ export default function NotificationsScreen({ route }) {
           >
             <Text style={styles.mainText}>Уведомления</Text>
             <TouchableOpacity
-              style={businessStatus ? { display: 'flex' } : { display: 'none' }}
-              onPress={() => navigation.navigate('FilterNotificationsScreen')}
+              style={businessStatus ? { display: "flex" } : { display: "none" }}
+              onPress={() => navigation.navigate("FilterNotificationsScreen")}
             >
               <Image
                 style={{
                   width: 20,
                   height: 20,
-                  resizeMode: 'contain',
+                  resizeMode: "contain",
                 }}
                 source={filterIcon}
               />
             </TouchableOpacity>
           </View>
           <View
-            style={businessStatus ? { display: 'none' } : styles.btnContainer}
+            style={businessStatus ? { display: "none" } : styles.btnContainer}
           >
             <TouchableOpacity
               onPress={() => setOpen(!open)}
@@ -155,7 +154,7 @@ export default function NotificationsScreen({ route }) {
             <CashbackSum cashBackGet={cashBackGet} />
           </View>
           <View
-            style={businessStatus ? styles.inactiveBox : { display: 'flex' }}
+            style={businessStatus ? styles.inactiveBox : { display: "flex" }}
           >
             <View style={open ? styles.CashbackSumsView : styles.inactiveBox}>
               <CashbackSum cashBackGet={cashBackGet} />
@@ -173,33 +172,33 @@ export default function NotificationsScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
+    width: "95%",
+    alignSelf: "center",
+    marginTop: Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
   },
   headerBox: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 23,
     marginTop: 20,
   },
   mainTxtBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
     marginTop: scalePoint * 37,
-    alignItems: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    alignSelf: "center",
   },
   businessMainTxtBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '95%',
-    marginTop: '10%',
-    alignItems: 'center',
-    alignSelf: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "95%",
+    marginTop: "10%",
+    alignItems: "center",
+    alignSelf: "center",
   },
   mainText: {
     fontSize: 24,
@@ -207,46 +206,46 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     marginTop: scalePoint * 20,
-    flexDirection: 'row',
-    width: '95%',
+    flexDirection: "row",
+    width: "95%",
     height: scalePoint * 35,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#EBEBEB',
+    alignSelf: "center",
+    justifyContent: "center",
+    backgroundColor: "#EBEBEB",
     borderRadius: 4,
-    alignItems: 'center',
+    alignItems: "center",
   },
   logInBtn: {
-    width: '50%',
+    width: "50%",
     height: scalePoint * 33,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   btnTxt: {
-    color: '#000',
+    color: "#000",
     fontSize: 14,
     lineHeight: 17,
   },
   btnActive: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 14,
     lineHeight: 17,
   },
   active: {
-    backgroundColor: '#ff6b00',
-    width: '50%',
+    backgroundColor: "#ff6b00",
+    width: "50%",
     height: scalePoint * 33,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 4,
-    color: '#fff',
+    color: "#fff",
   },
   CashbackSumsView: {
     flex: 1,
-    paddingBottom: '5%',
+    paddingBottom: "5%",
     marginTop: scalePoint * 27,
   },
   inactiveBox: {
-    display: 'none',
+    display: "none",
   },
 });

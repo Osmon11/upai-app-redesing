@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -9,19 +9,19 @@ import {
   Dimensions,
   TouchableOpacity,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import Header from '../../../Common/Header';
-import { useNavigation } from '@react-navigation/native';
+import Header from "../../../Common/Header";
+import { useNavigation } from "@react-navigation/native";
 
-import RatingComponent from '../CategoriesStackScreen/RatingComponent';
-import filterIcon from '../../../Images/filterIcon.png';
+import RatingComponent from "../CategoriesStackScreen/RatingComponent";
+import filterIcon from "../../../Images/filterIcon.png";
 
-import { API } from '../../../config';
+import { API } from "../../../config";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
-import AnimatedLoader from 'react-native-animated-loader';
+import AnimatedLoader from "react-native-animated-loader";
 
 export default function FireCashbacksScreen({ route }) {
   const [hotCash, setHotCash] = useState([]);
@@ -32,7 +32,7 @@ export default function FireCashbacksScreen({ route }) {
   }, []);
 
   const getAllHotCashBack = async () => {
-    const resp = await fetch(API + 'hot-cashback/?limit=100');
+    const resp = await fetch(API + "hot-cashback/?limit=100");
     const data = await resp.json();
     setHotCash(data.results);
     setViewLoader(false);
@@ -43,9 +43,9 @@ export default function FireCashbacksScreen({ route }) {
     <View style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
@@ -56,8 +56,8 @@ export default function FireCashbacksScreen({ route }) {
           <Text style={styles.mainText}>Горящий кэшбэк</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('FilterScreen', {
-                name: 'hot-cashback', 
+              navigation.navigate("FilterScreen", {
+                name: "hot-cashback",
               })
             }
             style={styles.filterBtn}
@@ -66,7 +66,7 @@ export default function FireCashbacksScreen({ route }) {
               style={{
                 width: scalePoint * 20,
                 height: scalePoint * 20,
-                resizeMode: 'contain',
+                resizeMode: "contain",
               }}
               source={filterIcon}
             />
@@ -86,7 +86,7 @@ export default function FireCashbacksScreen({ route }) {
                             : styles.imageBox
                         }
                         onPress={() =>
-                          navigation.navigate('HotCashbackInfoScreen', {
+                          navigation.navigate("HotCashbackInfoScreen", {
                             itemId: item.id,
                           })
                         }
@@ -95,7 +95,7 @@ export default function FireCashbacksScreen({ route }) {
                           style={styles.image}
                           source={{ uri: item.img }}
                         />
-                        <View style={{ marginLeft: '1%' }}>
+                        <View style={{ marginLeft: "1%" }}>
                           <Text style={styles.nameOfItem}>{item.name}</Text>
                           <View style={styles.nameOfItem}>
                             <RatingComponent
@@ -118,66 +118,66 @@ export default function FireCashbacksScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '8%',
+    marginTop: Platform.OS === "ios" ? "15%" : "8%",
   },
   mainTxtBox: {
-    marginTop: '5%',
-    marginBottom: '10%',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    marginTop: "5%",
+    marginBottom: "10%",
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   mainText: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 20,
     lineHeight: 24,
   },
   filterBtn: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     top: -scalePoint * 38,
   },
   mainContentBox: {
-    width: '100%',
+    width: "100%",
   },
   nameOfCategoryGroup: {
     fontSize: 16,
     lineHeight: 18,
-    marginLeft: '5%',
+    marginLeft: "5%",
   },
   scrollItem: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    width: '95%',
-    alignSelf: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    width: "95%",
+    alignSelf: "center",
   },
   imageBox: {
-    width: '45%',
-    paddingBottom: '8%',
+    width: "45%",
+    paddingBottom: "8%",
   },
   imageBox2: {
-    width: '45%',
-    marginTop: '-5%',
+    width: "45%",
+    marginTop: "-5%",
   },
   image: {
     borderWidth: 0.5,
-    borderColor: 'rgba(146, 146, 146, 0.37)',
+    borderColor: "rgba(146, 146, 146, 0.37)",
     borderRadius: 10,
     width: scalePoint * 160,
     height: scalePoint * 160,
   },
   nameOfItem: {
-    paddingLeft: '5%',
-    paddingTop: '2%',
+    paddingLeft: "5%",
+    paddingTop: "2%",
     fontSize: 16,
     lineHeight: 18,
   },

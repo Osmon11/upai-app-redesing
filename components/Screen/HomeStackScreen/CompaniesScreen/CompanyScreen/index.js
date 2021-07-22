@@ -279,7 +279,7 @@ export default function CompanyScreen({ route, navigation }) {
           visible={viewLoader}
           overlayColor='rgba(255,255,255,1)'
           source={require("../../../../Common/loader.json")}
-          animationStyle={{ width: 100, height: 100, resizeMode: "cover" }}
+          animationStyle={{ width: 100, height: 100 }}
           speed={1}
         ></AnimatedLoader>
         <KeyboardAvoidingView

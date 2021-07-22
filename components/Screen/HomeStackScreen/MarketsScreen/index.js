@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -9,18 +9,18 @@ import {
   Dimensions,
   TouchableOpacity,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import Header from '../../../Common/Header';
-import { useNavigation } from '@react-navigation/native';
+import Header from "../../../Common/Header";
+import { useNavigation } from "@react-navigation/native";
 
-import RatingComponent from '../CategoriesStackScreen/RatingComponent';
+import RatingComponent from "../CategoriesStackScreen/RatingComponent";
 
-import { API } from '../../../config';
-import percentIcon from '../../../Images/percentIcon.png';
-const window = Dimensions.get('window');
+import { API } from "../../../config";
+import percentIcon from "../../../Images/percentIcon.png";
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
-import AnimatedLoader from 'react-native-animated-loader';
+import AnimatedLoader from "react-native-animated-loader";
 
 export default function MarketScreen({ route }) {
   const [markets, setMarkets] = useState([]);
@@ -32,7 +32,7 @@ export default function MarketScreen({ route }) {
 
   const getAllHotCashBack = async () => {
     const resp = await fetch(
-      API + 'shop/?ordering=rating&limit=100&category=3'
+      API + "shop/?ordering=rating&limit=100&category=3"
     );
     const data = await resp.json();
     setMarkets(data.results);
@@ -44,9 +44,9 @@ export default function MarketScreen({ route }) {
     <View style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
       <ScrollView
@@ -72,7 +72,7 @@ export default function MarketScreen({ route }) {
                           : styles.imageBox
                       }
                       onPress={() =>
-                        navigation.navigate('CompanyScreen', {
+                        navigation.navigate("CompanyScreen", {
                           itemId: item.id,
                         })
                       }
@@ -83,7 +83,7 @@ export default function MarketScreen({ route }) {
                             style={{
                               width: scalePoint * 10,
                               height: scalePoint * 10,
-                              resizeMode: 'contain',
+                              resizeMode: "contain",
                             }}
                             source={percentIcon}
                           />
@@ -92,14 +92,14 @@ export default function MarketScreen({ route }) {
                           style={{
                             fontSize: 14,
                             lineHeight: 14,
-                            color: '#fff',
+                            color: "#fff",
                           }}
                         >
                           {item.cashback}%
                         </Text>
                       </View>
                       <Image style={styles.image} source={{ uri: item.logo }} />
-                      <View style={{ marginLeft: '1%' }}>
+                      <View style={{ marginLeft: "1%" }}>
                         <Text style={styles.nameOfItem}>{item.name}</Text>
                         <View style={styles.nameOfItem}>
                           <RatingComponent
@@ -112,7 +112,7 @@ export default function MarketScreen({ route }) {
                     </TouchableOpacity>
                   );
                 })
-              : ''}
+              : ""}
           </View>
         </View>
       </ScrollView>
@@ -122,82 +122,82 @@ export default function MarketScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollStyle: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? '5%' : 0,
+    width: "95%",
+    alignSelf: "center",
+    marginTop: Platform.OS === "ios" ? "5%" : 0,
   },
   headerStyle: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '5%',
-    marginBottom: '10%',
+    marginTop: Platform.OS === "ios" ? "15%" : "5%",
+    marginBottom: "10%",
   },
   cashbacksCircle: {
     width: scalePoint * 45,
     height: scalePoint * 45,
     borderRadius: scalePoint * 45 * 0.5,
-    backgroundColor: '#ff0707',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
+    backgroundColor: "#ff0707",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
     left: scalePoint * 100,
-    top: '5%',
+    top: "5%",
     zIndex: 9,
   },
   percentCircle: {
-    position: 'absolute',
-    top: '60%',
-    left: '-10%',
+    position: "absolute",
+    top: "60%",
+    left: "-10%",
     zIndex: 10,
     width: scalePoint * 16,
     height: scalePoint * 16,
     borderRadius: scalePoint * 16 * 0.5,
     borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: '#27ae60',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderColor: "#fff",
+    backgroundColor: "#27ae60",
+    justifyContent: "center",
+    alignItems: "center",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   mainContentBox: {
-    width: '100%',
+    width: "100%",
   },
   nameOfCategoryGroup: {
     fontSize: 16,
     lineHeight: 18,
-    marginLeft: '5%',
+    marginLeft: "5%",
   },
   scrollItem: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '95%',
-    justifyContent: 'space-between',
-    marginTop: '5%',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "95%",
+    justifyContent: "space-between",
+    marginTop: "5%",
   },
   imageBox: {
-    width: '45%',
-    marginRight: '5%',
+    width: "45%",
+    marginRight: "5%",
   },
   imageBox2: {
-    width: '45%',
-    paddingBottom: '9%',
-    marginTop: '-8%',
+    width: "45%",
+    paddingBottom: "9%",
+    marginTop: "-8%",
   },
   image: {
     borderWidth: 0.5,
-    borderColor: 'rgba(146, 146, 146, 0.37)',
+    borderColor: "rgba(146, 146, 146, 0.37)",
     borderRadius: 10,
     width: scalePoint * 160,
     height: scalePoint * 160,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   nameOfItem: {
-    paddingLeft: '5%',
-    paddingTop: '2%',
+    paddingLeft: "5%",
+    paddingTop: "2%",
     fontSize: 16,
     lineHeight: 18,
   },

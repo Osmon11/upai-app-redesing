@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,26 +9,26 @@ import {
   ScrollView,
   Dimensions,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import { Card } from 'react-native-shadow-cards';
+import { Card } from "react-native-shadow-cards";
 
-import Header from '../../../Common/Header';
-import HistoryOfBuys from './BusinessBuyHistory/HistoryOfBuys';
+import Header from "../../../Common/Header";
+import HistoryOfBuys from "./BusinessBuyHistory/HistoryOfBuys";
 
-import myBuysLikeIcon from '../../../Images/myBuysLikeIcon.png';
-import myBuysCashsSumIcon from '../../../Images/myBuysCashsSumIcon.png';
-import myBuysSumIcon from '../../../Images/myBuysSumIcon.png';
+import myBuysLikeIcon from "../../../Images/myBuysLikeIcon.png";
+import myBuysCashsSumIcon from "../../../Images/myBuysCashsSumIcon.png";
+import myBuysSumIcon from "../../../Images/myBuysSumIcon.png";
 
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../../config';
-import EmptyComponent from '../../../Common/EmptyComponent';
-import AnimatedLoader from 'react-native-animated-loader';
-import moment from 'moment';
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../../config";
+import EmptyComponent from "../../../Common/EmptyComponent";
+import AnimatedLoader from "react-native-animated-loader";
+import moment from "moment";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function BuyHistoryBuys() {
@@ -40,7 +40,7 @@ export default function BuyHistoryBuys() {
   React.useEffect(() => {
     getPurchase();
     getFullInfo();
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       setViewLoader(true);
       getPurchase();
       getFullInfo();
@@ -50,11 +50,11 @@ export default function BuyHistoryBuys() {
     };
   }, [navigation]);
   const getPurchase = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/purchase/?limit=100', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/purchase/?limit=100", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -63,11 +63,11 @@ export default function BuyHistoryBuys() {
   };
 
   const getFullInfo = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -81,23 +81,23 @@ export default function BuyHistoryBuys() {
       setViewLoader(false);
     }
   };
-  const { width, height } = Dimensions.get('window'),
+  const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
   return (
     <View style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
-        <View style={companyLog ? { flex: 1 } : { display: 'none' }}>
+        <View style={companyLog ? { flex: 1 } : { display: "none" }}>
           <HistoryOfBuys />
         </View>
-        <View style={companyLog ? { display: 'none' } : { flex: 1 }}>
+        <View style={companyLog ? { display: "none" } : { flex: 1 }}>
           <View style={styles.headerBox}>
             <Header />
           </View>
@@ -111,7 +111,7 @@ export default function BuyHistoryBuys() {
                 <View style={styles.shadowCard} key={index}>
                   <TouchableOpacity
                     onPress={() =>
-                      navigation.navigate('CompanyScreen', {
+                      navigation.navigate("CompanyScreen", {
                         itemId: item.seller,
                       })
                     }
@@ -127,7 +127,7 @@ export default function BuyHistoryBuys() {
                       <TouchableOpacity
                         style={styles.reviewBtnBox}
                         onPress={() =>
-                          navigation.navigate('CompanyScreen', {
+                          navigation.navigate("CompanyScreen", {
                             itemId: item.seller,
                           })
                         }
@@ -136,13 +136,13 @@ export default function BuyHistoryBuys() {
                         <Text style={styles.reviewBtnTxt}>Оставить отзыв</Text>
                       </TouchableOpacity>
                       <Text style={styles.dateTxt}>
-                        {moment(item.created).format('DD.MM.YYYY')}
+                        {moment(item.created).format("DD.MM.YYYY")}
                       </Text>
                     </View>
                     <View style={styles.rightSideBox}>
                       <Text style={styles.shopName}>
                         {String(item.shop_name).length > 16
-                          ? String(item.shop_name).substr(0, 16) + '...'
+                          ? String(item.shop_name).substr(0, 16) + "..."
                           : item.shop_name}
                       </Text>
                       <View
@@ -183,34 +183,34 @@ export default function BuyHistoryBuys() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   headerBox: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 23,
   },
   screenMainTxtBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: scalePoint * 35,
     marginBottom: scalePoint * 35,
   },
   nameOfCategoryGroup: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 24,
     lineHeight: 26,
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
+    width: "95%",
+    alignSelf: "center",
+    marginTop: Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
   },
   shadowCard: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 86,
     borderRadius: 10,
     marginTop: scalePoint * 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -221,107 +221,107 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   renderBox: {
-    marginRight: '4%',
-    marginLeft: '4%',
-    marginBottom: '5%',
+    marginRight: "4%",
+    marginLeft: "4%",
+    marginBottom: "5%",
   },
   renderItem: {
-    alignSelf: 'center',
-    width: '100%',
+    alignSelf: "center",
+    width: "100%",
     height: scalePoint * 86,
     borderWidth: 0.5,
-    borderColor: ' rgba(146, 146, 146, 0.37)',
+    borderColor: " rgba(146, 146, 146, 0.37)",
     borderRadius: 10,
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    alignItems: "center",
   },
   itemLeftSide: {
-    width: '50%',
+    width: "50%",
     borderRightWidth: 1,
-    borderRightColor: '#ebebeb',
-    alignItems: 'center',
+    borderRightColor: "#ebebeb",
+    alignItems: "center",
     marginTop: scalePoint * 13,
     marginBottom: scalePoint * 14,
   },
   reviewBtnBox: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: scalePoint * 7,
   },
   reviewBtnTxt: {
-    fontFamily: 'RobotoLight',
+    fontFamily: "RobotoLight",
     fontSize: 10,
     lineHeight: 12,
-    marginLeft: '1%',
-    marginTop: '-2%',
-    fontWeight: '100',
+    marginLeft: "1%",
+    marginTop: "-2%",
+    fontWeight: "100",
   },
   dateTxt: {
     fontSize: 10,
     lineHeight: 12,
-    marginTop: '2%',
-    color: '#8d8d8d',
-    fontFamily: 'Roboto',
+    marginTop: "2%",
+    color: "#8d8d8d",
+    fontFamily: "Roboto",
   },
   leftLogoBox: {
     width: scalePoint * 37,
     height: scalePoint * 37,
     borderRadius: scalePoint * 37 * 0.5,
-    justifyContent: 'center',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignSelf: "center",
   },
   leftLogo: {
     width: scalePoint * 37,
     height: scalePoint * 37,
     borderRadius: scalePoint * 37 * 0.5,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   icon: {
     width: scalePoint * 13,
     height: scalePoint * 13,
-    resizeMode: 'contain',
-    marginTop: '-5%',
+    resizeMode: "contain",
+    marginTop: "-5%",
   },
   rightSideBox: {
-    width: '50%',
-    alignItems: 'center',
+    width: "50%",
+    alignItems: "center",
     marginTop: scalePoint * 13,
     marginBottom: scalePoint * 14,
   },
   shopName: {
     fontSize: 14,
     lineHeight: 16,
-    color: '#313131',
+    color: "#313131",
   },
   sumIconBox: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   sumIcon: {
     width: scalePoint * 15,
     height: scalePoint * 15,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginRight: scalePoint * 3,
   },
   sum: {
     fontSize: 10,
     lineHeight: 12,
-    color: '#515151',
-    fontFamily: 'RobotoLight',
+    color: "#515151",
+    fontFamily: "RobotoLight",
   },
   cashbackBox: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   cashbackSum: {
     fontSize: 10,
     lineHeight: 12,
-    color: '#515151',
-    marginLeft: '1%',
-    fontFamily: 'RobotoLight',
+    color: "#515151",
+    marginLeft: "1%",
+    fontFamily: "RobotoLight",
   },
 });

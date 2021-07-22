@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleSheet,
   ScrollView,
   Dimensions,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import Header from '../../../../Common/Header';
-import BigSliderOfCategory from '../BigSliderOfCatefory';
-import SmallSliderOfCategory from '../SmallSiderOfCategory';
-import AdSlider from '../../../../Common/AdSlider';
-import CategoriesHeader from '../CategoriesHeader';
-import { API } from '../../../../config';
+import Header from "../../../../Common/Header";
+import BigSliderOfCategory from "../BigSliderOfCatefory";
+import SmallSliderOfCategory from "../SmallSiderOfCategory";
+import AdSlider from "../../../../Common/AdSlider";
+import CategoriesHeader from "../CategoriesHeader";
+import { API } from "../../../../config";
 
-import AnimatedLoader from 'react-native-animated-loader';
-const window = Dimensions.get('window');
+import AnimatedLoader from "react-native-animated-loader";
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function CategoriesScreen() {
@@ -27,7 +27,7 @@ export default function CategoriesScreen() {
   const [viewLoader, setViewLoader] = React.useState(true);
 
   const getAllCategoties = async () => {
-    const resp = await fetch(API + 'category/');
+    const resp = await fetch(API + "category/");
     const data = await resp.json();
     setCategory(data);
     data && setViewLoader(false);
@@ -42,9 +42,9 @@ export default function CategoriesScreen() {
     <View style={styles.container}>
       <AnimatedLoader
         visible={viewLoader}
-        overlayColor="rgba(255,255,255,1)"
-        source={require('../../../../Common/loader.json')}
-        animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+        overlayColor='rgba(255,255,255,1)'
+        source={require("../../../../Common/loader.json")}
+        animationStyle={{ width: 100, height: 100 }}
         speed={1}
       ></AnimatedLoader>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollBox}>
@@ -60,9 +60,6 @@ export default function CategoriesScreen() {
         </View>
         {category &&
           category.map((item, index) =>
-          
-            
-          
             item.shops_count >= 1 ? (
               (index + 1) / 3 == 1 ? (
                 <View key={index} style={styles.adSlideBox}>
@@ -92,27 +89,27 @@ export default function CategoriesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
-    width: '100%',
-    alignSelf: 'center',
+    marginTop: Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
+    width: "100%",
+    alignSelf: "center",
   },
   headerBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   categoriesHeaderBox: {
-    marginTop: '10%',
-    width: '95%',
-    alignSelf: 'center',
+    marginTop: "10%",
+    width: "95%",
+    alignSelf: "center",
     zIndex: -1,
   },
   adSlideBox: {
     zIndex: -1,
   },
   lastSliderBox: {
-    paddingBottom: '10%',
+    paddingBottom: "10%",
   },
 });

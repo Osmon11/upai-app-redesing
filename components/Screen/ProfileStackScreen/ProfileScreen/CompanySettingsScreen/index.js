@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,87 +11,87 @@ import {
   Dimensions,
   Platform,
   KeyboardAvoidingView,
-} from 'react-native';
+} from "react-native";
 
-import { ActionSheet, Root } from 'native-base';
-import { AntDesign } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import TimePickerModal from 'react-native-modal-datetime-picker';
-import RNPickerSelect from 'react-native-picker-select';
-import AnimatedLoader from 'react-native-animated-loader';
-import emptyProfileAccountImg from '../../../../Images/emptyProfileAccountImg.png';
-import addPhotoIcon from '../../../../Images/addPhotoIcon.png';
-import addPhotoToGalleryIcon from '../../../../Images/addPhotoToGalleryIcon.png';
-import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
-import { API } from '../../../../config';
-import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import DialogAlert from '../../../../Common/DialogAlert';
-import ModalCategories from '../../../HomeStackScreen/CategoriesStackScreen/CategoriesScreen/FilterScreen/ModalCategories';
+import { ActionSheet, Root } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import TimePickerModal from "react-native-modal-datetime-picker";
+import RNPickerSelect from "react-native-picker-select";
+import AnimatedLoader from "react-native-animated-loader";
+import emptyProfileAccountImg from "../../../../Images/emptyProfileAccountImg.png";
+import addPhotoIcon from "../../../../Images/addPhotoIcon.png";
+import addPhotoToGalleryIcon from "../../../../Images/addPhotoToGalleryIcon.png";
+import HeaderInStackScreens from "../../../../Common/HeaderInStackScreens";
+import { API } from "../../../../config";
+import AsyncStorage from "@react-native-community/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import DialogAlert from "../../../../Common/DialogAlert";
+import ModalCategories from "../../../HomeStackScreen/CategoriesStackScreen/CategoriesScreen/FilterScreen/ModalCategories";
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 const scalePoint = width / 380;
 
 export default function CompanySettingsScreen({ route }) {
   const { shopId } = route.params;
-  const [cashbacksPrecent, SetCashbacksPrecent] = useState('Введите % кэшбэка');
-  const [aboutUsInfo, SetAboutUsInfo] = useState('Описание вашего магазина');
+  const [cashbacksPrecent, SetCashbacksPrecent] = useState("Введите % кэшбэка");
+  const [aboutUsInfo, SetAboutUsInfo] = useState("Описание вашего магазина");
   const navigation = useNavigation();
-  const [contactsValue1, setContactsValue1] = useState('Введите телефон');
-  const [contactsValue2, setContactsValue2] = useState('Логин Instagram');
+  const [contactsValue1, setContactsValue1] = useState("Введите телефон");
+  const [contactsValue2, setContactsValue2] = useState("Логин Instagram");
   const [contactsValue3, setContactsValue3] = useState(
-    'Ссылка на сайт (www.vashsait.ru)'
+    "Ссылка на сайт (www.vashsait.ru)"
   );
   const [viewLoader, setViewLoader] = React.useState(false);
-  const [contactsValue4, setContactsValue4] = useState('Ваш адрес');
+  const [contactsValue4, setContactsValue4] = useState("Ваш адрес");
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const date = new Date();
   const [time2, setTime2] = useState(0);
-  const [mode, setMode] = useState('time');
+  const [mode, setMode] = useState("time");
   const [show, setShow] = useState(false);
   const [showFrom, setShowFrom] = useState(false);
   const [categories, setCategories] = useState([]);
   const [data, setData] = React.useState();
   const [selectedValue, setSelectedValue] = useState();
   const [workingDays, setWorkingDays] = useState();
-  const [activeLabel, setActiveLabel] = useState('');
+  const [activeLabel, setActiveLabel] = useState("");
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  const [nameOfCategory, setNameOfCategory] = useState('Выберите категорию');
+  const [nameOfCategory, setNameOfCategory] = useState("Выберите категорию");
   const [selectedId, setSelectedId] = useState(null);
   const [img, setImg] = useState();
   const [homeImg, sethomeImg] = useState();
 
   const wrkdays = [
     {
-      label: 'Monday',
-      out: 'Пн',
+      label: "Monday",
+      out: "Пн",
     },
     {
-      label: 'Tuesday',
-      out: 'Вт',
+      label: "Tuesday",
+      out: "Вт",
     },
     {
-      label: 'Wednesday',
-      out: 'Ср',
+      label: "Wednesday",
+      out: "Ср",
     },
     {
-      label: 'Thursday',
-      out: 'Чт',
+      label: "Thursday",
+      out: "Чт",
     },
     {
-      label: 'Friday',
-      out: 'Пт',
+      label: "Friday",
+      out: "Пт",
     },
     {
-      label: 'Saturday',
-      out: 'Сб',
+      label: "Saturday",
+      out: "Сб",
     },
     {
-      label: 'Sunday',
-      out: 'Вс',
+      label: "Sunday",
+      out: "Вс",
     },
   ];
 
@@ -103,16 +103,16 @@ export default function CompanySettingsScreen({ route }) {
     workingDays &&
       wrkdays.map((el) => {
         workingDays[el.label].to == null
-          ? (workingDays[el.label].to = '00:00')
+          ? (workingDays[el.label].to = "00:00")
           : workingDays[el.label].to;
         workingDays[el.label].from_ == null
-          ? (workingDays[el.label].from_ = '00:00')
+          ? (workingDays[el.label].from_ = "00:00")
           : workingDays[el.label].from_;
       });
   }, [workingDays]);
 
   const getAllCategories = async (name) => {
-    const resp = await fetch(API + 'category/');
+    const resp = await fetch(API + "category/");
     const data = await resp.json();
     let id = null;
     data &&
@@ -121,16 +121,16 @@ export default function CompanySettingsScreen({ route }) {
       });
     setCategories(data);
 
-    setNameOfCategory(name ? name : 'Выберите категорию');
+    setNameOfCategory(name ? name : "Выберите категорию");
     setSelectedId(id ? id : null);
   };
   const getAllAboutCategory = (el) => {
     setSelectedId(el ? el.id : null);
 
-    setNameOfCategory(el ? el.name : 'Выберите категорию');
+    setNameOfCategory(el ? el.name : "Выберите категорию");
   };
   const getAllInfo = async (arr) => {
-    let resp = await fetch(API + 'shop/' + shopId + '/');
+    let resp = await fetch(API + "shop/" + shopId + "/");
     let data = await resp.json();
     setData(data);
 
@@ -159,10 +159,10 @@ export default function CompanySettingsScreen({ route }) {
     let one = {
       active: workingDays[activeLabel].active,
       from_: time
-        ? `${time.getHours() <= 9 ? '0' + time.getHours() : time.getHours()}:${
-            time.getMinutes() <= 9 ? '0' + time.getMinutes() : time.getMinutes()
+        ? `${time.getHours() <= 9 ? "0" + time.getHours() : time.getHours()}:${
+            time.getMinutes() <= 9 ? "0" + time.getMinutes() : time.getMinutes()
           }`
-        : '00:00',
+        : "00:00",
       to: workingDays[activeLabel].to,
     };
 
@@ -170,7 +170,7 @@ export default function CompanySettingsScreen({ route }) {
     // changeMarketInfo({ ...workingDays, [activeLabel]: one });
 
     hideTimePickerFrom();
-    changeMarketInfo('save');
+    changeMarketInfo("save");
   };
 
   const handleTimeTo = (time) => {
@@ -178,16 +178,16 @@ export default function CompanySettingsScreen({ route }) {
       active: workingDays[activeLabel].active,
       from_: workingDays[activeLabel].from_,
       to: time
-        ? `${time.getHours() <= 9 ? '0' + time.getHours() : time.getHours()}:${
-            time.getMinutes() <= 9 ? '0' + time.getMinutes() : time.getMinutes()
+        ? `${time.getHours() <= 9 ? "0" + time.getHours() : time.getHours()}:${
+            time.getMinutes() <= 9 ? "0" + time.getMinutes() : time.getMinutes()
           }`
-        : '00:00',
+        : "00:00",
     };
 
     setWorkingDays({ ...workingDays, [activeLabel]: one });
     // changeMarketInfo({ ...workingDays, [activeLabel]: one });
     hideTimePicker();
-    changeMarketInfo('save');
+    changeMarketInfo("save");
   };
   const setWeeks = (label) => {
     let from = workingDays && workingDays[label].active;
@@ -198,7 +198,7 @@ export default function CompanySettingsScreen({ route }) {
       to: workingDays[label].to,
     };
     setWorkingDays({ ...workingDays, [label]: one });
-    changeMarketInfo('save');
+    changeMarketInfo("save");
     // changeMarketInfo({ ...workingDays, [label]: one });
   };
 
@@ -208,7 +208,7 @@ export default function CompanySettingsScreen({ route }) {
 
     if (permissionResult.granted === false) {
       setAnswerModal(true);
-      setModalTxt('Требуется разрешение на доступ к фотографиям');
+      setModalTxt("Требуется разрешение на доступ к фотографиям");
       return;
     }
 
@@ -217,12 +217,12 @@ export default function CompanySettingsScreen({ route }) {
   };
 
   const addPhotoToAccount = (name) => {
-    const btns = ['Выбрать из галереи', 'Отмена'];
+    const btns = ["Выбрать из галереи", "Отмена"];
     ActionSheet.show(
       {
         options: btns,
         cancelButtonIndex: 1,
-        title: 'Выберите способ...',
+        title: "Выберите способ...",
       },
       (buttonIndex) => {
         switch (buttonIndex) {
@@ -240,7 +240,7 @@ export default function CompanySettingsScreen({ route }) {
   };
   const changeMarketInfo = async (s) => {
     setViewLoader(true);
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
 
     delete data.logo;
     delete data.main_image;
@@ -249,26 +249,26 @@ export default function CompanySettingsScreen({ route }) {
     workingDays &&
       wrkdays.map((el) => {
         workingDays[el.label].to == null
-          ? (workingDays[el.label].to = '00:00')
+          ? (workingDays[el.label].to = "00:00")
           : workingDays[el.label].to;
         workingDays[el.label].from_ == null
-          ? (workingDays[el.label].from_ = '00:00')
+          ? (workingDays[el.label].from_ = "00:00")
           : workingDays[el.label].from_;
         data.working_days = workingDays;
       });
 
     if (selectedId == null || selectedId == undefined) {
       setAnswerModal(true);
-      setModalTxt('Выберите категорию');
+      setModalTxt("Выберите категорию");
     } else {
       data.categories = [selectedId];
 
       try {
-        const response = await fetch(API + 'shop/change/', {
-          method: 'PATCH', // или 'PUT'
+        const response = await fetch(API + "shop/change/", {
+          method: "PATCH", // или 'PUT'
           headers: {
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
         });
@@ -277,33 +277,33 @@ export default function CompanySettingsScreen({ route }) {
         setViewLoader(false);
         if (!s) {
           setAnswerModal(true);
-          setModalTxt('Успешно сохранено');
+          setModalTxt("Успешно сохранено");
         }
       } catch (error) {
-        console.error('Ошибка:', error);
+        console.error("Ошибка:", error);
       }
     }
   };
   const changePhoto = async (photo, name) => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
     const dats = new FormData();
 
-    dats.append(name != 'gallery' ? name : 'img', {
+    dats.append(name != "gallery" ? name : "img", {
       name: `${name}.png`,
-      type: photo.type + '/jpeg',
+      type: photo.type + "/jpeg",
       uri:
-        Platform.OS === 'android'
+        Platform.OS === "android"
           ? photo.uri
-          : photo.uri.replace('file://', ''),
+          : photo.uri.replace("file://", ""),
     });
-    let url = name == 'gallery' ? 'shop/image/' : 'shop/change/';
-    let met = name == 'gallery' ? 'POST' : 'PATCH';
+    let url = name == "gallery" ? "shop/image/" : "shop/change/";
+    let met = name == "gallery" ? "POST" : "PATCH";
 
     try {
       const response = await fetch(API + url, {
         method: met, // или 'PUT'
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: "Bearer " + token,
         },
         body: dats, // данные могут быть 'строкой' или {объектом}!
       });
@@ -311,28 +311,28 @@ export default function CompanySettingsScreen({ route }) {
 
       getAllInfo();
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
   const deleteImg = async (id) => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
     try {
-      const response = await fetch(API + 'shop/image/' + id + '/', {
-        method: 'DELETE', // или 'PUT'
+      const response = await fetch(API + "shop/image/" + id + "/", {
+        method: "DELETE", // или 'PUT'
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: "Bearer " + token,
         },
       });
 
       getAllInfo();
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
   return (
     <Root>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'position' : null}
+        behavior={Platform.OS === "ios" ? "position" : null}
         style={styles.container}
       >
         <ScrollView
@@ -341,9 +341,9 @@ export default function CompanySettingsScreen({ route }) {
         >
           <AnimatedLoader
             visible={viewLoader}
-            overlayColor="rgba(255,255,255,0.7)"
-            source={require('../../../../Common/loader.json')}
-            animationStyle={{ width: 100, height: 100, resizeMode: 'cover' }}
+            overlayColor='rgba(255,255,255,0.7)'
+            source={require("../../../../Common/loader.json")}
+            animationStyle={{ width: 100, height: 100 }}
             speed={1}
           >
             <Text>Сохранение...</Text>
@@ -358,13 +358,13 @@ export default function CompanySettingsScreen({ route }) {
                   <View style={styles.addPhotoIconBox}>
                     <TouchableOpacity
                       style={styles.addPhotoBtn}
-                      onPress={() => addPhotoToAccount('logo')}
+                      onPress={() => addPhotoToAccount("logo")}
                     >
                       <Image
                         style={{
                           width: scalePoint * 15,
                           height: scalePoint * 15,
-                          resizeMode: 'contain',
+                          resizeMode: "contain",
                         }}
                         source={addPhotoIcon}
                       />
@@ -389,17 +389,17 @@ export default function CompanySettingsScreen({ route }) {
 
           <View style={styles.infoInputsBox}>
             <Text style={styles.infoBoxText}>Главная картинка (450х250)</Text>
-            <View style={{ flexDirection: 'row', marginTop: '2%' }}>
+            <View style={{ flexDirection: "row", marginTop: "2%" }}>
               <View style={styles.mainImgBox}>
                 <TouchableOpacity
                   style={styles.deletePhotoBtn}
-                  onPress={() => addPhotoToAccount('main_image')}
+                  onPress={() => addPhotoToAccount("main_image")}
                 >
                   <Image
                     style={{
                       width: scalePoint * 15,
                       height: scalePoint * 15,
-                      resizeMode: 'contain',
+                      resizeMode: "contain",
                     }}
                     source={addPhotoIcon}
                   />
@@ -470,8 +470,8 @@ export default function CompanySettingsScreen({ route }) {
                 <TextInput
                   style={styles.pick}
                   placeholder={cashbacksPrecent}
-                  value={data ? data.cashback : ''}
-                  onChangeText={changeText('cashback')}
+                  value={data ? data.cashback : ""}
+                  onChangeText={changeText("cashback")}
                 />
               </View>
             </View>
@@ -483,8 +483,8 @@ export default function CompanySettingsScreen({ route }) {
                   multiline={true}
                   numberOfLines={5}
                   placeholder={aboutUsInfo}
-                  value={data ? data.about : ''}
-                  onChangeText={changeText('about')}
+                  value={data ? data.about : ""}
+                  onChangeText={changeText("about")}
                 />
               </View>
             </View>
@@ -494,33 +494,33 @@ export default function CompanySettingsScreen({ route }) {
                 <TextInput
                   style={styles.textInputStyle}
                   placeholder={contactsValue1}
-                  value={data ? data.phone : ''}
+                  value={data ? data.phone : ""}
                   maxLength={12}
-                  onChangeText={changeText('phone')}
+                  onChangeText={changeText("phone")}
                 />
               </View>
               <View style={styles.inputBox1}>
                 <TextInput
                   style={styles.textInputStyle}
                   placeholder={contactsValue2}
-                  value={data ? data.instagram : ''}
-                  onChangeText={changeText('instagram')}
+                  value={data ? data.instagram : ""}
+                  onChangeText={changeText("instagram")}
                 />
               </View>
               <View style={styles.inputBox1}>
                 <TextInput
                   style={styles.textInputStyle}
                   placeholder={contactsValue3}
-                  value={data ? data.web_site : ''}
-                  onChangeText={changeText('web_site')}
+                  value={data ? data.web_site : ""}
+                  onChangeText={changeText("web_site")}
                 />
               </View>
               <View style={styles.inputBox1}>
                 <TextInput
                   style={styles.textInputStyle}
                   placeholder={contactsValue4}
-                  value={data ? data.address : ''}
-                  onChangeText={changeText('address')}
+                  value={data ? data.address : ""}
+                  onChangeText={changeText("address")}
                 />
               </View>
             </View>
@@ -541,9 +541,9 @@ export default function CompanySettingsScreen({ route }) {
                         onPress={() => deleteImg(el.id)}
                       >
                         <AntDesign
-                          name="delete"
+                          name='delete'
                           size={scalePoint * 10}
-                          color="#fff"
+                          color='#fff'
                         />
                       </TouchableOpacity>
                       <Image
@@ -556,13 +556,13 @@ export default function CompanySettingsScreen({ route }) {
 
               <TouchableOpacity
                 style={styles.addPhotoBox}
-                onPress={() => addPhotoToAccount('gallery')}
+                onPress={() => addPhotoToAccount("gallery")}
               >
                 <Image
                   style={{
                     width: 18,
                     height: 18,
-                    resizeMode: 'contain',
+                    resizeMode: "contain",
                   }}
                   source={addPhotoToGalleryIcon}
                 />
@@ -572,7 +572,7 @@ export default function CompanySettingsScreen({ route }) {
           <View style={styles.infoBox}>
             <Text style={styles.infoBoxText}>Рабочее время</Text>
             <View style={styles.inputBox}>
-              <View style={{ paddingVertical: '3%', width: '100%' }}>
+              <View style={{ paddingVertical: "3%", width: "100%" }}>
                 {wrkdays &&
                   wrkdays.map((el) => (
                     <View style={styles.workTimeBox} key={el.label}>
@@ -581,13 +581,13 @@ export default function CompanySettingsScreen({ route }) {
                           style={{
                             transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }],
                           }}
-                          trackColor={{ false: '#e7e7e7', true: '#e7e7e7' }}
+                          trackColor={{ false: "#e7e7e7", true: "#e7e7e7" }}
                           thumbColor={
                             workingDays && workingDays[el.label]?.active
-                              ? '#ff6b00'
-                              : '#bfbfbf'
+                              ? "#ff6b00"
+                              : "#bfbfbf"
                           }
-                          ios_backgroundColor="#e7e7e7"
+                          ios_backgroundColor='#e7e7e7'
                           onValueChange={() => setWeeks(el.label)}
                           value={workingDays && workingDays[el.label]?.active}
                         />
@@ -631,21 +631,21 @@ export default function CompanySettingsScreen({ route }) {
                   <TimePickerModal
                     onConfirm={handleTimeFrom}
                     onCancel={hideTimePickerFrom}
-                    mode="time"
+                    mode='time'
                     isVisible={showFrom}
-                    display="spinner"
+                    display='spinner'
                     is24Hour={true}
-                    locale="ru-Ru"
+                    locale='ru-Ru'
                   />
                 ) : show ? (
                   <TimePickerModal
                     onConfirm={handleTimeTo}
                     onCancel={hideTimePicker}
-                    mode="time"
+                    mode='time'
                     isVisible={show}
-                    display="spinner"
+                    display='spinner'
                     is24Hour={true}
-                    locale="ru-Ru"
+                    locale='ru-Ru'
                   />
                 ) : null}
               </View>
@@ -654,7 +654,7 @@ export default function CompanySettingsScreen({ route }) {
           <View style={styles.btnBox}>
             <TouchableOpacity
               style={styles.declineBtn}
-              onPress={() => navigation.navigate('ProfileScreen')}
+              onPress={() => navigation.navigate("ProfileScreen")}
             >
               <Text style={styles.declineBtnTxt}>Отменить</Text>
             </TouchableOpacity>
@@ -670,11 +670,11 @@ export default function CompanySettingsScreen({ route }) {
             setAnswerModal={setAnswerModal}
             message={modalTxt}
             funcOk={() => {
-              modalTxt == 'Выберите категорию' ||
-              modalTxt == 'Заполните все временые промежутки'
+              modalTxt == "Выберите категорию" ||
+              modalTxt == "Заполните все временые промежутки"
                 ? setAnswerModal
                 : setAnswerModal(false);
-              navigation.navigate('ProfileScreen');
+              navigation.navigate("ProfileScreen");
             }}
           />
           <ModalCategories
@@ -691,40 +691,40 @@ export default function CompanySettingsScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    width: '100%',
-    alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? '15%' : '5%',
+    width: "100%",
+    alignSelf: "center",
+    marginTop: Platform.OS === "ios" ? "15%" : "5%",
   },
   addPhotoIconBox: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 9,
-    left: '85%',
-    top: '8%',
+    left: "85%",
+    top: "8%",
   },
   addPhotoBtn: {
     width: scalePoint * 34,
     height: scalePoint * 34,
     borderRadius: scalePoint * 34 * 0.5,
-    backgroundColor: '#ff6b00',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#ff6b00",
+    justifyContent: "center",
+    alignItems: "center",
   },
   deletePhotoBtn: {
     width: scalePoint * 20,
     height: scalePoint * 20,
     borderRadius: scalePoint * 20 * 0.5,
-    backgroundColor: '#ff6b00',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#ff6b00",
+    justifyContent: "center",
+    alignItems: "center",
 
-    position: 'absolute',
+    position: "absolute",
     right: scalePoint * 5,
     top: scalePoint * 5,
     zIndex: 999,
@@ -733,23 +733,23 @@ const styles = StyleSheet.create({
     width: scalePoint * 95,
     height: scalePoint * 75,
     borderRadius: scalePoint * 10,
-    alignSelf: 'center',
-    resizeMode: 'cover',
+    alignSelf: "center",
+    resizeMode: "cover",
   },
   addPhotoTxt: {
-    padding: '2%',
-    marginLeft: '5%',
+    padding: "2%",
+    marginLeft: "5%",
     fontSize: 16,
     lineHeight: 18,
-    width: '85%',
+    width: "85%",
   },
   accountImgFirstShadowCircle: {
     width: scalePoint * 142,
     height: scalePoint * 142,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: scalePoint * 142 * 0.5,
-    justifyContent: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowRadius: 13,
     shadowOpacity: 0.15,
     shadowOffset: {
@@ -757,28 +757,28 @@ const styles = StyleSheet.create({
       height: 0,
     },
     elevation: 10,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
   },
   accountImgSecondShadowCircle: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: scalePoint * 124,
     height: scalePoint * 124,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: scalePoint * 124 * 0.5,
-    justifyContent: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowRadius: 13,
     shadowOpacity: 0.15,
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     elevation: 8,
   },
   accountImgThirdShadowCircle: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowRadius: 13,
     shadowOpacity: 0.1,
     shadowOffset: {
@@ -786,191 +786,191 @@ const styles = StyleSheet.create({
       height: 0,
     },
     elevation: 8,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: scalePoint * 107 * 0.5,
     width: scalePoint * 107,
     height: scalePoint * 107,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
   },
   accountImg: {
     width: scalePoint * 107,
     height: scalePoint * 107,
     borderRadius: scalePoint * 107 * 0.5,
-    resizeMode: 'cover',
-    alignSelf: 'center',
+    resizeMode: "cover",
+    alignSelf: "center",
   },
   profileInfoBox: {
-    alignItems: 'center',
-    marginTop: '5%',
+    alignItems: "center",
+    marginTop: "5%",
   },
   infoInputsBox: {
-    marginBottom: '5%',
-    marginTop: '10%',
+    marginBottom: "5%",
+    marginTop: "10%",
   },
   infoBox: {
-    alignItems: 'center',
-    marginTop: '5%',
-    width: '100%',
+    alignItems: "center",
+    marginTop: "5%",
+    width: "100%",
   },
   infoBoxText: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginLeft: 19,
     fontSize: 16,
     lineHeight: 19,
-    color: '#515151',
+    color: "#515151",
   },
   inputBox: {
-    width: '100%',
-    alignSelf: 'center',
+    width: "100%",
+    alignSelf: "center",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 10,
     marginTop: 7,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   pick: {
-    color: 'grey',
+    color: "grey",
     paddingVertical: 11,
     paddingHorizontal: 19,
     fontSize: 12,
     lineHeight: 18,
-    fontFamily: 'Roboto',
-    width: '100%',
+    fontFamily: "Roboto",
+    width: "100%",
   },
   inputBox1: {
-    width: '100%',
-    marginTop: '3%',
-    borderColor: '#225196',
+    width: "100%",
+    marginTop: "3%",
+    borderColor: "#225196",
     borderWidth: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 10,
   },
   textInputStyle: {
-    width: '90%',
+    width: "90%",
     paddingVertical: 11,
     paddingHorizontal: 19,
     fontSize: 12,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     lineHeight: 18,
   },
   descriptionTxt: {
-    width: '90%',
-    marginVertical: '10%',
-    marginLeft: '5%',
+    width: "90%",
+    marginVertical: "10%",
+    marginLeft: "5%",
     fontSize: 16,
     lineHeight: 16,
   },
   workTimeBox: {
-    flexDirection: 'row',
-    width: '100%',
+    flexDirection: "row",
+    width: "100%",
   },
   workDaysAndTimeBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: '4%',
-    width: '50%',
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: "4%",
+    width: "50%",
   },
   dayTimeText: {
     fontSize: 12,
     lineHeight: 18,
-    color: '#8d8d8d',
+    color: "#8d8d8d",
   },
   timeBox: {
-    width: '45%',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
+    width: "45%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
   },
   timePickerStyle: {
     borderWidth: 1,
     borderRadius: 4,
-    width: '45%',
+    width: "45%",
     height: 20,
-    alignItems: 'center',
-    borderColor: '#225196',
-    justifyContent: 'center',
+    alignItems: "center",
+    borderColor: "#225196",
+    justifyContent: "center",
   },
   timePickerText: {
     fontSize: 12,
     lineHeight: 14,
-    color: '#515151',
-    alignSelf: 'center',
-    alignItems: 'center',
+    color: "#515151",
+    alignSelf: "center",
+    alignItems: "center",
   },
   addPhotoSection: {
-    marginTop: '2%',
-    width: '100%',
+    marginTop: "2%",
+    width: "100%",
   },
   mainImgBox: {
     width: scalePoint * 100,
     height: scalePoint * 80,
     borderRadius: scalePoint * 10,
     borderWidth: 1,
-    borderColor: '#256196',
+    borderColor: "#256196",
     marginRight: scalePoint * 10,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   addPhotoBox: {
     width: 100,
     height: 90,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#225196',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderColor: "#225196",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnBox: {
-    marginTop: '15%',
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-    marginBottom: '10%',
+    marginTop: "15%",
+    width: "85%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignSelf: "center",
+    marginBottom: "10%",
   },
   declineBtn: {
-    width: '48%',
+    width: "48%",
     height: 45,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#ff6b00',
-    justifyContent: 'center',
+    borderColor: "#ff6b00",
+    justifyContent: "center",
   },
   saveBtn: {
-    width: '48%',
+    width: "48%",
     height: 45,
     borderRadius: 10,
-    backgroundColor: '#ff6b00',
-    justifyContent: 'center',
+    backgroundColor: "#ff6b00",
+    justifyContent: "center",
   },
   declineBtnTxt: {
     fontSize: 14,
     lineHeight: 16,
-    alignSelf: 'center',
-    color: '#ff6b00',
-    fontFamily: 'SfPro',
+    alignSelf: "center",
+    color: "#ff6b00",
+    fontFamily: "SfPro",
   },
   saveBtnTxt: {
     fontSize: 14,
     lineHeight: 16,
-    alignSelf: 'center',
-    color: '#fff',
-    fontFamily: 'SfPro',
+    alignSelf: "center",
+    color: "#fff",
+    fontFamily: "SfPro",
   },
 });
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
-    color: 'black',
+    color: "black",
     height: scalePoint * 45,
     marginLeft: scalePoint * 30,
   },
   inputAndroid: {
     fontSize: 16,
-    color: 'black',
+    color: "black",
     height: scalePoint * 45,
     marginLeft: scalePoint * 30,
   },
