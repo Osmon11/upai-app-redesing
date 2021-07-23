@@ -40,6 +40,8 @@ export default function BuyHistoryBuys() {
   React.useEffect(() => {
     getPurchase();
     getFullInfo();
+  }, [navigation]);
+  React.useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       setViewLoader(true);
       getPurchase();
@@ -48,7 +50,7 @@ export default function BuyHistoryBuys() {
     return () => {
       unsubscribe;
     };
-  }, [navigation]);
+  }, []);
   const getPurchase = async () => {
     const token = await AsyncStorage.getItem("token");
     const resp = await fetch(API + "users/purchase/?limit=100", {
@@ -73,13 +75,10 @@ export default function BuyHistoryBuys() {
     const data = await resp.json();
     if (data && data.shop) {
       setCompanyLog(true);
-
-      setViewLoader(false);
     } else {
       setCompanyLog(false);
-
-      setViewLoader(false);
     }
+    setViewLoader(false);
   };
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,

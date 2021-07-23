@@ -434,7 +434,10 @@ export default function CasbackSettingsScreen({ route }) {
             <View style={styles.infoBox}>
               <Text style={styles.infoBoxText}>Календарь</Text>
               <View style={styles.calendarBox}>
-                <Calendar all={customDatesStyles} />
+                <Calendar
+                  all={customDatesStyles}
+                  setCustomDatesStyles={(value) => setCustomDatesStyles(value)}
+                />
               </View>
             </View>
           </View>

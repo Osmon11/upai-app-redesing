@@ -72,7 +72,6 @@ export default function NotificationsScreen({ route }) {
   };
 
   const getAll = async () => {
-    console.log("date", from);
     const token = await AsyncStorage.getItem("token");
 
     const req = await fetch(

@@ -69,7 +69,9 @@ export default function CashbackSum({ cashBackGet }) {
                   <Image
                     style={styles.boxImage}
                     source={
-                      item.kind == "success"
+                      item.kind == "success" ||
+                      item.kind == "balance_changed" ||
+                      item.kind == "new_shop"
                         ? gettingCashbacksIcon
                         : item.kind == "pending"
                         ? waitingCashbacksIcon

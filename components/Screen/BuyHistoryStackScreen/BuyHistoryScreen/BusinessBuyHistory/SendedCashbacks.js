@@ -29,19 +29,11 @@ export default function SendedCashbacks({ open, cashBackGet }) {
     x: -1,
     y: 1.5,
   };
-  const [viewLoader, setViewLoader] = React.useState(true);
 
   React.useEffect(() => {}, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff", width: "98%" }}>
-      <AnimatedLoader
-        visible={viewLoader}
-        overlayColor='rgba(255,255,255,1)'
-        source={require("../../../../Common/loader.json")}
-        animationStyle={{ width: 100, height: 100 }}
-        speed={1}
-      ></AnimatedLoader>
       <View>
         {cashBackGet && cashBackGet?.length !== 0 ? (
           cashBackGet?.map((item, index) => (

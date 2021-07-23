@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-} from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import Dialog, { DialogContent } from "react-native-popup-dialog";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
   const [label1, setLabel1] = useState({
-    label: 'Отклоненные',
-    value: 'error',
+    label: "Отклоненные",
+    value: "error",
   });
   const [label2, setLabel2] = useState({
-    label: 'В ожидании',
-    value: 'pending',
+    label: "В ожидании",
+    value: "pending",
   });
   const [label3, setLabel3] = useState({
-    label: 'Отправленные',
-    value: 'success',
+    label: "Отправленные",
+    value: "success",
   });
   const [label4, setLabel4] = useState({
-    label: 'Все, за весь период',
-    value: 'all',
+    label: "Все, за весь период",
+    value: "all",
   });
   const [choice1, setChoice1] = useState(false);
   const [choice2, setChoice2] = useState(false);
@@ -76,7 +76,7 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
     >
       <DialogContent style={styles.answerModalBox}>
         <View style={styles.container}>
-        <TouchableOpacity
+          <TouchableOpacity
             onPress={() => getChoice4()}
             style={styles.chooseLine}
           >
@@ -85,9 +85,9 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
             </View>
             <View>
               {choice4 ? (
-                <AntDesign name="checkcircle" size={17} color="#225196" />
+                <AntDesign name='checkcircle' size={17} color='#225196' />
               ) : (
-                <FontAwesome5 name="circle" size={17} color="#225196" />
+                <FontAwesome5 name='circle' size={17} color='#225196' />
               )}
             </View>
           </TouchableOpacity>
@@ -100,9 +100,9 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
             </View>
             <View>
               {choice1 ? (
-                <AntDesign name="checkcircle" size={17} color="#225196" />
+                <AntDesign name='checkcircle' size={17} color='#225196' />
               ) : (
-                <FontAwesome5 name="circle" size={17} color="#225196" />
+                <FontAwesome5 name='circle' size={17} color='#225196' />
               )}
             </View>
           </TouchableOpacity>
@@ -115,9 +115,9 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
             </View>
             <View>
               {choice2 ? (
-                <AntDesign name="checkcircle" size={17} color="#225196" />
+                <AntDesign name='checkcircle' size={17} color='#225196' />
               ) : (
-                <FontAwesome5 name="circle" size={17} color="#225196" />
+                <FontAwesome5 name='circle' size={17} color='#225196' />
               )}
             </View>
           </TouchableOpacity>
@@ -130,9 +130,9 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
             </View>
             <View>
               {choice3 ? (
-                <AntDesign name="checkcircle" size={17} color="#225196" />
+                <AntDesign name='checkcircle' size={17} color='#225196' />
               ) : (
-                <FontAwesome5 name="circle" size={17} color="#225196" />
+                <FontAwesome5 name='circle' size={17} color='#225196' />
               )}
             </View>
           </TouchableOpacity>
@@ -142,54 +142,52 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
   );
 }
 const styles = StyleSheet.create({
-  
   container: {
-    alignSelf: 'center',
+    alignSelf: "center",
     width: scalePoint * 343,
     height: scalePoint * 125,
-    marginTop:'-7%'
+    marginTop: "-7%",
   },
   answerModalBox: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     width: scalePoint * 343,
-    height: scalePoint * 135,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '2%',
+    height: scalePoint * 180,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: scalePoint * 50,
   },
   chooseLine: {
-    marginTop: scalePoint * 25,
     marginLeft: scalePoint * 20,
     marginRight: scalePoint * 23,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   chooseLine2: {
     marginTop: scalePoint * 15,
     marginLeft: scalePoint * 20,
     marginRight: scalePoint * 23,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   txt: {
     fontSize: 16,
-    fontFamily: 'RobotoLight',
-    color: '#000',
+    fontFamily: "RobotoLight",
+    color: "#000",
   },
   btnTxt: {
     fontSize: 14,
-    color: '#ff6b00',
-    alignSelf: 'center',
+    color: "#ff6b00",
+    alignSelf: "center",
   },
   accessBox: {
     marginBottom: scalePoint * 5,
-    width: '80%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
+    width: "80%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    alignSelf: "center",
+    alignItems: "center",
   },
 });

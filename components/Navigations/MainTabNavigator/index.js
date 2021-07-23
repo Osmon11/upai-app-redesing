@@ -169,19 +169,25 @@ export default function MainTabNavigator() {
               flexDirection: "row",
               position: "absolute",
               top: 0,
-              backgroundColor: "transparent`",
+              backgroundColor: "#fff`",
             }}
           >
-            <View style={{ flex: 1, backgroundColor: "#fff" }}></View>
-            <Svg width='73' height='83' viewBox='0 0 73 83' fill='none'>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "#fff",
+                width: 73,
+                height: 93,
+              }}
+            ></View>
+            {/* <Svg width='73' height='83' viewBox='0 0 73 83' fill='none'>
               <Path
                 fill-rule='evenodd'
                 clip-rule='evenodd'
                 d='M3.74594 1.36587C3.47967 0.562792 2.74122 0 1.89514 0C0.848485 0 0 0.848484 0 1.89514V79C0 81.2091 1.79086 83 4 83H69C71.2091 83 73 81.2091 73 79V1.89514C73 0.848485 72.1515 0 71.1049 0C70.2588 0 69.5203 0.562793 69.2541 1.36587C64.7016 15.0958 51.7574 25 36.5 25C21.2426 25 8.29838 15.0958 3.74594 1.36587Z'
                 fill='white'
               />
-            </Svg>
-            <View style={{ flex: 1, backgroundColor: "#fff" }}></View>
+            </Svg> */}
           </View>
           <TouchableOpacity
             style={{
@@ -285,9 +291,7 @@ export default function MainTabNavigator() {
             ) : (
               <AntDesign name='clockcircle' size={23} color={color} />
             ),
-          tabBarButton: (props) => (
-            <TabBarCustomButton {...props} isSelected={false} />
-          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
       />
       <Tab.Screen

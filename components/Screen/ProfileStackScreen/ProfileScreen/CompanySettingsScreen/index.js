@@ -11,13 +11,13 @@ import {
   Dimensions,
   Platform,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 
 import { ActionSheet, Root } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import TimePickerModal from "react-native-modal-datetime-picker";
-import RNPickerSelect from "react-native-picker-select";
 import AnimatedLoader from "react-native-animated-loader";
 import emptyProfileAccountImg from "../../../../Images/emptyProfileAccountImg.png";
 import addPhotoIcon from "../../../../Images/addPhotoIcon.png";
@@ -46,8 +46,7 @@ export default function CompanySettingsScreen({ route }) {
   const [contactsValue4, setContactsValue4] = useState("Ваш адрес");
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const date = new Date();
-  const [time2, setTime2] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("time");
   const [show, setShow] = useState(false);
   const [showFrom, setShowFrom] = useState(false);
@@ -136,6 +135,7 @@ export default function CompanySettingsScreen({ route }) {
     let resp = await fetch(API + "shop/" + shopId + "/");
     let data = await resp.json();
     setData(data);
+    setLoading(false);
     if (data && data.working_days) {
       for (let day in data.working_days) {
         if (
@@ -281,9 +281,7 @@ export default function CompanySettingsScreen({ route }) {
           body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
         });
         const json = await response.json();
-
-        setViewLoader(false);
-        if (!s) {
+        if (json) {
           setAnswerModal(true);
           setModalTxt("Успешно сохранено");
         }
@@ -291,11 +289,12 @@ export default function CompanySettingsScreen({ route }) {
         console.error("Ошибка:", error);
       }
     }
+    setViewLoader(false);
   };
   const changePhoto = async (photo, name) => {
     const token = await AsyncStorage.getItem("token");
     const dats = new FormData();
-
+    setLoading(true);
     dats.append(name != "gallery" ? name : "img", {
       name: `${name}.png`,
       type: photo.type + "/jpeg",
@@ -319,7 +318,8 @@ export default function CompanySettingsScreen({ route }) {
 
       getAllInfo();
     } catch (error) {
-      console.error("Ошибка:", error);
+      alert(`Ошибка: ${JSON.stringify(error)}`);
+      setLoading(false);
     }
   };
   const deleteImg = async (id) => {
@@ -527,14 +527,18 @@ export default function CompanySettingsScreen({ route }) {
                 style={styles.addPhotoBox}
                 onPress={() => addPhotoToAccount("gallery")}
               >
-                <Image
-                  style={{
-                    width: 18,
-                    height: 18,
-                    resizeMode: "contain",
-                  }}
-                  source={addPhotoToGalleryIcon}
-                />
+                {loading ? (
+                  <ActivityIndicator size='large' color='#ff6b00' />
+                ) : (
+                  <Image
+                    style={{
+                      width: 18,
+                      height: 18,
+                      resizeMode: "contain",
+                    }}
+                    source={addPhotoToGalleryIcon}
+                  />
+                )}
               </TouchableOpacity>
             </ScrollView>
           </View>
@@ -639,11 +643,7 @@ export default function CompanySettingsScreen({ route }) {
             setAnswerModal={setAnswerModal}
             message={modalTxt}
             funcOk={() => {
-              modalTxt == "Выберите категорию" ||
-              modalTxt == "Заполните все временые промежутки"
-                ? setAnswerModal
-                : setAnswerModal(false);
-              navigation.navigate("ProfileScreen");
+              setAnswerModal(false);
             }}
           />
           <ModalCategories
@@ -891,6 +891,7 @@ const styles = StyleSheet.create({
     borderColor: "#225196",
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
   },
   btnBox: {
     marginTop: "15%",
