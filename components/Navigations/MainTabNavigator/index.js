@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Dimensions, Platform, TouchableOpacity } from "react-native";
@@ -29,10 +29,6 @@ import * as Linking from "expo-linking";
 import * as Notifications from "expo-notifications";
 import { View, Text } from "native-base";
 import { API } from "../../config";
-import RegistrationScreen from "../../Screen/ProfileStackScreen/LoginMainScreen/Registration";
-import Svg, { Path } from "react-native-svg";
-import { BarCodeScanner } from "expo-barcode-scanner";
-const prefix = Linking.makeUrl("/");
 const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
@@ -106,6 +102,7 @@ export default function MainTabNavigator() {
       Linking.removeEventListener("url");
     };
   }, [dataLink]);
+
   React.useEffect(() => {
     const subscription = Notifications.addNotificationResponseReceivedListener(
       (response) => {
@@ -127,6 +124,7 @@ export default function MainTabNavigator() {
     //   const { status } = await BarCodeScanner.requestPermissionsAsync();
     //   setHasPermission(status == "granted");
     // })();
+
     return () => {
       subscription.remove();
     };

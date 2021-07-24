@@ -39,6 +39,12 @@ export default function CashbackSum({ cashBackGet }) {
       setViewLoader(false);
     }, 2000);
   }, []);
+  const getImg = {
+    success: gettingCashbacksIcon,
+    balance_changed: gettingCashbacksIcon,
+    new_shop: gettingCashbacksIcon,
+    pending: waitingCashbacksIcon,
+  };
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <AnimatedLoader
@@ -69,12 +75,8 @@ export default function CashbackSum({ cashBackGet }) {
                   <Image
                     style={styles.boxImage}
                     source={
-                      item.kind == "success" ||
-                      item.kind == "balance_changed" ||
-                      item.kind == "new_shop"
-                        ? gettingCashbacksIcon
-                        : item.kind == "pending"
-                        ? waitingCashbacksIcon
+                      Boolean(getImg[item.kind])
+                        ? getImg[item.kind]
                         : declinedCashbacksIcon
                     }
                   />

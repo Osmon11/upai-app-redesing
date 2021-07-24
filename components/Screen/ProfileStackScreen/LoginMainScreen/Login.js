@@ -6,13 +6,11 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
   Dimensions,
 } from "react-native";
 
+import * as Notifications from "expo-notifications";
+import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 
 import phoneIcon from "../../../Images/PhoneIcon.png";
@@ -81,6 +79,9 @@ export default function Login() {
       } else if (json.access) {
         await AsyncStorage.setItem("token", json.access);
         navigation.navigate("ProfileStackScreen", { screen: "ProfileScreen" });
+        registerForPushNotificationsAsync().then((notificationToken) => {
+          registerTokenFromBack(notificationToken);
+        });
       } else if (json.error) {
         setAnswerModal(true);
         setModalTxt(json.error);
@@ -156,6 +157,56 @@ export default function Login() {
     </View>
   );
 }
+
+const registerTokenFromBack = async (id) => {
+  const token = await AsyncStorage.getItem("token");
+  let data = {
+    registration_id: id,
+    type: Platform.OS === "android" ? "android" : "ios",
+  };
+  const response = await fetch(API + "devices/", {
+    method: "POST", // или 'PUT'
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+  });
+  const json = await response.json();
+};
+
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      console.log("Failed to get push token for push notification!");
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log("notification token", token);
+  } else {
+    console.log("Must use physical device for Push Notifications");
+  }
+
+  if (Platform.OS === "android") {
+    Notifications.setNotificationChannelAsync("default", {
+      name: "default",
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: "#FF231F7C",
+    });
+  }
+
+  return token;
+}
+
 const styles = StyleSheet.create({
   container: {
     width: "90%",

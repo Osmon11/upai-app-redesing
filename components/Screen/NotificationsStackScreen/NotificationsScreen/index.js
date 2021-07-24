@@ -90,6 +90,7 @@ export default function NotificationsScreen({ route }) {
     );
     const res = await req.json();
     res && setViewLoader(false);
+    console.log(res.results);
     setCashBackGet(res.results);
   };
 

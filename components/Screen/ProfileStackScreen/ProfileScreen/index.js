@@ -4,7 +4,6 @@ import {
   Text,
   View,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   Dimensions,
   TouchableOpacity,
@@ -28,16 +27,9 @@ import { API } from "../../../config";
 import AsyncStorage from "@react-native-community/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import AnimatedLoader from "react-native-animated-loader";
-import Constants from "expo-constants";
 const width = Dimensions.get("window").width;
 const scalePoint = width / 380;
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
+
 export default function ProfileScreen() {
   const [data, setData] = React.useState();
   const [purchase, setPurchase] = React.useState([]);
@@ -49,34 +41,12 @@ export default function ProfileScreen() {
     getInfo();
   });
   const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-  const registerTokenFromBack = async (id) => {
-    const token = await AsyncStorage.getItem("token");
-    let data = {
-      registration_id: id,
-      type: Platform.OS === "android" ? "android" : "ios",
-    };
-    const response = await fetch(API + "devices/", {
-      method: "POST", // или 'PUT'
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
-    });
-    const json = await response.json();
-  };
 
   React.useEffect(() => {
     getFullInfo();
     getPurchase();
-    registerForPushNotificationsAsync().then((token) => {
-      setExpoPushToken(token);
-      registerTokenFromBack(token);
-    });
-
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
@@ -429,34 +399,3 @@ const styles = StyleSheet.create({
     color: "#ff6b00",
   },
 });
-async function registerForPushNotificationsAsync() {
-  let token;
-  if (Constants.isDevice) {
-    const { status: existingStatus } =
-      await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== "granted") {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== "granted") {
-      console.log("Failed to get push token for push notification!");
-      return;
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
-  } else {
-    console.log("Must use physical device for Push Notifications");
-  }
-
-  if (Platform.OS === "android") {
-    Notifications.setNotificationChannelAsync("default", {
-      name: "default",
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
-    });
-  }
-
-  return token;
-}

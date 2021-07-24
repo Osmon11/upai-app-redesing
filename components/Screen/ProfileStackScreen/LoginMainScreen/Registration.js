@@ -19,9 +19,18 @@ import * as Linking from "expo-linking";
 import AsyncStorage from "@react-native-community/async-storage";
 import DialogAlert from "../../../Common/DialogAlert";
 import { regReferal } from "./Login";
+import * as Notifications from "expo-notifications";
+import Constants from "expo-constants";
 
 const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function RegistrationScreen({ open }) {
   const [value, numberInput] = useState("Введите номер");
@@ -144,6 +153,9 @@ export default function RegistrationScreen({ open }) {
         const json = await response.json();
         if (json.message) {
           getToken();
+          registerForPushNotificationsAsync().then((token) => {
+            registerTokenFromBack(token);
+          });
         } else if (json.code) {
           setAnswerModal(true);
           setModalTxt(json.code[0]);
@@ -165,6 +177,7 @@ export default function RegistrationScreen({ open }) {
       }
     }
   };
+
   return (
     <View>
       <View style={styles.container}>
@@ -268,6 +281,56 @@ export default function RegistrationScreen({ open }) {
     </View>
   );
 }
+
+const registerTokenFromBack = async (id) => {
+  const token = await AsyncStorage.getItem("token");
+  let data = {
+    registration_id: id,
+    type: Platform.OS === "android" ? "android" : "ios",
+  };
+  const response = await fetch(API + "devices/", {
+    method: "POST", // или 'PUT'
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
+  });
+  const json = await response.json();
+};
+
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      console.log("Failed to get push token for push notification!");
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log("notification token", token);
+  } else {
+    console.log("Must use physical device for Push Notifications");
+  }
+
+  if (Platform.OS === "android") {
+    Notifications.setNotificationChannelAsync("default", {
+      name: "default",
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: "#FF231F7C",
+    });
+  }
+
+  return token;
+}
+
 const styles = StyleSheet.create({
   container: {
     width: "90%",
