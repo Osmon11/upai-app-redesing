@@ -184,7 +184,6 @@ export default function CompanySettingsScreen({ route }) {
     setWorkingDays({ ...workingDays, [activeLabel]: one });
 
     hideTimePickerFrom();
-    changeMarketInfo("save");
   };
 
   const handleTimeTo = (time) => {
@@ -200,7 +199,6 @@ export default function CompanySettingsScreen({ route }) {
 
     setWorkingDays({ ...workingDays, [activeLabel]: one });
     hideTimePicker();
-    changeMarketInfo("save");
   };
   const setWeeks = (label) => {
     let from = workingDays && workingDays[label].active;
@@ -211,7 +209,6 @@ export default function CompanySettingsScreen({ route }) {
       to: workingDays[label].to,
     };
     setWorkingDays({ ...workingDays, [label]: one });
-    changeMarketInfo("save");
   };
 
   const choosePhotoFromGallery = async (name) => {

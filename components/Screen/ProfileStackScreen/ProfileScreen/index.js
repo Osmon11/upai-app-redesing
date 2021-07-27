@@ -34,6 +34,7 @@ export default function ProfileScreen() {
   const [data, setData] = React.useState();
   const [purchase, setPurchase] = React.useState([]);
   const [auth, setAuth] = React.useState(false);
+  const [notification, setNotification] = React.useState();
 
   const [viewLoader, setViewLoader] = React.useState(true);
 
@@ -84,7 +85,6 @@ export default function ProfileScreen() {
     });
     const data = await resp.json();
     setViewLoader(false);
-
     setData(data);
   };
   const getInfo = async () => {

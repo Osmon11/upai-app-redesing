@@ -20,6 +20,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.example.upai",
       "buildNumber": "3.3.2",
+      "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "LSApplicationQueriesSchemes": ["upai"],
         "NSCameraUsageDescription": "Приложение запрашивает доступ к камере для считывания qr кода и загрузки сделаных вами снимков",
@@ -32,7 +33,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      
+
       "versionCode": 6,
       "googleServicesFile": "./google-services.json",
       "package": "com.up.upaii",

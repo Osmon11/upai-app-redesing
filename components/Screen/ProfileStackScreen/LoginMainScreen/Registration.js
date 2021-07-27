@@ -24,13 +24,6 @@ import Constants from "expo-constants";
 
 const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
 
 export default function RegistrationScreen({ open }) {
   const [value, numberInput] = useState("Введите номер");
@@ -282,7 +275,21 @@ export default function RegistrationScreen({ open }) {
   );
 }
 
-const registerTokenFromBack = async (id) => {
+export const hasDevices = async () => {
+  const token = await AsyncStorage.getItem("token");
+  const res = await fetch(API + "devices/", {
+    method: "GET", // или 'PUT'
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  });
+  const json = await res.json();
+
+  return json.length;
+};
+
+export const registerTokenFromBack = async (id) => {
   const token = await AsyncStorage.getItem("token");
   let data = {
     registration_id: id,
@@ -296,10 +303,9 @@ const registerTokenFromBack = async (id) => {
     },
     body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
   });
-  const json = await response.json();
 };
 
-async function registerForPushNotificationsAsync() {
+export async function registerForPushNotificationsAsync() {
   let token;
   if (Constants.isDevice) {
     const { status: existingStatus } =

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -9,25 +9,22 @@ import {
   SafeAreaView,
   Platform,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import HeaderInStackScreens from '../../../Common/HeaderInStackScreens';
-import CardBox from './CardBox';
-import WalletHistory from './History';
-import GettingCashbacksList from '../../NotificationsStackScreen/NotificationsScreen/GettingCashbacksList';
+import HeaderInStackScreens from "../../../Common/HeaderInStackScreens";
+import CardBox from "./CardBox";
+import WalletHistory from "./History";
+import GettingCashbacksList from "../../NotificationsStackScreen/NotificationsScreen/GettingCashbacksList";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function WalletSettingScreen() {
   const navigation = useNavigation();
   React.useEffect(() => {
-    console.log('');
-    const unsubscribe = navigation.addListener('focus', () => {
-      console.log('a');
-    });
+    const unsubscribe = navigation.addListener("focus", () => {});
     return () => {
       unsubscribe;
     };
@@ -48,8 +45,8 @@ export default function WalletSettingScreen() {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            width: '100%',
-            marginTop: '10%',
+            width: "100%",
+            marginTop: "10%",
             height: scalePoint * 235,
           }}
         >
@@ -57,7 +54,7 @@ export default function WalletSettingScreen() {
         </ScrollView>
         <TouchableOpacity
           style={styles.btnStyle}
-          onPress={() => navigation.navigate('GetMoneyScreen')}
+          onPress={() => navigation.navigate("GetMoneyScreen")}
         >
           <Text style={styles.btnTxt}>Вывести деньги </Text>
         </TouchableOpacity>
@@ -68,41 +65,41 @@ export default function WalletSettingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
-    backgroundColor: '#fff',
+    width: "95%",
+    alignSelf: "center",
+    backgroundColor: "#fff",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '5%',
+    marginTop: Platform.OS === "ios" ? "15%" : "5%",
   },
   mainContentBox: {
-    marginTop: '10%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: '10%',
+    marginTop: "10%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: "10%",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   btnStyle: {
-    width: '60%',
-    marginTop: '5%',
-    marginBottom: '15%',
+    width: "60%",
+    marginTop: "5%",
+    marginBottom: "15%",
     height: scalePoint * 45,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#ff6b00',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: "#ff6b00",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   btnTxt: {
     fontSize: 14,
     lineHeight: 16,
-    color: '#ff6b00',
+    color: "#ff6b00",
   },
 });

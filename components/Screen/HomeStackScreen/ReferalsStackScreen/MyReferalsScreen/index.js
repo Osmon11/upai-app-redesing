@@ -23,7 +23,6 @@ const scalePoint = window.width / 380;
 export default function MyReferalsScreen({ route }) {
   const { all } = route.params;
   const navigation = useNavigation();
-  console.log("data", route?.params);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "position" : null}

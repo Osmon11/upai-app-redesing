@@ -29,16 +29,36 @@ import * as Linking from "expo-linking";
 import * as Notifications from "expo-notifications";
 import { View, Text } from "native-base";
 import { API } from "../../config";
+import {
+  hasDevices,
+  registerForPushNotificationsAsync,
+  registerTokenFromBack,
+} from "../../Screen/ProfileStackScreen/LoginMainScreen/Registration";
 const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function MainTabNavigator() {
   const [auth, setAuth] = React.useState(false);
   const [dataLink, setDataLink] = React.useState(false);
   const [hideIcon, setHideIcon] = useState(false);
+  const notificationListener = React.useRef();
+  const responseListener = React.useRef();
 
   React.useEffect(() => {
+    const token = AsyncStorage.getItem("token");
     getInfo();
+    if (token && hasDevices() === 0) {
+      registerForPushNotificationsAsync().then((notificationToken) => {
+        registerTokenFromBack(notificationToken);
+      });
+    }
   });
   function handleDeepLink(data) {
     if (data.path === "company/") {
@@ -104,8 +124,24 @@ export default function MainTabNavigator() {
   }, [dataLink]);
 
   React.useEffect(() => {
-    const subscription = Notifications.addNotificationResponseReceivedListener(
-      (response) => {
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        const data = notification.request.content.data;
+        if (data.kind != "new_shop") {
+          navigation.navigate("NotificationsScreen", {
+            screen: "NotificationMainScreen",
+            params: { status: data.kind },
+          });
+        } else if (data.kind == "new_shop") {
+          navigation.navigate("ProfileStackScreen", {
+            screen: "CompanySettingsScreen",
+            params: { shopId: data.new_shop_id },
+          });
+        }
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
         const data = response.notification.request.content.data;
         if (data.kind != "new_shop") {
           navigation.navigate("NotificationsScreen", {
@@ -118,15 +154,15 @@ export default function MainTabNavigator() {
             params: { shopId: data.new_shop_id },
           });
         }
-      }
-    );
+      });
     // (async () => {
     //   const { status } = await BarCodeScanner.requestPermissionsAsync();
     //   setHasPermission(status == "granted");
     // })();
 
     return () => {
-      subscription.remove();
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
     };
   }, []);
 
