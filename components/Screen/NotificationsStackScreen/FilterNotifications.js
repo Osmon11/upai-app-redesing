@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dimensions,
   Platform,
@@ -7,25 +7,25 @@ import {
   TouchableOpacity,
   View,
   Image,
-} from 'react-native';
+} from "react-native";
 
-import HeaderInStackScreens from '../../Common/HeaderInStackScreens';
-import RNPickerSelect from 'react-native-picker-select';
-import arrowDownIcon from '../../Images/arrowDownIcon.png';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import SortFilter from '../HomeStackScreen/CategoriesStackScreen/CategoriesScreen/FilterScreen/SortFilter';
-import { useNavigation } from '@react-navigation/native';
-import SortNoti from './SortNoti';
+import HeaderInStackScreens from "../../Common/HeaderInStackScreens";
+import RNPickerSelect from "react-native-picker-select";
+import arrowDownIcon from "../../Images/arrowDownIcon.png";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import SortFilter from "../HomeStackScreen/CategoriesStackScreen/CategoriesScreen/FilterScreen/SortFilter";
+import { useNavigation } from "@react-navigation/native";
+import SortNoti from "./SortNoti";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function FilterNotificationsScreen() {
   const navigation = useNavigation();
 
   const [choice, setChoice] = useState({
-    label: 'Все, за весь период',
-    value: 'all',
+    label: "Все, за весь период",
+    value: "all",
   });
   const [date, setDate] = useState(new Date());
   const [sortModal, setSortModal] = useState(false);
@@ -63,7 +63,7 @@ export default function FilterNotificationsScreen() {
     return () => {
       setSortModal(false);
     };
-    BackHandler.addEventListener('hardwareBackPress', handleBackButton());
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton());
   }, [navigation]);
   const handleBackButton = () => {
     setSortModal(false);
@@ -119,7 +119,7 @@ export default function FilterNotificationsScreen() {
             <View style={styles.datePickersBox}>
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
-                mode="date"
+                mode='date'
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
               />
@@ -128,9 +128,9 @@ export default function FilterNotificationsScreen() {
                 style={styles.datePickerStyle}
               >
                 <Text style={styles.datePickerTxt}>
-                  {date.getDate() <= 9 ? '0' + date.getDate() : date.getDate()}-
+                  {date.getDate() <= 9 ? "0" + date.getDate() : date.getDate()}-
                   {date.getMonth() <= 9
-                    ? '0' + (date.getMonth() + 1)
+                    ? "0" + (date.getMonth() + 1)
                     : date.getMonth() + 1}
                   -{date.getFullYear()}
                 </Text>
@@ -138,7 +138,7 @@ export default function FilterNotificationsScreen() {
               <Text>-</Text>
               <DateTimePickerModal
                 isVisible={isDatePickerVisibleTo}
-                mode="date"
+                mode='date'
                 onConfirm={handleConfirmTo}
                 onCancel={hideDatePickerTo}
               />
@@ -148,11 +148,11 @@ export default function FilterNotificationsScreen() {
               >
                 <Text style={styles.datePickerTxt}>
                   {dateTo.getDate() <= 9
-                    ? '0' + dateTo.getDate()
+                    ? "0" + dateTo.getDate()
                     : dateTo.getDate()}
                   -
                   {dateTo.getMonth() <= 9
-                    ? '0' + (dateTo.getMonth() + 1)
+                    ? "0" + (dateTo.getMonth() + 1)
                     : dateTo.getMonth() + 1}
                   -{dateTo.getFullYear()}
                 </Text>
@@ -162,45 +162,46 @@ export default function FilterNotificationsScreen() {
           <TouchableOpacity
             style={styles.filterBtn}
             onPress={() => {
-              if(choice.value !== 'all'){
+              if (choice.value !== "all") {
                 if (new Date(date) < new Date(dateTo)) {
-                navigation.navigate('NotificationMainScreen', {
-                  status: choice.value,
+                  navigation.navigate("NotificationMainScreen", {
+                    status: choice.value,
 
-                  from: `${
-                    date.getDate() <= 9 ? '0' + date.getDate() : date.getDate()
-                  }-${
-                    date.getMonth() <= 9
-                      ? '0' + (date.getMonth() + 1)
-                      : date.getMonth() + 1
-                  }-${date.getFullYear()}`,
-                  to: `${
-                    dateTo.getDate() <= 9
-                      ? '0' + dateTo.getDate()
-                      : dateTo.getDate()
-                  }-${
-                    dateTo.getMonth() <= 9
-                      ? '0' + (dateTo.getMonth() + 1)
-                      : dateTo.getMonth() + 1
-                  }-${dateTo.getFullYear()}`,
-                });
+                    from: `${
+                      date.getDate() <= 9
+                        ? "0" + date.getDate()
+                        : date.getDate()
+                    }-${
+                      date.getMonth() <= 9
+                        ? "0" + (date.getMonth() + 1)
+                        : date.getMonth() + 1
+                    }-${date.getFullYear()}`,
+                    to: `${
+                      dateTo.getDate() <= 9
+                        ? "0" + dateTo.getDate()
+                        : dateTo.getDate()
+                    }-${
+                      dateTo.getMonth() <= 9
+                        ? "0" + (dateTo.getMonth() + 1)
+                        : dateTo.getMonth() + 1
+                    }-${dateTo.getFullYear()}`,
+                  });
+                } else {
+                  navigation.navigate("NotificationMainScreen", {
+                    status: choice.value,
+
+                    from: undefined,
+                    to: undefined,
+                  });
+                }
               } else {
-                navigation.navigate('NotificationMainScreen', {
-                  status: choice.value,
-
-                  from: undefined,
-                  to: undefined,
-                });
-              }
-              }else{
-                navigation.navigate('NotificationMainScreen', {
+                navigation.navigate("NotificationMainScreen", {
                   status: undefined,
 
                   from: undefined,
                   to: undefined,
                 });
               }
-              
             }}
           >
             <Text style={styles.btnText}>Сортировать</Text>
@@ -219,36 +220,36 @@ export default function FilterNotificationsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   mainBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '10%',
-    width: '100%',
+    marginTop: Platform.OS === "ios" ? "15%" : "10%",
+    width: "100%",
     height: scalePoint * 17,
   },
   mainContentBox: {
-    marginTop: '5%',
-    width: '100%',
+    marginTop: "5%",
+    width: "100%",
   },
   mainText: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 24,
     lineHeight: 28,
   },
   categoriesBox: {
-    marginTop: '15%',
+    marginTop: "15%",
   },
   dropDownsStyle: {
-    backgroundColor: '#fff',
-    marginTop: '5%',
+    backgroundColor: "#fff",
+    marginTop: "5%",
 
-    width: '100%',
+    width: "100%",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 6,
   },
   dropDownsText: {
@@ -256,98 +257,98 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   categoryFilterBox: {
-    width: '100%',
+    width: "100%",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 6,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     height: 45,
   },
   pickerBox: {
-    width: '90%',
+    width: "90%",
   },
   arrowDownBox: {
-    width: '10%',
+    width: "10%",
   },
   categoryFilterText: {
     fontSize: 16,
     lineHeight: 18,
-    padding: '5%',
-    color: 'rgba(13,32,59, 0.4)',
+    padding: "5%",
+    color: "rgba(13,32,59, 0.4)",
   },
   dateBox: {
-    marginTop: '10%',
+    marginTop: "10%",
   },
   dateText: {
-    marginLeft: '3%',
+    marginLeft: "3%",
     fontSize: 20,
     lineHeight: 23,
-    color: '#313131',
+    color: "#313131",
   },
   datePickersBox: {
-    marginTop: '5%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    marginTop: "5%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   datePickerStyle: {
     borderWidth: 1,
     borderRadius: 10,
-    width: '48%',
+    width: "48%",
     height: scalePoint * 45,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#225196',
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#225196",
   },
   datePickerTxt: {
     fontSize: 16,
     lineHeight: 19,
-    padding: '5%',
-    color: '#225196',
+    padding: "5%",
+    color: "#225196",
   },
   dropDownsBox: {
-    marginTop: '5%',
+    marginTop: "5%",
   },
   filterBtn: {
-    width: '50%',
+    width: "50%",
     height: scalePoint * 45,
     borderRadius: 10,
-    marginTop: '15%',
-    backgroundColor: '#FF6B00',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    marginTop: "15%",
+    backgroundColor: "#01C65C",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   btnText: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#fff',
-    alignSelf: 'center',
+    color: "#fff",
+    alignSelf: "center",
   },
   arrowDown: {
     width: scalePoint * 18,
     height: scalePoint * 18,
-    resizeMode: 'contain',
-    marginRight: '5%',
+    resizeMode: "contain",
+    marginRight: "5%",
   },
   pick: {
     fontSize: 16,
     lineHeight: 18,
-    color: 'rgba(13,32,59, 0.4)',
+    color: "rgba(13,32,59, 0.4)",
     marginLeft: scalePoint * 18,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
   },
 });
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
-    padding: '5%',
-    color: 'black',
+    padding: "5%",
+    color: "black",
   },
   inputAndroid: {
     fontSize: 16,
-    padding: '5%',
-    color: 'black',
+    padding: "5%",
+    color: "black",
   },
 });

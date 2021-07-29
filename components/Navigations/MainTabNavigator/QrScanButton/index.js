@@ -31,7 +31,7 @@ export default function QrScanButton({ hideIcon }) {
 }
 const styles = StyleSheet.create({
   btnStyles: {
-    backgroundColor: "#FF6B00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",

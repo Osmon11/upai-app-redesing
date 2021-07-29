@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-import HeaderInStackScreens from '../../../../Common/HeaderInStackScreens';
+import HeaderInStackScreens from "../../../../Common/HeaderInStackScreens";
 
 export default function FilterReferalsScreen() {
-  const [date, setDate] = useState('29-09-2020');
+  const [date, setDate] = useState("29-09-2020");
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
       }}
     >
-      <View style={{ position: 'absolute', width: '100%' }}>
+      <View style={{ position: "absolute", width: "100%" }}>
         <HeaderInStackScreens />
       </View>
       <View style={styles.mainContentBox}>
@@ -26,7 +26,7 @@ export default function FilterReferalsScreen() {
         <Text style={styles.dateText}>Дата</Text>
         <DateTimePickerModal
           isVisible={true}
-          mode="date"
+          mode='date'
           // onConfirm={handleConfirm}
           // onCancel={hideDatePicker}
         />
@@ -36,24 +36,24 @@ export default function FilterReferalsScreen() {
             style={styles.datePickerStyle}
           >
             <Text style={styles.datePickerTxt}>
-              { new Date()
-                        .toISOString()
-                        .replace('-', '/')
-                        .split('T')[0]
-                        .replace('-', '/')}
+              {new Date()
+                .toISOString()
+                .replace("-", "/")
+                .split("T")[0]
+                .replace("-", "/")}
             </Text>
           </TouchableOpacity>
           <Text>-</Text>
           <TouchableOpacity
-           // onPress={showDatePicker}
+            // onPress={showDatePicker}
             style={styles.datePickerStyle}
           >
             <Text style={styles.datePickerTxt}>
               {new Date()
-                        .toISOString()
-                        .replace('-', '/')
-                        .split('T')[0]
-                        .replace('-', '/')}
+                .toISOString()
+                .replace("-", "/")
+                .split("T")[0]
+                .replace("-", "/")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -66,49 +66,49 @@ export default function FilterReferalsScreen() {
 }
 const styles = StyleSheet.create({
   mainContentBox: {
-    marginTop: '30%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginTop: "30%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginLeft: "5%",
+    marginRight: "5%",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   dateBox: {
-    marginTop: '10%',
-    marginLeft: '5%',
+    marginTop: "10%",
+    marginLeft: "5%",
   },
   dateText: {
     fontSize: 20,
     lineHeight: 23,
-    color: '#313131',
+    color: "#313131",
   },
   datePickersBox: {
-    marginTop: '5%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    marginTop: "5%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   datePickerStyle: {
     borderWidth: 1,
     borderRadius: 10,
-    width: '48%',
-    alignItems: 'center',
-    borderColor: '#225196',
+    width: "48%",
+    alignItems: "center",
+    borderColor: "#225196",
   },
   btnStyle: {
-    alignSelf: 'center',
-    marginTop: '10%',
+    alignSelf: "center",
+    marginTop: "10%",
     borderRadius: 10,
-    backgroundColor: '#ff6b00',
+    backgroundColor: "#01C65C",
   },
   btnTxt: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#fff',
-    paddingVertical: '5%',
-    padding: '10%',
+    color: "#fff",
+    paddingVertical: "5%",
+    padding: "10%",
   },
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -7,26 +7,26 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from "react-native";
 
-import HeaderInStackScreens from '../../../../../Common/HeaderInStackScreens';
-import RNPickerSelect from 'react-native-picker-select';
-import { useNavigation } from '@react-navigation/native';
-import { API } from '../../../../../config';
-import DialogAlert from '../../../../../Common/DialogAlert';
-import arrowDown from '../../../../../Images/arrowDownIcon.png';
-import SortFilter from './SortFilter';
-import ModalCategories from './ModalCategories';
+import HeaderInStackScreens from "../../../../../Common/HeaderInStackScreens";
+import RNPickerSelect from "react-native-picker-select";
+import { useNavigation } from "@react-navigation/native";
+import { API } from "../../../../../config";
+import DialogAlert from "../../../../../Common/DialogAlert";
+import arrowDown from "../../../../../Images/arrowDownIcon.png";
+import SortFilter from "./SortFilter";
+import ModalCategories from "./ModalCategories";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function FilterScreen({ route }) {
   const navigation = useNavigation();
 
   const [choice, setChoice] = useState({
-    label: 'По рейтингу',
-    value: 'rating',
+    label: "По рейтингу",
+    value: "rating",
   });
   const [selectedValue, setSelectedValue] = useState();
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,23 +35,22 @@ export default function FilterScreen({ route }) {
   const [answerModal, setAnswerModal] = useState(false);
   const [sortModal, setSortModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
-  const [nameOfCategory, setNameOfCategory] = useState('Выберите категорию');
+  const [nameOfCategory, setNameOfCategory] = useState("Выберите категорию");
   const [selectedName, setSelectedName] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const { name } = route?.params;
   React.useEffect(() => {
     getAllCategories();
-    const unsubscribe = navigation.addListener('focus', () => {
-      setModalVisible(false)
+    const unsubscribe = navigation.addListener("focus", () => {
+      setModalVisible(false);
     });
-    return()=>{
-      unsubscribe
-    }
-    
+    return () => {
+      unsubscribe;
+    };
   }, [navigation]);
 
   const getAllCategories = async () => {
-    const resp = await fetch(API + 'category/');
+    const resp = await fetch(API + "category/");
     const data = await resp.json();
     let id = null;
     data &&
@@ -60,19 +59,18 @@ export default function FilterScreen({ route }) {
       });
     setCategories(data);
 
-    
-    setSelectedName(name != 'hot-cashback' ? name : null);
-    setNameOfCategory(name != 'hot-cashback' ? name : 'Выберите категорию');
+    setSelectedName(name != "hot-cashback" ? name : null);
+    setNameOfCategory(name != "hot-cashback" ? name : "Выберите категорию");
     setSelectedId(id ? id : null);
   };
   const getAllAboutCategory = (el) => {
     setSelectedId(el ? el.id : null);
     setSelectedName(el ? el.name : null);
-    setNameOfCategory(el ? el.name : 'Выберите категорию');
+    setNameOfCategory(el ? el.name : "Выберите категорию");
   };
   const callDialog = () => {
     setAnswerModal(true);
-    setModalTxt('Выберите категорию');
+    setModalTxt("Выберите категорию");
   };
   const getResult = (value) => {
     setChoice(value);
@@ -124,7 +122,7 @@ export default function FilterScreen({ route }) {
             onPress={() =>
               selectedName == null && selectedId == null
                 ? callDialog()
-                : navigation.navigate('SingleCategoryScreen', {
+                : navigation.navigate("SingleCategoryScreen", {
                     name: selectedName,
                     category: selectedId,
                     filter: choice.value,
@@ -159,54 +157,54 @@ export default function FilterScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     zIndex: 1,
   },
   mainBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '10%',
-    width: '100%',
+    marginTop: Platform.OS === "ios" ? "15%" : "10%",
+    width: "100%",
     height: scalePoint * 45,
   },
   mainContentBox: {
-    width: '100%',
+    width: "100%",
   },
   mainText: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 24,
     lineHeight: 28,
   },
   categoriesBox: {
-    marginTop: '10%',
+    marginTop: "10%",
   },
   dropDownsStyle: {
-    padding: '5%',
+    padding: "5%",
   },
   dropDownsText: {
     fontSize: 20,
     lineHeight: 24,
   },
   categoryFilterBox: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 46,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 6,
-    marginTop: '5%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    marginTop: "5%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   categoryFilterText: {
     fontSize: 16,
     lineHeight: 18,
-    color: 'rgba(13,32,59, 0.4)',
+    color: "rgba(13,32,59, 0.4)",
     marginLeft: scalePoint * 18,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
   },
   arrowDown: {
     width: scalePoint * 20,
@@ -214,40 +212,40 @@ const styles = StyleSheet.create({
     marginRight: scalePoint * 20,
   },
   dropDownsBox: {
-    marginTop: '5%',
-    marginBottom: '10%',
+    marginTop: "5%",
+    marginBottom: "10%",
   },
   filterBtn: {
-    alignSelf: 'center',
+    alignSelf: "center",
     width: scalePoint * 150,
     height: scalePoint * 45,
     borderRadius: scalePoint * 10,
-    backgroundColor: '#FF6B00',
-    justifyContent: 'center',
+    backgroundColor: "#01C65C",
+    justifyContent: "center",
   },
   btnText: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#fff',
-    alignSelf: 'center',
+    color: "#fff",
+    alignSelf: "center",
   },
   pick: {
     fontSize: 16,
     lineHeight: 18,
-    color: 'rgba(13,32,59, 0.4)',
+    color: "rgba(13,32,59, 0.4)",
     marginLeft: scalePoint * 18,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
   },
 });
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
-    padding: '5%',
-    color: 'black',
+    padding: "5%",
+    color: "black",
   },
   inputAndroid: {
     fontSize: 16,
-    padding: '5%',
-    color: 'black',
+    padding: "5%",
+    color: "black",
   },
 });

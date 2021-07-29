@@ -525,7 +525,7 @@ export default function CompanySettingsScreen({ route }) {
                 onPress={() => addPhotoToAccount("gallery")}
               >
                 {loading ? (
-                  <ActivityIndicator size='large' color='#ff6b00' />
+                  <ActivityIndicator size='large' color='#01C65C' />
                 ) : (
                   <Image
                     style={{
@@ -554,7 +554,7 @@ export default function CompanySettingsScreen({ route }) {
                           trackColor={{ false: "#e7e7e7", true: "#e7e7e7" }}
                           thumbColor={
                             workingDays && workingDays[el.label]?.active
-                              ? "#ff6b00"
+                              ? "#01C65C"
                               : "#bfbfbf"
                           }
                           ios_backgroundColor='#e7e7e7'
@@ -678,7 +678,7 @@ const styles = StyleSheet.create({
     width: scalePoint * 34,
     height: scalePoint * 34,
     borderRadius: scalePoint * 34 * 0.5,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -686,7 +686,7 @@ const styles = StyleSheet.create({
     width: scalePoint * 20,
     height: scalePoint * 20,
     borderRadius: scalePoint * 20 * 0.5,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignItems: "center",
 
@@ -903,21 +903,21 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#ff6b00",
+    borderColor: "#01C65C",
     justifyContent: "center",
   },
   saveBtn: {
     width: "48%",
     height: 45,
     borderRadius: 10,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
   },
   declineBtnTxt: {
     fontSize: 14,
     lineHeight: 16,
     alignSelf: "center",
-    color: "#ff6b00",
+    color: "#01C65C",
     fontFamily: "SfPro",
   },
   saveBtnTxt: {

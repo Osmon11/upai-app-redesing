@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -9,17 +9,17 @@ import {
   Image,
   ScrollView,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import Header from '../../../../Common/Header';
+import { useNavigation } from "@react-navigation/native";
+import Header from "../../../../Common/Header";
 
-import filterIcon from '../../../../Images/filterIcon.png';
-import SendedCashbacks from './SendedCashbacks';
-import CommentsToCashback from './CommentsToCashback';
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../../../config';
-const window = Dimensions.get('window');
+import filterIcon from "../../../../Images/filterIcon.png";
+import SendedCashbacks from "./SendedCashbacks";
+import CommentsToCashback from "./CommentsToCashback";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../../../config";
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function HistoryOfBuys({ route }) {
@@ -29,7 +29,7 @@ export default function HistoryOfBuys({ route }) {
   const [viewLoader, setViewLoader] = React.useState(true);
   const [openCommentsForView, setOpenCommentsForView] = useState();
   const [cashBackGet, setCashBackGet] = React.useState();
-  const [urls, setUrl] = React.useState('sell/?limit=100');
+  const [urls, setUrl] = React.useState("sell/?limit=100");
 
   // const { from, to } = route ? route.params : '';
   React.useEffect(() => {
@@ -43,12 +43,12 @@ export default function HistoryOfBuys({ route }) {
   }, [route?.params]);
 
   const getAll = async (val) => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
 
-    const req = await fetch(API + 'sell/?limit=100', {
+    const req = await fetch(API + "sell/?limit=100", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const res = await req.json();
@@ -65,12 +65,12 @@ export default function HistoryOfBuys({ route }) {
   };
 
   const getFilteredHistory = async (val) => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
 
     const req = await fetch(API + val, {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const res = await req.json();
@@ -86,7 +86,7 @@ export default function HistoryOfBuys({ route }) {
                 ? {
                     ...styles.headerBox,
                     marginTop:
-                      Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
+                      Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
                     marginLeft: scalePoint * 10,
                   }
                 : styles.headerBox
@@ -102,22 +102,22 @@ export default function HistoryOfBuys({ route }) {
           <View style={styles.mainContent}>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
               <View>
                 <Text style={styles.mainText}>История</Text>
               </View>
               <TouchableOpacity
-                onPress={() => navigation.navigate('FilterBuyHistoryScreen')}
+                onPress={() => navigation.navigate("FilterBuyHistoryScreen")}
               >
                 <Image
                   style={{
                     width: 20,
                     height: 20,
-                    resizeMode: 'contain',
+                    resizeMode: "contain",
                   }}
                   source={filterIcon}
                 />
@@ -148,64 +148,64 @@ export default function HistoryOfBuys({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   headerBox: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 23,
     marginTop: 20,
   },
   mainBox: {
-    width: '100%',
-    alignSelf: 'center',
+    width: "100%",
+    alignSelf: "center",
   },
   scrollBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   mainContent: {
-    marginTop: '10%',
-    marginBottom: '5%',
+    marginTop: "10%",
+    marginBottom: "5%",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   btnContainer: {
-    marginTop: '10%',
-    flexDirection: 'row',
+    marginTop: "10%",
+    flexDirection: "row",
   },
   logInBtn: {
-    width: '48%',
+    width: "48%",
     height: 45,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 4,
-    backgroundColor: '#EBEBEB',
+    backgroundColor: "#EBEBEB",
   },
   btnTxt: {
-    color: '#000',
-    marginTop: '9%',
+    color: "#000",
+    marginTop: "9%",
     fontSize: 14,
     lineHeight: 17,
   },
   btnActive: {
-    color: '#fff',
-    marginTop: '9%',
+    color: "#fff",
+    marginTop: "9%",
     fontSize: 14,
     lineHeight: 17,
   },
   active: {
-    backgroundColor: '#ff6b00',
-    width: '48%',
+    backgroundColor: "#01C65C",
+    width: "48%",
     height: 45,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 4,
-    color: '#fff',
+    color: "#fff",
   },
   CashbackSumsView: {
-    marginTop: '15%',
+    marginTop: "15%",
   },
   inactiveBox: {
-    display: 'none',
+    display: "none",
   },
 });

@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     width: scalePoint * 34,
     height: scalePoint * 34,
     borderRadius: scalePoint * 34 * 0.5,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
   },
   btnSignIn: {
     height: 45,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,

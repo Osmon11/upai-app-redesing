@@ -107,9 +107,11 @@ export default function MainTabNavigator() {
     const getInitialURL = async () => {
       setDataLink(true);
       const initialURL = await Linking.getInitialURL();
-      let data = Linking.parse(initialURL);
-
-      handleDeepLink(data);
+      if (initialURL) {
+        let data = Linking.parse(initialURL);
+        console.log(data);
+        handleDeepLink(data);
+      }
     };
     if (!dataLink) {
       getInitialURL();
@@ -259,7 +261,7 @@ export default function MainTabNavigator() {
     <Tab.Navigator
       initialRouteName='Tabs'
       tabBarOptions={{
-        activeTintColor: "#ff6b00",
+        activeTintColor: "#01C65C",
         inactiveTintColor: "#225196",
         showLabel: false,
         style: {

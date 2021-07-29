@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dimensions,
   Platform,
@@ -6,20 +6,20 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from "react-native";
 
-import HeaderInStackScreens from '../../Common/HeaderInStackScreens';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { useNavigation } from '@react-navigation/native';
+import HeaderInStackScreens from "../../Common/HeaderInStackScreens";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useNavigation } from "@react-navigation/native";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function FilterBuyHistoryScreen() {
   const navigation = useNavigation();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDatePickerVisibleTo, setDatePickerVisibilityTo] = useState(false);
-  const [choice, setChoice] = useState('decline');
+  const [choice, setChoice] = useState("decline");
   const [date, setDate] = useState(new Date());
   const [date2, setDate2] = useState(new Date());
 
@@ -62,7 +62,7 @@ export default function FilterBuyHistoryScreen() {
             <View style={styles.datePickersBox}>
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
-                mode="date"
+                mode='date'
                 onConfirm={(date) => handleConfirm(date)}
                 onCancel={hideDatePicker}
               />
@@ -71,9 +71,9 @@ export default function FilterBuyHistoryScreen() {
                 style={styles.datePickerStyle}
               >
                 <Text style={styles.datePickerTxt}>
-                  {date.getDate() <= 9 ? '0' + date.getDate() : date.getDate()}-
+                  {date.getDate() <= 9 ? "0" + date.getDate() : date.getDate()}-
                   {date.getMonth() <= 9
-                    ? '0' + (date.getMonth() + 1)
+                    ? "0" + (date.getMonth() + 1)
                     : date.getMonth() + 1}
                   -{date.getFullYear()}
                 </Text>
@@ -82,7 +82,7 @@ export default function FilterBuyHistoryScreen() {
               <Text>-</Text>
               <DateTimePickerModal
                 isVisible={isDatePickerVisibleTo}
-                mode="date"
+                mode='date'
                 minimumDate={date}
                 onConfirm={(date) => handleConfirmTo(date)}
                 onCancel={hideDatePickerTo}
@@ -94,11 +94,11 @@ export default function FilterBuyHistoryScreen() {
               >
                 <Text style={styles.datePickerTxt}>
                   {date2.getDate() <= 9
-                    ? '0' + date2.getDate()
+                    ? "0" + date2.getDate()
                     : date2.getDate()}
                   -
                   {date2.getMonth() <= 9
-                    ? '0' + (date2.getMonth() + 1)
+                    ? "0" + (date2.getMonth() + 1)
                     : date2.getMonth() + 1}
                   -{date2.getFullYear()}
                 </Text>
@@ -109,27 +109,27 @@ export default function FilterBuyHistoryScreen() {
             style={styles.filterBtn}
             onPress={() => {
               if (new Date(date) < new Date(date2)) {
-                navigation.navigate('HistoryOfBuys', {
+                navigation.navigate("HistoryOfBuys", {
                   from: `${
-                    date.getDate() <= 9 ? '0' + date.getDate() : date.getDate()
+                    date.getDate() <= 9 ? "0" + date.getDate() : date.getDate()
                   }-${
                     date.getMonth() <= 9
-                      ? '0' + (date.getMonth() + 1)
-                      : (date.getMonth() + 1)
+                      ? "0" + (date.getMonth() + 1)
+                      : date.getMonth() + 1
                   }-${date.getFullYear()}`,
                   to: `${
                     date2.getDate() <= 9
-                      ? '0' + date2.getDate()
+                      ? "0" + date2.getDate()
                       : date2.getDate()
                   }-${
                     date2.getMonth() <= 9
-                      ? '0' + (date2.getMonth() + 1)
-                      : (date2.getMonth() + 1)
+                      ? "0" + (date2.getMonth() + 1)
+                      : date2.getMonth() + 1
                   }-${date2.getFullYear()}`,
                   filtered: true,
                 });
               } else {
-                navigation.navigate('HistoryOfBuys', {
+                navigation.navigate("HistoryOfBuys", {
                   from: undefined,
                   to: undefined,
                 });
@@ -147,35 +147,35 @@ export default function FilterBuyHistoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   mainBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
-    width: '100%',
+    marginTop: Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
+    width: "100%",
     height: scalePoint * 17,
   },
   mainContentBox: {
-    marginTop: '10%',
-    width: '100%',
+    marginTop: "10%",
+    width: "100%",
   },
   mainText: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 24,
     lineHeight: 28,
   },
   categoriesBox: {
-    marginTop: '15%',
+    marginTop: "15%",
   },
   dropDownsStyle: {
-    backgroundColor: '#fff',
-    marginTop: '5%',
-    width: '100%',
+    backgroundColor: "#fff",
+    marginTop: "5%",
+    width: "100%",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 6,
   },
   dropDownsText: {
@@ -183,63 +183,63 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   categoryFilterBox: {
-    width: '90%',
+    width: "90%",
     borderWidth: 1,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderRadius: 6,
   },
   categoryFilterText: {
     fontSize: 16,
     lineHeight: 18,
-    padding: '5%',
-    color: 'rgba(13,32,59, 0.4)',
+    padding: "5%",
+    color: "rgba(13,32,59, 0.4)",
   },
   dateBox: {
-    marginTop: '10%',
+    marginTop: "10%",
   },
   dateText: {
-    marginLeft: '3%',
+    marginLeft: "3%",
     fontSize: 20,
     lineHeight: 23,
-    color: '#313131',
+    color: "#313131",
   },
   datePickersBox: {
-    marginTop: '5%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    marginTop: "5%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   datePickerStyle: {
     borderWidth: 1,
     borderRadius: 10,
-    width: '48%',
+    width: "48%",
     height: scalePoint * 45,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#225196',
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#225196",
   },
   datePickerTxt: {
     fontSize: 16,
     lineHeight: 19,
-    padding: '5%',
-    color: '#225196',
+    padding: "5%",
+    color: "#225196",
   },
   dropDownsBox: {
-    marginTop: '5%',
+    marginTop: "5%",
   },
   filterBtn: {
-    width: '50%',
+    width: "50%",
     height: 45,
     borderRadius: 10,
-    marginTop: '15%',
-    backgroundColor: '#FF6B00',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    marginTop: "15%",
+    backgroundColor: "#01C65C",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   btnText: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#fff',
-    alignSelf: 'center',
+    color: "#fff",
+    alignSelf: "center",
   },
 });

@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   active: {
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     width: "45%",
     height: scalePoint * 45,
     alignItems: "center",

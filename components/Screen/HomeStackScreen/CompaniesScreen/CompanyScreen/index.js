@@ -641,7 +641,7 @@ const styles = StyleSheet.create({
     width: "86%",
     alignSelf: "center",
     borderWidth: 1,
-    borderColor: "#ff6b00",
+    borderColor: "#01C65C",
     borderRadius: 10,
     marginLeft: "5%",
     marginRight: "5%",
@@ -659,7 +659,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 15,
     paddingHorizontal: 25,
-    color: "#ff6b00",
+    color: "#01C65C",
   },
   screensBox: {
     flex: 1,

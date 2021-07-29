@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   topBox: {
     width: "100%",
     height: scalePoint * 112,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     justifyContent: "center",
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     height: scalePoint * 45,
     borderRadius: 10,
     marginTop: "5%",
-    backgroundColor: "#FF6B00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignSelf: "center",
   },

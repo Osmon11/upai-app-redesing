@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     height: scalePoint * 45,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#ff6b00",
+    borderColor: "#01C65C",
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
   btnTxt: {
     fontSize: 14,
     lineHeight: 16,
-    color: "#ff6b00",
+    color: "#01C65C",
   },
 });

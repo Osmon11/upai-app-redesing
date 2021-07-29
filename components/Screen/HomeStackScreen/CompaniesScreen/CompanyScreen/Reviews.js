@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
   TextInput,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import reviewsAccountImg from '../../../../Images/reviewsAccountImg.png';
+import reviewsAccountImg from "../../../../Images/reviewsAccountImg.png";
 
-import CompaniesRating from './CompaniesRating';
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
-import DialogAlert from '../../../../Common/DialogAlert';
-import moment from 'moment';
+import CompaniesRating from "./CompaniesRating";
+import Dialog, { DialogContent } from "react-native-popup-dialog";
+import DialogAlert from "../../../../Common/DialogAlert";
+import moment from "moment";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 export default function Reviews({
   review,
@@ -28,7 +28,7 @@ export default function Reviews({
 }) {
   const [allReviews, setAllReviews] = useState(false);
   const [selectedReply, setSelectedReply] = useState();
-  const [reply, setReply] = useState('');
+  const [reply, setReply] = useState("");
   const [answerModal, setAnswerModal] = useState(false);
   return (
     <View>
@@ -51,8 +51,8 @@ export default function Reviews({
                   <Text style={styles.commentTxt}>{item.opinion}</Text>
                   <View
                     style={{
-                      marginTop: '2%',
-                      flexDirection: 'row',
+                      marginTop: "2%",
+                      flexDirection: "row",
                     }}
                   >
                     <CompaniesRating rate={item.rate} />
@@ -69,13 +69,13 @@ export default function Reviews({
                   </View>
                   <View
                     style={{
-                      flexDirection: 'row',
+                      flexDirection: "row",
                     }}
                   >
                     <Text style={styles.commentTime}>
                       {new Date(item.created)
                         .toLocaleTimeString()
-                        .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3')}
+                        .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")}
                     </Text>
                     <Text style={styles.commentTime}>
                       {/* {new Date(item.created)
@@ -83,7 +83,7 @@ export default function Reviews({
                         .replace('-', '/')
                         .split('T')[0]
                         .replace('-', '/')} */}
-                      {moment(item.created).format('DD.MM.YYYY')}
+                      {moment(item.created).format("DD.MM.YYYY")}
                     </Text>
                   </View>
                 </View>
@@ -124,7 +124,7 @@ export default function Reviews({
           <View style={styles.answerInputBox}>
             <TextInput
               style={styles.answerInput}
-              placeholder={'Напишите ответ'}
+              placeholder={"Напишите ответ"}
               value={reply}
               onChangeText={(text) => setReply(text)}
             />
@@ -133,7 +133,7 @@ export default function Reviews({
             onPress={() => {
               sendReply(selectedReply, reply);
               setAnswerModal(false);
-              setReply('');
+              setReply("");
             }}
             style={styles.answerModalBtn}
           >
@@ -146,32 +146,32 @@ export default function Reviews({
 }
 const styles = StyleSheet.create({
   textBox: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   mainBoxTxt: {
     fontSize: 20,
     lineHeight: 24,
-    color: '#000',
+    color: "#000",
   },
   mainContentBox: {
-    width: '100%',
+    width: "100%",
     borderBottomWidth: 1,
-    borderBottomColor: '#dbdbdb',
+    borderBottomColor: "#dbdbdb",
   },
   commentBox: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '100%',
-    marginTop: '5%',
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    marginTop: "5%",
   },
   mainCommentBox: {
-    width: '85%',
+    width: "85%",
   },
   userAvatarBox: {
-    width: '10%',
-    marginLeft: '-5%',
-    marginRight: '1%',
+    width: "10%",
+    marginLeft: "-5%",
+    marginRight: "1%",
   },
   userAvatar: {
     width: scalePoint * 25,
@@ -181,74 +181,74 @@ const styles = StyleSheet.create({
   usernameTxt: {
     fontSize: 12,
     lineHeight: 14,
-    textAlign: 'left',
+    textAlign: "left",
   },
   commentTxt: {
     fontSize: 10,
     lineHeight: 12,
-    textAlign: 'left',
-    marginTop: '5%',
+    textAlign: "left",
+    marginTop: "5%",
   },
   commentTime: {
     fontSize: 12,
     lineHeight: 14,
-    textAlign: 'left',
-    marginTop: '5%',
-    marginRight: '5%',
-    color: '#8d8d8d',
+    textAlign: "left",
+    marginTop: "5%",
+    marginRight: "5%",
+    color: "#8d8d8d",
   },
   answerBtnTxt: {
     fontSize: 10,
   },
   answerBox: {
-    width: '85%',
-    alignSelf: 'flex-end',
-    flexDirection: 'row',
-    marginTop: '5%',
+    width: "85%",
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    marginTop: "5%",
   },
   moreBtn: {
-    alignSelf: 'flex-end',
-    marginRight: '5%',
-    marginTop: '5%',
-    marginBottom: '5%',
+    alignSelf: "flex-end",
+    marginRight: "5%",
+    marginTop: "5%",
+    marginBottom: "5%",
   },
   moreBtnTxt: {
     fontSize: 12,
     lineHeight: 14,
-    color: '#225196',
+    color: "#225196",
   },
   answerModalBox: {
-    marginTop: '5%',
-    backgroundColor: '#fff',
+    marginTop: "5%",
+    backgroundColor: "#fff",
     width: scalePoint * 300,
     height: scalePoint * 200,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   answerInputBox: {
     borderWidth: 1,
     borderRadius: scalePoint * 10,
   },
   answerInput: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 14,
     lineHeight: 16,
-    color: '#000',
-    padding: '3%',
+    color: "#000",
+    padding: "3%",
   },
   answerModalBtn: {
-    alignSelf: 'center',
-    marginTop: '10%',
+    alignSelf: "center",
+    marginTop: "10%",
     width: scalePoint * 140,
     height: scalePoint * 40,
-    backgroundColor: '#ff6b00',
+    backgroundColor: "#01C65C",
     borderRadius: scalePoint * 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   answerModalBtnTxt: {
     fontSize: 14,
     lineHeight: 16,
-    alignSelf: 'center',
-    color: '#fff',
+    alignSelf: "center",
+    color: "#fff",
   },
 });

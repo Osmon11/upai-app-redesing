@@ -120,7 +120,7 @@ export default function HotCashbacksInfoScreen({ route }) {
                 name='delete'
                 onPress={() => setAnswerModal(true)}
                 size={24}
-                color='#ff6b00'
+                color='#01C65C'
               />
             </View>
             <View>
@@ -132,7 +132,7 @@ export default function HotCashbacksInfoScreen({ route }) {
                     cashId: itemId,
                   })
                 }
-                color='#ff6b00'
+                color='#01C65C'
               />
             </View>
           </View>

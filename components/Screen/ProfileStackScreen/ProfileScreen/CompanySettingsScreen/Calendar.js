@@ -21,7 +21,7 @@ export default function Calendar({ all, setCustomDatesStyles }) {
         ...all,
         {
           date: date,
-          style: { backgroundColor: "#ff6b00" },
+          style: { backgroundColor: "#01C65C" },
           textStyle: { color: "black" }, // sets the font color
           containerStyle: [], // extra styling for day container
           allowDisabled: true, // allow custom style to apply to disabled dates
@@ -58,7 +58,7 @@ export default function Calendar({ all, setCustomDatesStyles }) {
         selectedDayTextColor='#000'
         onDateChange={onDateChange}
         selectedRangeStyle={{
-          backgroundColor: "#ff6b00",
+          backgroundColor: "#01C65C",
         }}
         selectedDayStyle={{
           color: "black",

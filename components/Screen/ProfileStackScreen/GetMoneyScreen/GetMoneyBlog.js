@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,21 +7,21 @@ import {
   Image,
   TextInput,
   Dimensions,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import CheckBox from 'react-native-check-box';
-import { Card } from 'react-native-shadow-cards';
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import CheckBox from "react-native-check-box";
+import { Card } from "react-native-shadow-cards";
 
-import arrowDownIcon from '../../../Images/arrowDownIcon.png';
-import oWalletLogo from '../../../Images/OwalletLogo.png';
-import MegaWalletLogo from '../../../Images/MegaWalletLogo.png';
-import BeelineWalletLogo from '../../../Images/BeelineWalletLogo.png';
-import Success from './Success';
-import AsyncStorage from '@react-native-community/async-storage';
-import { API } from '../../../config';
-import QRCode from 'react-native-qrcode-svg';
-import DialogAlert from '../../../Common/DialogAlert';
-const window = Dimensions.get('window');
+import arrowDownIcon from "../../../Images/arrowDownIcon.png";
+import oWalletLogo from "../../../Images/OwalletLogo.png";
+import MegaWalletLogo from "../../../Images/MegaWalletLogo.png";
+import BeelineWalletLogo from "../../../Images/BeelineWalletLogo.png";
+import Success from "./Success";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API } from "../../../config";
+import QRCode from "react-native-qrcode-svg";
+import DialogAlert from "../../../Common/DialogAlert";
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function GetMoneyBlog() {
@@ -30,11 +30,11 @@ export default function GetMoneyBlog() {
   const [choiceIsBeeline, setChoiceIsBeeline] = useState(false);
   const [choiceIsMega, setChoiceIsMega] = useState(false);
 
-  const [value1, setValue1] = useState('Введите сумму');
-  const [value2, setValue2] = useState('Электронный кошелек');
+  const [value1, setValue1] = useState("Введите сумму");
+  const [value2, setValue2] = useState("Электронный кошелек");
   const [isPressed, setIsPressed] = useState(false);
   const [data, setData] = useState();
-  const [sum, setSum] = useState('');
+  const [sum, setSum] = useState("");
   const [phone, setPhone] = useState();
   const [otvet, setOtvet] = useState();
   const [answerModal, setAnswerModal] = useState(false);
@@ -43,11 +43,11 @@ export default function GetMoneyBlog() {
     getFullInfo();
   }, []);
   const getFullInfo = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const resp = await fetch(API + 'users/profile/', {
+    const token = await AsyncStorage.getItem("token");
+    const resp = await fetch(API + "users/profile/", {
       headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
       },
     });
     const data = await resp.json();
@@ -55,24 +55,24 @@ export default function GetMoneyBlog() {
   };
 
   const withdrawal = async () => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem("token");
     const data = {
       amount: sum,
       method: choiceIsO
-        ? 'o_money'
+        ? "o_money"
         : choiceIsBeeline
-        ? 'balance'
+        ? "balance"
         : choiceIsMega
-        ? 'mega_pay'
+        ? "mega_pay"
         : null,
-      requisite: '996' + phone,
+      requisite: "996" + phone,
     };
     try {
-      const response = await fetch(API + 'users/withdrawal/', {
-        method: 'POST', // или 'PUT'
+      const response = await fetch(API + "users/withdrawal/", {
+        method: "POST", // или 'PUT'
         headers: {
-          Authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
       });
@@ -81,15 +81,15 @@ export default function GetMoneyBlog() {
       //   setOtvet(json)
       //   setSuccess(!success)
       // }
-      if (json.requisite && typeof json?.requisite != 'string') {
+      if (json.requisite && typeof json?.requisite != "string") {
         setAnswerModal(true);
         setModalTxt(json?.requisite[0]);
-      } else if (json.amount && typeof json.amount != 'string') {
+      } else if (json.amount && typeof json.amount != "string") {
         setAnswerModal(true);
         setModalTxt(json.amount[0]);
-      } else if (json.method && typeof json.method != 'string') {
+      } else if (json.method && typeof json.method != "string") {
         setAnswerModal(true);
-        setModalTxt('Выберите кошелек');
+        setModalTxt("Выберите кошелек");
       } else if (json.error) {
         setAnswerModal(true);
         setModalTxt(json.error);
@@ -98,38 +98,38 @@ export default function GetMoneyBlog() {
         setSuccess(!success);
       }
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
   return (
     <View style={styles.container}>
       <View
         style={
-          success ? { display: 'none' } : { marginLeft: '5%', marginTop: '5%' }
+          success ? { display: "none" } : { marginLeft: "5%", marginTop: "5%" }
         }
       >
         <Success data={otvet} />
       </View>
-      <View style={success ? styles.notSuccessBox : { display: 'none' }}>
+      <View style={success ? styles.notSuccessBox : { display: "none" }}>
         <Card style={styles.openedCardStyle}>
           <LinearGradient
             style={styles.openedLinerGradient}
-            colors={['#245398', '#75AAF8']}
+            colors={["#245398", "#75AAF8"]}
             end={{ x: 2, y: 2 }}
             locations={[0.01, 0.9]}
           >
             <View style={styles.cardContentBox}>
               <View
                 style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
                 <TouchableOpacity style={styles.qrCodeIconBox}>
                   <QRCode
-                    color={'#fff'}
-                    backgroundColor={'transparent'}
-                    value={data ? data.phone : 'oops'}
+                    color={"#fff"}
+                    backgroundColor={"transparent"}
+                    value={data ? data.phone : "oops"}
                   />
                 </TouchableOpacity>
               </View>
@@ -149,7 +149,7 @@ export default function GetMoneyBlog() {
           </LinearGradient>
         </Card>
 
-        <View style={{ display: 'flex' }}>
+        <View style={{ display: "flex" }}>
           <Card style={styles.getMoneyCard}>
             <Text style={styles.getMoneyTxt}>Вывести деньги</Text>
             <Text style={styles.getMoneyTxtBottom}>
@@ -162,7 +162,7 @@ export default function GetMoneyBlog() {
             >
               <TouchableOpacity
                 onPress={() => setIsPressed(!isPressed)}
-                style={{ flexDirection: 'row' }}
+                style={{ flexDirection: "row" }}
               >
                 <Text style={styles.chooseTxt}>Электронный кошелек</Text>
                 <Image source={arrowDownIcon} style={styles.arrowDown} />
@@ -170,7 +170,7 @@ export default function GetMoneyBlog() {
 
               <View
                 style={
-                  isPressed ? styles.electronWalletsBox : { display: 'none' }
+                  isPressed ? styles.electronWalletsBox : { display: "none" }
                 }
               >
                 <View style={styles.checkboxesBox}>
@@ -180,19 +180,19 @@ export default function GetMoneyBlog() {
                       style={{
                         width: scalePoint * 19,
                         height: scalePoint * 19,
-                        resizeMode: 'contain',
+                        resizeMode: "contain",
                       }}
                     />
                     <CheckBox
-                      style={{ marginTop: '5%' }}
+                      style={{ marginTop: "5%" }}
                       onClick={() => {
                         setChoiceIsO(!choiceIsO);
                         setChoiceIsBeeline(false);
                         setChoiceIsMega(false);
                       }}
-                      checkBoxColor={'#225196'}
+                      checkBoxColor={"#225196"}
                       isChecked={choiceIsO}
-                      leftText={'CheckBox'}
+                      leftText={"CheckBox"}
                     />
                   </View>
                   <View style={styles.oneCheckboxBox}>
@@ -201,19 +201,19 @@ export default function GetMoneyBlog() {
                       style={{
                         width: scalePoint * 44,
                         height: scalePoint * 18,
-                        resizeMode: 'contain',
+                        resizeMode: "contain",
                       }}
                     />
                     <CheckBox
-                      style={{ marginTop: '5%' }}
+                      style={{ marginTop: "5%" }}
                       onClick={() => {
                         setChoiceIsBeeline(!choiceIsBeeline);
                         setChoiceIsO(false);
                         setChoiceIsMega(false);
                       }}
-                      checkBoxColor={'#225196'}
+                      checkBoxColor={"#225196"}
                       isChecked={choiceIsBeeline}
-                      leftText={'CheckBox'}
+                      leftText={"CheckBox"}
                     />
                   </View>
                   <View style={styles.oneCheckboxBox}>
@@ -222,19 +222,19 @@ export default function GetMoneyBlog() {
                       style={{
                         width: scalePoint * 65,
                         height: scalePoint * 17,
-                        resizeMode: 'contain',
+                        resizeMode: "contain",
                       }}
                     />
                     <CheckBox
-                      style={{ marginTop: '5%' }}
+                      style={{ marginTop: "5%" }}
                       onClick={() => {
                         setChoiceIsBeeline(false);
                         setChoiceIsO(false);
                         setChoiceIsMega(!choiceIsMega);
                       }}
-                      checkBoxColor={'#225196'}
+                      checkBoxColor={"#225196"}
                       isChecked={choiceIsMega}
-                      leftText={'CheckBox'}
+                      leftText={"CheckBox"}
                     />
                   </View>
                 </View>
@@ -243,7 +243,7 @@ export default function GetMoneyBlog() {
             <View style={styles.textInputBox}>
               <TextInput
                 style={styles.textInputStyle}
-                keyboardType="number-pad"
+                keyboardType='number-pad'
                 placeholder='Введите реквизит без "996" и без "0"'
                 maxLength={9}
                 value={phone}
@@ -253,7 +253,7 @@ export default function GetMoneyBlog() {
             <View style={styles.textInputBox}>
               <TextInput
                 style={styles.textInputStyle}
-                keyboardType="number-pad"
+                keyboardType='number-pad'
                 placeholder={value1}
                 value={sum}
                 onChangeText={(text) => setSum(text)}
@@ -280,167 +280,167 @@ export default function GetMoneyBlog() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   notSuccessBox: {
-    marginTop: '5%',
-    width: '95%',
-    alignSelf: 'center',
+    marginTop: "5%",
+    width: "95%",
+    alignSelf: "center",
   },
   openedCardStyle: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 185,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
   },
   openedLinerGradient: {
-    width: '100%',
+    width: "100%",
     height: scalePoint * 185,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
   },
   cardContentBox: {
-    marginTop: '5%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    paddingBottom: '5%',
+    marginTop: "5%",
+    marginLeft: "5%",
+    marginRight: "5%",
+    paddingBottom: "5%",
   },
   qrCodeIconBox: {
     width: scalePoint * 80,
     height: scalePoint * 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   qrIcon: {
     width: scalePoint * 80,
     height: scalePoint * 80,
   },
   numTxtBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   cardNumberTxt: {
-    marginTop: '3%',
+    marginTop: "3%",
     fontSize: 20,
     lineHeight: 23,
-    color: '#fff',
+    color: "#fff",
   },
   cardOwnerTxt: {
     fontSize: 20,
     lineHeight: 23,
-    color: '#fff',
+    color: "#fff",
   },
   cardOwnerID: {
     fontSize: 14,
     lineHeight: 16,
-    color: '#fff',
+    color: "#fff",
   },
   getMoneyCard: {
-    width: '100%',
-    backgroundColor: '#fff',
+    width: "100%",
+    backgroundColor: "#fff",
     borderBottomEndRadius: 10,
     borderBottomStartRadius: 10,
   },
   getMoneyTxt: {
     fontSize: 20,
-    marginTop: '5%',
-    marginLeft: '5%',
+    marginTop: "5%",
+    marginLeft: "5%",
   },
   getMoneyTxtBottom: {
     fontSize: 12,
-    marginTop: '0.5%',
-    marginLeft: '5%',
-    color: '#a7b9a6',
+    marginTop: "0.5%",
+    marginLeft: "5%",
+    color: "#a7b9a6",
   },
   textInputBox: {
-    marginTop: '5%',
-    width: '90%',
+    marginTop: "5%",
+    width: "90%",
     height: scalePoint * 45,
     borderWidth: 1,
-    borderColor: 'rgba(34, 81, 150, 0.43)',
+    borderColor: "rgba(34, 81, 150, 0.43)",
     borderRadius: 10,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
   },
   textInputStyle: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 14,
     lineHeight: 16,
-    color: '#225196',
+    color: "#225196",
   },
   chooseBtnBox: {
-    marginTop: '10%',
-    width: '90%',
+    marginTop: "10%",
+    width: "90%",
     height: scalePoint * 45,
     borderWidth: 1,
-    borderColor: 'rgba(34, 81, 150, 0.43)',
+    borderColor: "rgba(34, 81, 150, 0.43)",
     borderRadius: 10,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   pressedChooseBtnBox: {
-    marginTop: '10%',
-    width: '90%',
+    marginTop: "10%",
+    width: "90%",
     height: scalePoint * 113,
     borderWidth: 1,
-    borderColor: 'rgba(34, 81, 150, 0.43)',
+    borderColor: "rgba(34, 81, 150, 0.43)",
     borderRadius: 10,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   chooseTxt: {
-    width: '87%',
-    marginLeft: '5%',
+    width: "87%",
+    marginLeft: "5%",
     fontSize: 14,
     lineHeight: 16,
-    color: '#a7b9d5',
+    color: "#a7b9d5",
   },
   arrowDown: {
     width: scalePoint * 18,
     height: scalePoint * 18,
-    resizeMode: 'contain',
-    marginRight: '5%',
+    resizeMode: "contain",
+    marginRight: "5%",
   },
   electronWalletsBox: {
-    width: '100%',
+    width: "100%",
   },
   checkboxesBox: {
-    width: '99%',
-    alignSelf: 'center',
-    flexDirection: 'row',
+    width: "99%",
+    alignSelf: "center",
+    flexDirection: "row",
   },
   oneCheckboxBox: {
-    marginTop: '5%',
-    width: '33%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: "5%",
+    width: "33%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnStyle: {
-    marginTop: '10%',
+    marginTop: "10%",
     height: scalePoint * 45,
     borderRadius: 10,
-    backgroundColor: '#ff6b00',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '15%',
+    backgroundColor: "#01C65C",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "15%",
   },
   btnStyleDis: {
-    marginTop: '10%',
+    marginTop: "10%",
     height: scalePoint * 45,
     borderRadius: 10,
-    backgroundColor: 'grey',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '15%',
+    backgroundColor: "grey",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "15%",
   },
   btnTxt: {
     fontSize: 14,
     lineHeight: 14,
-    color: '#fff',
-    padding: '5%',
+    color: "#fff",
+    padding: "5%",
   },
 });

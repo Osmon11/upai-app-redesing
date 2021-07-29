@@ -103,7 +103,7 @@ export default function CasbackSettingsScreen({ route }) {
     dates.map((el) => {
       arr.push({
         date: el.lower,
-        style: { backgroundColor: "#ff6b00" },
+        style: { backgroundColor: "#01C65C" },
         textStyle: { color: "black" }, // sets the font color
         containerStyle: [], // extra styling for day container
         allowDisabled: false, // allow custom style to apply to disabled dates
@@ -598,7 +598,7 @@ const styles = StyleSheet.create({
     width: scalePoint * 20,
     height: scalePoint * 20,
     borderRadius: scalePoint * 20 * 0.5,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
     alignItems: "center",
 
@@ -731,21 +731,21 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#ff6b00",
+    borderColor: "#01C65C",
     justifyContent: "center",
   },
   saveBtn: {
     width: "48%",
     height: 45,
     borderRadius: 10,
-    backgroundColor: "#ff6b00",
+    backgroundColor: "#01C65C",
     justifyContent: "center",
   },
   declineBtnTxt: {
     fontSize: 14,
     lineHeight: 16,
     alignSelf: "center",
-    color: "#ff6b00",
+    color: "#01C65C",
   },
   saveBtnTxt: {
     fontSize: 14,

@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     fontSize: 14,
-    color: "#ff6b00",
+    color: "#01C65C",
     alignSelf: "center",
   },
   accessBox: {

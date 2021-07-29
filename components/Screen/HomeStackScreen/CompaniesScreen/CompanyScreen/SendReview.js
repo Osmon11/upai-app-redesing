@@ -134,7 +134,7 @@ export default function SendReview({ shop, open, getAllreview }) {
           marginTop: "10%",
           width: 140,
           height: 40,
-          backgroundColor: "#ff6b00",
+          backgroundColor: "#01C65C",
           borderRadius: 10,
           justifyContent: "center",
         }}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -6,34 +6,33 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native';
-import { API } from '../../../config';
-import AsyncStorage from '@react-native-community/async-storage';
-import DialogAlert from '../../../Common/DialogAlert';
+} from "react-native";
+import { API } from "../../../config";
+import AsyncStorage from "@react-native-community/async-storage";
+import DialogAlert from "../../../Common/DialogAlert";
 export default function SetPass() {
-  const [value, numberInput] = useState('Старый пароль');
-  const [value1, passInput] = useState('Новый пароль');
-  const [value2, rePassInput] = useState('Повторите новый пароль');
-  const [oldPass, setOldPass] = useState('');
-  const [newPass, setNewPass] = useState('');
-  const [reNewPass, setReNewPass] = useState('');
+  const [value, numberInput] = useState("Старый пароль");
+  const [value1, passInput] = useState("Новый пароль");
+  const [value2, rePassInput] = useState("Повторите новый пароль");
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [reNewPass, setReNewPass] = useState("");
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
 
   const changePass = async () => {
-    
-    if(newPass == reNewPass){
+    if (newPass == reNewPass) {
       let data = {
         old_password: oldPass,
         new_password: newPass,
       };
-      const token = await AsyncStorage.getItem('token');
+      const token = await AsyncStorage.getItem("token");
       try {
-        const response = await fetch(API + 'users/change-password/', {
-          method: 'PUT', // или 'PUT'
+        const response = await fetch(API + "users/change-password/", {
+          method: "PUT", // или 'PUT'
           headers: {
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
         });
@@ -49,13 +48,12 @@ export default function SetPass() {
           setModalTxt(json.old_password[0]);
         }
       } catch (error) {
-        console.error('Ошибка:', error);
+        console.error("Ошибка:", error);
       }
-    }else{
+    } else {
       setAnswerModal(true);
-      setModalTxt('Пароли не совпадают');
+      setModalTxt("Пароли не совпадают");
     }
-    
   };
   return (
     <View>
@@ -93,8 +91,8 @@ export default function SetPass() {
       </View>
       <View
         style={{
-          alignItems: 'center',
-          marginTop: '5%',
+          alignItems: "center",
+          marginTop: "5%",
         }}
       >
         <TouchableOpacity style={styles.btnSignIn} onPress={changePass}>
@@ -113,34 +111,34 @@ export default function SetPass() {
 const styles = StyleSheet.create({
   btnSignIn: {
     height: 45,
-    backgroundColor: '#ff6b00',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#01C65C",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
   },
   inputBox: {
-    width: '95%',
+    width: "95%",
     marginTop: 10,
-    alignSelf: 'center',
+    alignSelf: "center",
     height: 45,
-    borderColor: '#225196',
+    borderColor: "#225196",
     borderWidth: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 10,
   },
   textInputStyle: {
-    width: '100%',
+    width: "100%",
     height: 40,
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontSize: 16,
     lineHeight: 18,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   btnTxt: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 14,
     lineHeight: 16,
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    paddingLeft: "5%",
+    paddingRight: "5%",
   },
 });
