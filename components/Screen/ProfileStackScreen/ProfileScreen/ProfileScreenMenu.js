@@ -81,7 +81,7 @@ export default function ProfileScreenMenu({ data }) {
         >
           <View style={styles.btnContent}>
             <Image style={styles.btnIcon} source={InviteIcon} />
-            <Text style={styles.btnText}>Пригласить друга</Text>
+            <Text style={styles.btnText}>Do’stni taklif etish</Text>
           </View>
         </TouchableOpacity>
       )}
@@ -94,7 +94,7 @@ export default function ProfileScreenMenu({ data }) {
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={SettingIcon} />
-              <Text style={styles.btnText}>Кошелек</Text>
+              <Text style={styles.btnText}>Hamyon</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -112,7 +112,7 @@ export default function ProfileScreenMenu({ data }) {
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={BusinessProfileIcon} />
-              <Text style={styles.btnText}>Бизнес профиль</Text>
+              <Text style={styles.btnText}>Biznes profil</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -123,7 +123,7 @@ export default function ProfileScreenMenu({ data }) {
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={ShareIcon} />
-              <Text style={styles.btnText}>Поделиться приложением</Text>
+              <Text style={styles.btnText}>Ilovani bo’lishish</Text>
             </View>
           </TouchableOpacity>
         </>
@@ -179,7 +179,7 @@ export default function ProfileScreenMenu({ data }) {
       >
         <View style={styles.btnContent}>
           <Image style={styles.btnIcon} source={InviteIcon} />
-          <Text style={styles.btnText}>Пригласить друга</Text>
+          <Text style={styles.btnText}>Do’stni taklif etish</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -206,7 +206,7 @@ export default function ProfileScreenMenu({ data }) {
       >
         <View style={styles.btnContent}>
           <Image style={styles.btnIcon} source={BusinessProfileIcon} />
-          <Text style={styles.btnText}>Бизнес профиль</Text>
+          <Text style={styles.btnText}>Biznes profil</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -217,7 +217,7 @@ export default function ProfileScreenMenu({ data }) {
       >
         <View style={styles.btnContent}>
           <Image style={styles.btnIcon} source={ShareIcon} />
-          <Text style={styles.btnText}>Поделиться приложением</Text>
+          <Text style={styles.btnText}>Ilovani bo’lishish</Text>
         </View>
       </TouchableOpacity> */}
       <TouchableOpacity

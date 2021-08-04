@@ -29,7 +29,7 @@ export default function MyReferals({ all }) {
             navigation.navigate("MyReferalsScreen", { all: all });
           }}
         >
-          <Text style={styles.allPageBtnTxt}>Все</Text>
+          <Text style={styles.allPageBtnTxt}>Barchasi</Text>
         </TouchableOpacity>
       </View>
       <View>

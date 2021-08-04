@@ -261,7 +261,7 @@ export default function RegistrationScreen({ open }) {
               lineHeight: 19,
             }}
           >
-            {getpin ? "Зарегистрироваться" : "Получить пин"}
+            {getpin ? "Ro’yxatdan o’tish" : "Получить пин"}
           </Text>
         </TouchableOpacity>
       </View>

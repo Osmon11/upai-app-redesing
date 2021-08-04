@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   ScrollView,
@@ -7,15 +7,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import { Card } from 'react-native-shadow-cards';
+import { useNavigation } from "@react-navigation/native";
+import { Card } from "react-native-shadow-cards";
 
-import RatingComponent from '../../CategoriesStackScreen/RatingComponent';
-import { API } from '../../../../config';
+import RatingComponent from "../../CategoriesStackScreen/RatingComponent";
+import { API } from "../../../../config";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function ShopsSlider() {
@@ -26,7 +26,9 @@ export default function ShopsSlider() {
   }, []);
 
   const getAllHotCashBack = async () => {
-    const resp = await fetch(API + 'shop/?offset=0&ordering=rating&limit=10&category=3');
+    const resp = await fetch(
+      API + "shop/?offset=0&ordering=rating&limit=10&category=3"
+    );
     const data = await resp.json();
     setHotCash(data.results);
   };
@@ -37,22 +39,22 @@ export default function ShopsSlider() {
     <View style={styles.container}>
       <View>
         <View style={styles.nameOfCategoryGroupBox}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.nameOfCategoryGroup}>Магазины</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.nameOfCategoryGroup}>Do’konlar</Text>
           </View>
           <TouchableOpacity
             style={styles.allPageBtn}
             onPress={() => {
-              navigation.navigate('MarketScreen', { data: hotCash });
+              navigation.navigate("MarketScreen", { data: hotCash });
             }}
           >
-            <Text style={styles.allPageBtnTxt}>Все</Text>
+            <Text style={styles.allPageBtnTxt}>Barchasi</Text>
           </TouchableOpacity>
         </View>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{ marginTop: '2%' }}
+          style={{ marginTop: "2%" }}
         >
           {hotCash.map((item, index) => (
             <Card
@@ -66,7 +68,7 @@ export default function ShopsSlider() {
                 style={styles.sliderImgBox}
                 key={item.id}
                 onPress={() => {
-                  navigation.navigate('CompanyScreen', { itemId: item.id });
+                  navigation.navigate("CompanyScreen", { itemId: item.id });
                 }}
               >
                 <Image style={styles.image} source={{ uri: item.main_image }} />
@@ -82,7 +84,7 @@ export default function ShopsSlider() {
                   <View style={styles.textBox}>
                     <Text style={styles.nameOfItem}>
                       {item.name.length > 10
-                        ? item.name.substring(0, 10) + '...'
+                        ? item.name.substring(0, 10) + "..."
                         : item.name}
                     </Text>
                     <Text style={styles.categoryOfItem}>
@@ -101,14 +103,14 @@ export default function ShopsSlider() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    marginTop: '5%',
+    backgroundColor: "#fff",
+    marginTop: "5%",
   },
   nameOfCategoryGroupBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '95%',
-    alignSelf: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "95%",
+    alignSelf: "center",
     marginLeft: 5,
   },
   nameOfCategoryGroup: {
@@ -117,19 +119,19 @@ const styles = StyleSheet.create({
   },
   allPageBtnTxt: {
     fontSize: 12,
-    color: '#8d8d8d',
-    marginTop: '8%',
-    fontFamily: 'RobotoLight',
+    color: "#8d8d8d",
+    marginTop: "8%",
+    fontFamily: "RobotoLight",
   },
   firstSliderImgBox: {
     width: scalePoint * 100,
     height: scalePoint * 111,
-    alignItems: 'center',
+    alignItems: "center",
   },
   sliderImgBox: {
     width: scalePoint * 100,
     height: scalePoint * 111,
-    alignItems: 'center',
+    alignItems: "center",
   },
   firstImageShadow: {
     marginTop: scalePoint * 10,
@@ -154,40 +156,40 @@ const styles = StyleSheet.create({
     marginTop: scalePoint * 10,
     width: scalePoint * 90,
     height: scalePoint * 30,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   shopInfoBox: {
-    width: '100%',
+    width: "100%",
   },
   ratingCompBox: {
-    marginTop: '5%',
-    alignSelf: 'center',
-    width: '80%',
+    marginTop: "5%",
+    alignSelf: "center",
+    width: "80%",
   },
   textBox: {
-    width: '100%',
-    marginTop: '5%',
+    width: "100%",
+    marginTop: "5%",
   },
   nameOfItem: {
-    width: '80%',
+    width: "80%",
 
     fontSize: 12,
     lineHeight: 14,
-    textAlign: 'center',
-    alignSelf: 'center',
+    textAlign: "center",
+    alignSelf: "center",
   },
   categoryOfItem: {
     fontSize: 10,
     lineHeight: 12,
-    color: '#8d8d8d',
-    textAlign: 'center',
-    alignSelf: 'center',
-    marginTop: '5%',
+    color: "#8d8d8d",
+    textAlign: "center",
+    alignSelf: "center",
+    marginTop: "5%",
   },
   percentOfChashback: {
     fontSize: 11,
     lineHeight: 12,
-    color: '#27ea60',
-    textAlign: 'center',
+    color: "#27ea60",
+    textAlign: "center",
   },
 });

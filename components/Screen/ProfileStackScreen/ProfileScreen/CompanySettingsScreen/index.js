@@ -422,7 +422,7 @@ export default function CompanySettingsScreen({ route }) {
               </View>
             </View>
             <View style={styles.infoBox}>
-              <Text style={styles.infoBoxText}>Категории</Text>
+              <Text style={styles.infoBoxText}>Toifalar</Text>
               <TouchableOpacity
                 style={styles.inputBox}
                 onPress={() => setModalVisible(true)}
@@ -493,7 +493,7 @@ export default function CompanySettingsScreen({ route }) {
           </View>
 
           <View style={styles.infoBox}>
-            <Text style={styles.infoBoxText}>Галерея</Text>
+            <Text style={styles.infoBoxText}>Galereya</Text>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -632,7 +632,7 @@ export default function CompanySettingsScreen({ route }) {
               onPress={() => changeMarketInfo(false)}
               style={styles.saveBtn}
             >
-              <Text style={styles.saveBtnTxt}>Сохранить</Text>
+              <Text style={styles.saveBtnTxt}>Saqlab qolish</Text>
             </TouchableOpacity>
           </View>
           <DialogAlert

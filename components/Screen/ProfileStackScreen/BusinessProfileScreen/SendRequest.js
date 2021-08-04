@@ -72,7 +72,7 @@ export default function SendRequest() {
       </View>
       <View style={opened ? { display: "flex" } : { display: "none" }}>
         <View style={styles.mainContentBox}>
-          <Text style={styles.mainText}>Бизнес профиль</Text>
+          <Text style={styles.mainText}>Biznes profil</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AboutBussines")}
           >

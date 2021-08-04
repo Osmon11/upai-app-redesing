@@ -114,7 +114,7 @@ export default function SingleReferalScreen({ route }) {
                   }}
                 >
                   <View style={styles.leftBlockStyles}>
-                    <Text style={styles.tableMainTxt}>Дата</Text>
+                    <Text style={styles.tableMainTxt}>Sana</Text>
                   </View>
                   <View style={styles.rightBlockStyles}>
                     <Text style={styles.tableMainTxt}>Кэшбэк</Text>

@@ -359,7 +359,7 @@ export default function CasbackSettingsScreen({ route }) {
               </View> */}
             </View>
             <View style={styles.infoBox}>
-              <Text style={styles.infoBoxText}>Категории</Text>
+              <Text style={styles.infoBoxText}>Toifalar</Text>
               <TouchableOpacity
                 style={styles.inputBox}
                 onPress={() => setModalVisible(true)}
@@ -487,7 +487,7 @@ export default function CasbackSettingsScreen({ route }) {
                 <Text style={styles.declineBtnTxt}>Отменить</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={saveCashBack}>
-                <Text style={styles.saveBtnTxt}>Сохранить</Text>
+                <Text style={styles.saveBtnTxt}>Saqlab qolish</Text>
               </TouchableOpacity>
             </View>
           </View>

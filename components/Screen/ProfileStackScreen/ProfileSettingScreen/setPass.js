@@ -11,9 +11,9 @@ import { API } from "../../../config";
 import AsyncStorage from "@react-native-community/async-storage";
 import DialogAlert from "../../../Common/DialogAlert";
 export default function SetPass() {
-  const [value, numberInput] = useState("Старый пароль");
-  const [value1, passInput] = useState("Новый пароль");
-  const [value2, rePassInput] = useState("Повторите новый пароль");
+  const [value, numberInput] = useState("Eski parol");
+  const [value1, passInput] = useState("Yangi parol");
+  const [value2, rePassInput] = useState("Yangi parolni takrorlang");
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [reNewPass, setReNewPass] = useState("");
@@ -96,7 +96,7 @@ export default function SetPass() {
         }}
       >
         <TouchableOpacity style={styles.btnSignIn} onPress={changePass}>
-          <Text style={styles.btnTxt}>Изменить пароль</Text>
+          <Text style={styles.btnTxt}>Parolni o’zgartirish</Text>
         </TouchableOpacity>
       </View>
       <DialogAlert

@@ -7,7 +7,7 @@
     "scheme": "upai",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash.svg",
       "resizeMode": "contain",
       "backgroundColor": "#01C65C"
     },
@@ -16,7 +16,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "icon": "./assets/icon.png",
+      "icon": "./assets/icon.svg",
       "supportsTablet": true,
       "bundleIdentifier": "com.example.upai",
       "buildNumber": "3.3.2",
@@ -30,7 +30,7 @@
     "android": {
       "useNextNotificationsApi": true,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptive-icon.svg",
         "backgroundColor": "#FFFFFF"
       },
 
@@ -53,14 +53,14 @@
       ]
     },
     "notification": {
-      "icon": "./assets/favicon.png",
+      "icon": "./assets/favicon.svg",
       "color": "#311b92",
       "iosDisplayInForeground": true,
       "androidMode": "default",
       "androidCollapsedTitle": "UPAI"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.svg"
     }
   }
 }

@@ -15,11 +15,11 @@ const scalePoint = window.width / 380;
 
 export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
   const [label1, setLabel1] = useState({
-    label: "Отклоненные",
+    label: "Rad etilganlari",
     value: "error",
   });
   const [label2, setLabel2] = useState({
-    label: "В ожидании",
+    label: "Kutishdagilari",
     value: "pending",
   });
   const [label3, setLabel3] = useState({
@@ -27,7 +27,7 @@ export default function SortNoti({ answerModal, setAnswerModal, getResult }) {
     value: "success",
   });
   const [label4, setLabel4] = useState({
-    label: "Все, за весь период",
+    label: "Barchasi, за весь период",
     value: "all",
   });
   const [choice1, setChoice1] = useState(false);

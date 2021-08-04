@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import HeaderInStackScreens from '../../../Common/HeaderInStackScreens';
+import HeaderInStackScreens from "../../../Common/HeaderInStackScreens";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 export default function PrivacyPolicyScreen() {
   const navigation = useNavigation();
@@ -21,7 +21,7 @@ export default function PrivacyPolicyScreen() {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
       }}
     >
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -202,24 +202,28 @@ export default function PrivacyPolicyScreen() {
               7. Обратная связь. Вопросы и предложения
             </Text>
             <Text style={styles.bottomTxt}>
-              7.1. Все предложения или вопросы по поводу настоящей Политики
+              7.1. Barchasi предложения или вопросы по поводу настоящей Политики
               следует сообщать на электронную почту Cashbackupai@gmail.com
             </Text>
           </View>
           <View
             style={{
-              marginTop: '10%',
-              alignItems: 'center',
-              marginBottom: '10%',
+              marginTop: "10%",
+              alignItems: "center",
+              marginBottom: "10%",
             }}
           >
             <TouchableOpacity
               style={styles.btnSignIn}
-              onPress={() => navigation.navigate('ProfileStackScreen', {screen:'ProfileSettingScreen'})}
+              onPress={() =>
+                navigation.navigate("ProfileStackScreen", {
+                  screen: "ProfileSettingScreen",
+                })
+              }
             >
               <Text
                 style={{
-                  color: '#fff',
+                  color: "#fff",
                   fontSize: 16,
                   lineHeight: 19,
                 }}
@@ -235,45 +239,45 @@ export default function PrivacyPolicyScreen() {
 }
 const styles = StyleSheet.create({
   headerBox: {
-    width: '95%',
-    alignSelf: 'center',
-    marginTop: Platform.OS === 'ios' ? scalePoint * 46 : scalePoint * 25,
+    width: "95%",
+    alignSelf: "center",
+    marginTop: Platform.OS === "ios" ? scalePoint * 46 : scalePoint * 25,
     height: scalePoint * 23,
   },
   showbleView: {
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginLeft: "5%",
+    marginRight: "5%",
     marginTop: scalePoint * 37.5,
   },
   namePage: {
-    color: '#313131',
+    color: "#313131",
     fontSize: 20,
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center",
   },
   textContent: {
     marginTop: scalePoint * 31,
   },
   topTxt: {
-    color: '#000',
+    color: "#000",
     fontSize: 14,
     lineHeight: 16,
-    fontFamily: 'Roboto',
-    textAlign: 'justify',
+    fontFamily: "Roboto",
+    textAlign: "justify",
   },
   bottomTxt: {
-    marginTop: '5%',
-    color: '#000',
+    marginTop: "5%",
+    color: "#000",
     fontSize: 14,
     lineHeight: 16,
-    fontFamily: 'Roboto',
-    textAlign: 'justify',
+    fontFamily: "Roboto",
+    textAlign: "justify",
   },
   btnSignIn: {
-    width: '60%',
-    backgroundColor: '#225196',
-    alignItems: 'center',
+    width: "60%",
+    backgroundColor: "#225196",
+    alignItems: "center",
     borderRadius: 30,
-    paddingVertical: '5%',
+    paddingVertical: "5%",
   },
 });

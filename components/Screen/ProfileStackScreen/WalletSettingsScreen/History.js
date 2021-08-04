@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import CashbackSum from '../../NotificationsStackScreen/NotificationsScreen/CashbackSum';
+import { useNavigation } from "@react-navigation/native";
+import CashbackSum from "../../NotificationsStackScreen/NotificationsScreen/CashbackSum";
 
 export default function WalletHistory() {
   const navigation = useNavigation();
@@ -15,15 +15,15 @@ export default function WalletHistory() {
         <TouchableOpacity
           style={styles.allPageBtn}
           onPress={() => {
-            navigation.navigate('NotificationsScreen');
+            navigation.navigate("NotificationsScreen");
           }}
         >
-          <Text style={styles.allPageBtnTxt}>Все</Text>
+          <Text style={styles.allPageBtnTxt}>Barchasi</Text>
         </TouchableOpacity>
       </View>
       <View
         style={{
-          width: '100%',
+          width: "100%",
         }}
       >
         <CashbackSum />
@@ -33,31 +33,31 @@ export default function WalletHistory() {
 }
 const styles = StyleSheet.create({
   mainContentBox: {
-    marginTop: '30%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: '10%',
-    marginRight: '5%',
+    marginTop: "30%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginLeft: "10%",
+    marginRight: "5%",
   },
   mainText: {
     fontSize: 24,
     lineHeight: 28,
   },
   showbleView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   namePage: {
-    color: '#313131',
+    color: "#313131",
     fontSize: 20,
     lineHeight: 24,
-    marginLeft: '10%',
+    marginLeft: "10%",
   },
   allPageBtnTxt: {
     fontSize: 12,
-    color: '#8d8d8d',
-    marginRight: '5%',
-    marginTop: '8%',
+    color: "#8d8d8d",
+    marginRight: "5%",
+    marginTop: "8%",
   },
 });

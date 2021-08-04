@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   SafeAreaView,
@@ -10,50 +10,49 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import { API } from '../../../../../config';
+import { API } from "../../../../../config";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 export default function FilterCategories() {
   const [categories, setCategories] = useState([]);
   const [isPress, setIsPress] = useState(false);
   useEffect(() => {
     getAllCategories();
-    
   }, []);
 
   const getAllCategories = async () => {
-    const resp = await fetch(API + 'category/');
+    const resp = await fetch(API + "category/");
     const data = await resp.json();
     setCategories(data);
   };
 
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, width: '100%' }}>
+    <View style={{ flex: 1, width: "100%" }}>
       <SafeAreaView>
         <View style={styles.showbleView}>
           <View style={styles.namePageView}>
-            <Text style={styles.namePage}>Категории</Text>
+            <Text style={styles.namePage}>Toifalar</Text>
           </View>
           <TouchableOpacity
             style={styles.allPageBtn}
             onPress={() => {
-              navigation.navigate('CategoriesList', { data: categories });
+              navigation.navigate("CategoriesList", { data: categories });
             }}
           >
-            <Text style={styles.allPageBtnTxt}>Все</Text>
+            <Text style={styles.allPageBtnTxt}>Barchasi</Text>
           </TouchableOpacity>
         </View>
         <ScrollView
           style={{
-            paddingTop: '2%',
-            width: '100%',
-            alignSelf: 'center',
+            paddingTop: "2%",
+            width: "100%",
+            alignSelf: "center",
           }}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -66,12 +65,12 @@ export default function FilterCategories() {
               <View style={styles.filterItem}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('SingleCategoryScreen', {
+                    navigation.navigate("SingleCategoryScreen", {
                       category: item.id,
                       name: item.name,
                     })
                   }
-                  underlayColor={'transparent'}
+                  underlayColor={"transparent"}
                   style={
                     index === 0
                       ? styles.firstFilterItemIconBox
@@ -95,34 +94,34 @@ export default function FilterCategories() {
 }
 const styles = StyleSheet.create({
   namePage: {
-    color: '#313131',
+    color: "#313131",
     fontSize: 16,
     lineHeight: 19,
   },
   showbleView: {
-    width: '95%',
-    alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: "95%",
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   allPageBtnTxt: {
     fontSize: 12,
-    color: '#8D8D8D',
-    marginTop: '8%',
+    color: "#8D8D8D",
+    marginTop: "8%",
   },
   firstFiltersBox: {
     width: scalePoint * 82,
     marginRight: scalePoint * 19,
     marginLeft: scalePoint * 8,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   filtersBox: {
     width: scalePoint * 85,
     marginRight: scalePoint * 19,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   filterItem: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -133,13 +132,13 @@ const styles = StyleSheet.create({
   filterItemIconBox: {
     width: scalePoint * 82,
     height: scalePoint * 80,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 10,
     borderWidth: 0.5,
-    borderColor: 'rgba(146, 146, 146, 0.37)',
-    justifyContent: 'center',
-    paddingBottom: '1%',
-    shadowColor: '#000',
+    borderColor: "rgba(146, 146, 146, 0.37)",
+    justifyContent: "center",
+    paddingBottom: "1%",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -150,33 +149,33 @@ const styles = StyleSheet.create({
   firstFilterItemIconBox: {
     width: scalePoint * 80,
     height: scalePoint * 80,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 10,
     borderWidth: 0.5,
-    borderColor: 'rgba(146, 146, 146, 0.37)',
-    justifyContent: 'center',
-    paddingBottom: '1%',
-    shadowColor: '#000',
+    borderColor: "rgba(146, 146, 146, 0.37)",
+    justifyContent: "center",
+    paddingBottom: "1%",
+    shadowColor: "#000",
     shadowOffset: {
       width: 3,
       height: 2,
     },
     shadowOpacity: 0.07,
     elevation: 4,
-    marginLeft: '4%',
+    marginLeft: "4%",
   },
   filterItemIcon: {
     width: scalePoint * 29,
     height: scalePoint * 29,
-    alignSelf: 'center',
-    resizeMode: 'contain',
+    alignSelf: "center",
+    resizeMode: "contain",
   },
   filterItemText: {
-    width: '100%',
-    textAlign: 'center',
+    width: "100%",
+    textAlign: "center",
     fontSize: 12,
     lineHeight: 14,
     marginTop: scalePoint * 13,
-    fontFamily: 'RobotoLight',
+    fontFamily: "RobotoLight",
   },
 });

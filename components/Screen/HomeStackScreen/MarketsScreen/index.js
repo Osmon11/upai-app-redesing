@@ -57,7 +57,7 @@ export default function MarketScreen({ route }) {
           <Header />
         </View>
         <View>
-          <Text style={styles.mainText}>Магазины</Text>
+          <Text style={styles.mainText}>Do’konlar</Text>
         </View>
         <View style={styles.mainContentBox}>
           <View style={styles.scrollItem}>

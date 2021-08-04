@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   ScrollView,
@@ -7,14 +7,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import percentIcon from '../../../../Images/percentIcon.png';
-import RatingComponent from '../RatingComponent';
-import { API } from '../../../../config';
+import { useNavigation } from "@react-navigation/native";
+import percentIcon from "../../../../Images/percentIcon.png";
+import RatingComponent from "../RatingComponent";
+import { API } from "../../../../config";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function BigSliderOfCategory({ category, categoryName }) {
@@ -25,7 +25,7 @@ export default function BigSliderOfCategory({ category, categoryName }) {
   }, []);
   const getAllCatById = async () => {
     let resp = await fetch(
-      API + 'shop/?offset=0&category=' + category + '&limit=5'
+      API + "shop/?offset=0&category=" + category + "&limit=5"
     );
     let req = await resp.json();
     setData(req.results);
@@ -36,13 +36,13 @@ export default function BigSliderOfCategory({ category, categoryName }) {
         <Text style={styles.nameOfCategoryGroup}>{categoryName}</Text>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate('SingleCategoryScreen', {
+            navigation.navigate("SingleCategoryScreen", {
               category: category,
               name: categoryName,
             })
           }
         >
-          <Text style={styles.allBtnTxt}>Все</Text>
+          <Text style={styles.allBtnTxt}>Barchasi</Text>
         </TouchableOpacity>
       </View>
       <ScrollView
@@ -56,7 +56,7 @@ export default function BigSliderOfCategory({ category, categoryName }) {
                 key={index}
                 style={index === 0 ? styles.firstImageBox : styles.imageBox}
                 onPress={() =>
-                  navigation.navigate('CompanyScreen', { itemId: item.id })
+                  navigation.navigate("CompanyScreen", { itemId: item.id })
                 }
               >
                 <View style={styles.cashbacksCircle}>
@@ -65,8 +65,8 @@ export default function BigSliderOfCategory({ category, categoryName }) {
                       style={{
                         width: scalePoint * 10,
                         height: scalePoint * 10,
-                        resizeMode: 'contain',
-                        alignSelf: 'center',
+                        resizeMode: "contain",
+                        alignSelf: "center",
                       }}
                       source={percentIcon}
                     />
@@ -75,7 +75,7 @@ export default function BigSliderOfCategory({ category, categoryName }) {
                     style={{
                       fontSize: 14,
                       lineHeight: 14,
-                      color: '#fff',
+                      color: "#fff",
                     }}
                   >
                     {item.cashback}%
@@ -100,12 +100,12 @@ export default function BigSliderOfCategory({ category, categoryName }) {
   );
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', zIndex: -1 },
+  container: { flex: 1, backgroundColor: "#fff", zIndex: -1 },
   categoryGroupBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '95%',
-    alignSelf: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "95%",
+    alignSelf: "center",
     marginTop: scalePoint * 36,
   },
   nameOfCategoryGroup: {
@@ -120,27 +120,27 @@ const styles = StyleSheet.create({
     width: scalePoint * 45,
     height: scalePoint * 45,
     borderRadius: scalePoint * 45 * 0.5,
-    backgroundColor: '#ff0707',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
+    backgroundColor: "#ff0707",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
     right: scalePoint * 5,
     top: scalePoint * 5,
     zIndex: 9,
   },
   percentCircle: {
-    position: 'absolute',
-    top: '60%',
-    left: '-10%',
+    position: "absolute",
+    top: "60%",
+    left: "-10%",
     zIndex: 10,
     width: scalePoint * 16,
     height: scalePoint * 16,
     borderRadius: scalePoint * 16 * 0.5,
     borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: '#27ae60',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderColor: "#fff",
+    backgroundColor: "#27ae60",
+    justifyContent: "center",
+    alignItems: "center",
   },
   firstImageBox: {
     marginRight: scalePoint * 10,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   image: {
     borderWidth: 0.5,
-    borderColor: 'rgba(146, 146, 146, 0.37)',
+    borderColor: "rgba(146, 146, 146, 0.37)",
     borderRadius: 10,
     width: scalePoint * 150,
     height: scalePoint * 150,

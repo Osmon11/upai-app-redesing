@@ -82,9 +82,9 @@ export default function FilterScreen({ route }) {
           <HeaderInStackScreens />
         </View>
         <View style={styles.mainContentBox}>
-          <Text style={styles.mainText}>Фильтры</Text>
+          <Text style={styles.mainText}>Filtrы</Text>
           <View style={styles.categoriesBox}>
-            <Text style={styles.dropDownsText}>Категории</Text>
+            <Text style={styles.dropDownsText}>Toifalar</Text>
             <TouchableOpacity
               style={styles.categoryFilterBox}
               onPress={() => setModalVisible(true)}
@@ -108,7 +108,7 @@ export default function FilterScreen({ route }) {
             </TouchableOpacity>
           </View>
           <View style={styles.dropDownsBox}>
-            <Text style={styles.dropDownsText}>Сортировать</Text>
+            <Text style={styles.dropDownsText}>Navlarga ajratish</Text>
             <TouchableOpacity
               onPress={() => setSortModal(true)}
               style={styles.categoryFilterBox}
@@ -129,7 +129,7 @@ export default function FilterScreen({ route }) {
                   })
             }
           >
-            <Text style={styles.btnText}>Фильтровать</Text>
+            <Text style={styles.btnText}>Filtrовать</Text>
           </TouchableOpacity>
         </View>
       </View>

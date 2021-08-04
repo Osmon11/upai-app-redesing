@@ -48,7 +48,7 @@ export default function Login() {
   const navigation = useNavigation();
 
   const [value, numbersInput] = useState("Введите номер");
-  const [value1, passInput] = useState("Введите пароль");
+  const [value1, passInput] = useState("Parolni kiriting");
   const [phone, setPhone] = useState("996");
   const [prettyPhoneNum, setPrettyPhoneNum] = useState("996");
   const [pass, setPass] = useState("");
@@ -80,7 +80,7 @@ export default function Login() {
         setModalTxt("Телефон: " + json.password);
       } else if (json.password) {
         setAnswerModal(true);
-        setModalTxt("Пароль: " + json.password);
+        setModalTxt("Parol: " + json.password);
       } else if (json.access) {
         await AsyncStorage.setItem("token", json.access);
         navigation.navigate("ProfileStackScreen", {
@@ -154,7 +154,7 @@ export default function Login() {
           // onPress={() => navigation.navigate("ProfileScreen")}
           onPress={() => login()}
         >
-          <Text style={styles.btnTxt}>Войти</Text>
+          <Text style={styles.btnTxt}>Kirish</Text>
         </TouchableOpacity>
       </View>
       <DialogAlert

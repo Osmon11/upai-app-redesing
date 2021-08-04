@@ -101,7 +101,7 @@ export default function BuyHistoryBuys() {
             <Header />
           </View>
           <View style={styles.screenMainTxtBox}>
-            <Text style={styles.nameOfCategoryGroup}>Мои покупки</Text>
+            <Text style={styles.nameOfCategoryGroup}>Mening xaridlarim</Text>
           </View>
 
           <View style={styles.renderBox}>
@@ -132,7 +132,9 @@ export default function BuyHistoryBuys() {
                         }
                       >
                         <Image style={styles.icon} source={myBuysLikeIcon} />
-                        <Text style={styles.reviewBtnTxt}>Оставить отзыв</Text>
+                        <Text style={styles.reviewBtnTxt}>
+                          Taqriz qoldirish
+                        </Text>
                       </TouchableOpacity>
                       <Text style={styles.dateTxt}>
                         {moment(item.created).format("DD.MM.YYYY")}

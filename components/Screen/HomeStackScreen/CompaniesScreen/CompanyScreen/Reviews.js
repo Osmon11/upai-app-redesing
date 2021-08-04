@@ -33,7 +33,7 @@ export default function Reviews({
   return (
     <View>
       <View style={styles.textBox}>
-        <Text style={styles.mainBoxTxt}>Отзывы</Text>
+        <Text style={styles.mainBoxTxt}>Taqrizlar</Text>
       </View>
       <View style={styles.mainContentBox}>
         {review &&

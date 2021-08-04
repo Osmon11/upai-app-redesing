@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   ScrollView,
@@ -7,16 +7,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useNavigation } from '@react-navigation/native';
-import smallSliderOfCategoryImg from '../../../../Images/smallSliderOfCategoryImg.png';
+import { useNavigation } from "@react-navigation/native";
+import smallSliderOfCategoryImg from "../../../../Images/smallSliderOfCategoryImg.png";
 
-import percentIcon from '../../../../Images/percentIcon.png';
-import RatingComponent from '../RatingComponent';
-import { API } from '../../../../config';
+import percentIcon from "../../../../Images/percentIcon.png";
+import RatingComponent from "../RatingComponent";
+import { API } from "../../../../config";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function SmallSliderOfCategory({ categoryName, category }) {
@@ -27,7 +27,7 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
   }, []);
   const getAllCatById = async () => {
     let resp = await fetch(
-      API + 'shop/?offset=0&category=' + category + '&limit=5'
+      API + "shop/?offset=0&category=" + category + "&limit=5"
     );
     let req = await resp.json();
     setData(req.results);
@@ -39,19 +39,19 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
           <Text style={styles.nameOfCategoryGroup}>{categoryName}</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('SingleCategoryScreen', {
+              navigation.navigate("SingleCategoryScreen", {
                 category: category,
                 name: categoryName,
               })
             }
           >
-            <Text style={styles.allBtnTxt}>Все</Text>
+            <Text style={styles.allBtnTxt}>Barchasi</Text>
           </TouchableOpacity>
         </View>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{ marginTop: '2%' }}
+          style={{ marginTop: "2%" }}
         >
           {data && data.length != 0
             ? data.map((item, index) => (
@@ -59,7 +59,7 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
                   key={index}
                   style={index === 0 ? styles.firstImageBox : styles.imageBox}
                   onPress={() =>
-                    navigation.navigate('CompanyScreen', { itemId: item.id })
+                    navigation.navigate("CompanyScreen", { itemId: item.id })
                   }
                 >
                   <View style={styles.cashbacksCircle}>
@@ -68,7 +68,7 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
                         style={{
                           width: scalePoint * 10,
                           height: scalePoint * 10,
-                          resizeMode: 'contain',
+                          resizeMode: "contain",
                         }}
                         source={percentIcon}
                       />
@@ -77,7 +77,7 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
                       style={{
                         fontSize: 14,
                         lineHeight: 14,
-                        color: '#fff',
+                        color: "#fff",
                       }}
                     >
                       {item.cashback}%
@@ -90,7 +90,7 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
                   <View style={{ marginTop: scalePoint * 6 }}>
                     <Text style={styles.nameOfItem}>
                       {item.name.length > 16
-                        ? item.name.substring(0, 16) + '...'
+                        ? item.name.substring(0, 16) + "..."
                         : item.name}
                     </Text>
                     <View style={styles.nameOfItem}>
@@ -112,20 +112,20 @@ export default function SmallSliderOfCategory({ categoryName, category }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     zIndex: -1,
     marginTop: scalePoint * 25,
   },
   categoryGroupBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '95%',
-    alignSelf: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "95%",
+    alignSelf: "center",
   },
   nameOfCategoryGroup: {
     fontSize: 16,
     lineHeight: 18,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
   },
   allBtnTxt: {
     fontSize: 14,
@@ -135,28 +135,28 @@ const styles = StyleSheet.create({
     width: scalePoint * 45,
     height: scalePoint * 45,
     borderRadius: scalePoint * 45 * 0.5,
-    backgroundColor: '#ff0707',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    alignSelf: 'flex-end',
-    right: '5%',
-    top: '5%',
+    backgroundColor: "#ff0707",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    alignSelf: "flex-end",
+    right: "5%",
+    top: "5%",
     zIndex: 9,
   },
   percentCircle: {
-    position: 'absolute',
-    top: '60%',
-    left: '-10%',
+    position: "absolute",
+    top: "60%",
+    left: "-10%",
     zIndex: 10,
     width: scalePoint * 16,
     height: scalePoint * 16,
     borderRadius: scalePoint * 16 * 0.5,
     borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: '#27ae60',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderColor: "#fff",
+    backgroundColor: "#27ae60",
+    justifyContent: "center",
+    alignItems: "center",
   },
   firstImageBox: {
     marginRight: scalePoint * 10,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   image: {
     borderWidth: 0.5,
-    borderColor: 'rgba(146, 146, 146, 0.37)',
+    borderColor: "rgba(146, 146, 146, 0.37)",
     borderRadius: scalePoint * 10,
     width: scalePoint * 150,
     height: scalePoint * 75,

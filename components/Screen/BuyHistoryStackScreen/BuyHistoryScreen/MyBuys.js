@@ -36,7 +36,7 @@ export default function MyBuys(props) {
           }}
         >
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.nameOfCategoryGroup}>Мои покупки</Text>
+            <Text style={styles.nameOfCategoryGroup}>Mening xaridlarim</Text>
           </View>
           <TouchableOpacity
             style={styles.allPageBtn}
@@ -44,7 +44,7 @@ export default function MyBuys(props) {
               navigation.navigate("BuyHistoryScreen");
             }}
           >
-            <Text style={styles.allPageBtnTxt}>Все</Text>
+            <Text style={styles.allPageBtnTxt}>Barchasi</Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -71,7 +71,7 @@ export default function MyBuys(props) {
                         style={styles.reviewIcon}
                         source={myBuysLikeIcon}
                       />
-                      <Text style={styles.reviewBtnTxt}>Оставить отзыв</Text>
+                      <Text style={styles.reviewBtnTxt}>Taqriz qoldirish</Text>
                     </TouchableOpacity>
                     <Text style={styles.date}>
                       {moment(item.created).format("DD.MM.YYYY")}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 import {
   View,
   ScrollView,
@@ -8,11 +8,11 @@ import {
   Modal,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
-import PagerView from 'react-native-pager-view';
-import { AntDesign } from '@expo/vector-icons';
+} from "react-native";
+import PagerView from "react-native-pager-view";
+import { AntDesign } from "@expo/vector-icons";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const width = window.width * 0.9;
 
 const scalePoint = window.width / 380;
@@ -33,10 +33,10 @@ export default function Gallery(props) {
       }}
     >
       <View style={styles.textBox}>
-        <Text style={styles.mainBoxTxt}>{props.gallery ? 'Галерея' : ''}</Text>
+        <Text style={styles.mainBoxTxt}>{props.gallery ? "Galereya" : ""}</Text>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {props.gallery !== ''
+        {props.gallery !== ""
           ? props.gallery.map((item, index) => (
               <View key={index}>
                 <TouchableOpacity
@@ -74,10 +74,10 @@ export default function Gallery(props) {
             onPress={() => setDialog(null)}
             activeOpacity={1}
           >
-            <AntDesign name="closecircleo" size={24} color="white" />
+            <AntDesign name='closecircleo' size={24} color='white' />
           </TouchableOpacity>
           <PagerView
-            style={{ flex: 1, backgroundColor: '#000', marginTop: '-0.5%' }}
+            style={{ flex: 1, backgroundColor: "#000", marginTop: "-0.5%" }}
             initialPage={openImg}
             showPageIndicator={true}
           >
@@ -88,7 +88,7 @@ export default function Gallery(props) {
                     style={{
                       width: width,
                       height: scalePoint * 500,
-                      resizeMode: 'contain',
+                      resizeMode: "contain",
                     }}
                     source={{ uri: el.img }}
                   />
@@ -102,32 +102,32 @@ export default function Gallery(props) {
 }
 const styles = StyleSheet.create({
   textBox: {
-    marginBottom: '5%',
-    width: '90%',
-    alignSelf: 'center',
+    marginBottom: "5%",
+    width: "90%",
+    alignSelf: "center",
   },
   mainBoxTxt: {
     fontSize: 20,
     lineHeight: 24,
   },
   closeBtn: {
-    paddingTop: '15%',
-    paddingRight: '5%',
-    paddingBottom: '2%',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    backgroundColor: '#000',
+    paddingTop: "15%",
+    paddingRight: "5%",
+    paddingBottom: "2%",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    backgroundColor: "#000",
   },
   modalBox: {
-    backgroundColor: '#000',
-    width: '100%',
-    height: '100%',
+    backgroundColor: "#000",
+    width: "100%",
+    height: "100%",
   },
   page: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 0,
-    backgroundColor: '#000',
-    paddingTop: '-5%',
+    backgroundColor: "#000",
+    paddingTop: "-5%",
   },
 });

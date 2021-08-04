@@ -56,7 +56,7 @@ export default function WalletSettingScreen() {
           style={styles.btnStyle}
           onPress={() => navigation.navigate("GetMoneyScreen")}
         >
-          <Text style={styles.btnTxt}>Вывести деньги </Text>
+          <Text style={styles.btnTxt}>Pullarni chiqarib olish </Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

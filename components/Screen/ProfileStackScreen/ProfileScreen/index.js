@@ -234,7 +234,7 @@ export default function ProfileScreen() {
               style={styles.getCashBtn}
               onPress={() => navigation.navigate("GetMoneyScreen")}
             >
-              <Text style={styles.btnTxt}>Вывести деньги</Text>
+              <Text style={styles.btnTxt}>Pullarni chiqarib olish</Text>
             </TouchableOpacity>
           </View>
         ) : null}

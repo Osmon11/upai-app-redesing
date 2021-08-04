@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,19 +7,19 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
-} from 'react-native';
+} from "react-native";
 
-import HeaderInStackScreens from '../../../Common/HeaderInStackScreens';
-import GetMoneyBlog from './GetMoneyBlog';
+import HeaderInStackScreens from "../../../Common/HeaderInStackScreens";
+import GetMoneyBlog from "./GetMoneyBlog";
 
-const window = Dimensions.get('window');
+const window = Dimensions.get("window");
 const scalePoint = window.width / 380;
 
 export default function GetMoneyScreen() {
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'height' : null}
+        behavior={Platform.OS === "ios" ? "height" : null}
         style={{ flex: 1 }}
       >
         <ScrollView
@@ -30,7 +30,7 @@ export default function GetMoneyScreen() {
             <HeaderInStackScreens />
           </View>
           <View style={styles.contentBox}>
-            <Text style={styles.mainText}>Вывод денег</Text>
+            <Text style={styles.mainText}>Chiqarish денег</Text>
           </View>
           <View style={{ flex: 1 }}>
             <GetMoneyBlog />
@@ -43,22 +43,22 @@ export default function GetMoneyScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   headerBox: {
-    marginTop: Platform.OS === 'ios' ? '15%' : '5%',
-    width: '100%',
+    marginTop: Platform.OS === "ios" ? "15%" : "5%",
+    width: "100%",
     height: scalePoint * 17,
   },
   mainContentBox: {
     flex: 1,
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   contentBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '10%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: "10%",
   },
   mainText: {
     fontSize: 24,

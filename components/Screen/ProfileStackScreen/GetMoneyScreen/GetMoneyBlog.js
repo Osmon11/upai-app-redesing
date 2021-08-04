@@ -151,7 +151,7 @@ export default function GetMoneyBlog() {
 
         <View style={{ display: "flex" }}>
           <Card style={styles.getMoneyCard}>
-            <Text style={styles.getMoneyTxt}>Вывести деньги</Text>
+            <Text style={styles.getMoneyTxt}>Pullarni chiqarib olish</Text>
             <Text style={styles.getMoneyTxtBottom}>
               * комисия 10% от вывода
             </Text>
@@ -263,7 +263,7 @@ export default function GetMoneyBlog() {
               style={styles.btnStyle}
               onPress={() => withdrawal()}
             >
-              <Text style={styles.btnTxt}>Вывести деньги</Text>
+              <Text style={styles.btnTxt}>Pullarni chiqarib olish</Text>
             </TouchableOpacity>
           </Card>
         </View>

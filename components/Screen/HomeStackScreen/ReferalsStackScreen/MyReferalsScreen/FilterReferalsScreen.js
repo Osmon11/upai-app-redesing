@@ -20,10 +20,10 @@ export default function FilterReferalsScreen() {
         <HeaderInStackScreens />
       </View>
       <View style={styles.mainContentBox}>
-        <Text style={styles.mainText}>Сортировать</Text>
+        <Text style={styles.mainText}>Navlarga ajratish</Text>
       </View>
       <View style={styles.dateBox}>
-        <Text style={styles.dateText}>Дата</Text>
+        <Text style={styles.dateText}>Sana</Text>
         <DateTimePickerModal
           isVisible={true}
           mode='date'
@@ -58,7 +58,7 @@ export default function FilterReferalsScreen() {
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.btnStyle}>
-          <Text style={styles.btnTxt}>Сортировать</Text>
+          <Text style={styles.btnTxt}>Navlarga ajratish</Text>
         </TouchableOpacity>
       </View>
     </View>

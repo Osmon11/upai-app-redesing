@@ -24,7 +24,7 @@ export default function FilterNotificationsScreen() {
   const navigation = useNavigation();
 
   const [choice, setChoice] = useState({
-    label: "Все, за весь период",
+    label: "Barchasi, за весь период",
     value: "all",
   });
   const [date, setDate] = useState(new Date());
@@ -75,7 +75,7 @@ export default function FilterNotificationsScreen() {
           <HeaderInStackScreens />
         </View>
         <View style={styles.mainContentBox}>
-          <Text style={styles.mainText}>Сортировать</Text>
+          <Text style={styles.mainText}>Navlarga ajratish</Text>
           <View style={styles.dropDownsBox}>
             <View style={styles.categoryFilterBox}>
               <TouchableOpacity
@@ -86,11 +86,11 @@ export default function FilterNotificationsScreen() {
                 {/* <RNPickerSelect
                   items={[
                     {
-                      label: 'Отклоненные',
+                      label: 'Rad etilganlari',
                       value: 'decline',
                     },
                     {
-                      label: 'В ожидании',
+                      label: 'Kutishdagilari',
                       value: 'pending',
                     },
                     {
@@ -115,7 +115,7 @@ export default function FilterNotificationsScreen() {
             </View>
           </View>
           <View style={styles.dateBox}>
-            <Text style={styles.dateText}>Дата</Text>
+            <Text style={styles.dateText}>Sana</Text>
             <View style={styles.datePickersBox}>
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
@@ -204,7 +204,7 @@ export default function FilterNotificationsScreen() {
               }
             }}
           >
-            <Text style={styles.btnText}>Сортировать</Text>
+            <Text style={styles.btnText}>Navlarga ajratish</Text>
           </TouchableOpacity>
         </View>
       </View>

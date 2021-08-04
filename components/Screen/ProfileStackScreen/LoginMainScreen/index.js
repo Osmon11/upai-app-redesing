@@ -115,7 +115,7 @@ export default function LoginMainScreen() {
           style={styles.cantLoginBox}
         >
           <Text style={styles.cantloginTxt}>
-            {!forgotPass ? "Не можете войти ? " : "Войти"}
+            {!forgotPass ? "Не можете войти ? " : "Kirish"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity

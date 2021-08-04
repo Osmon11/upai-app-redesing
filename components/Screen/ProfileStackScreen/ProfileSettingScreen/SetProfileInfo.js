@@ -258,7 +258,7 @@ export default function SetProfileInfo() {
         >
           <TouchableOpacity style={styles.btnSignIn}>
             <Text style={styles.btnTxt} onPress={() => changePersonalInfo()}>
-              Сохранить
+              Saqlab qolish
             </Text>
           </TouchableOpacity>
         </View>

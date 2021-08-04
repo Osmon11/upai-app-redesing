@@ -55,7 +55,7 @@ export default function NewCompaniesScreen({ route }) {
           <Header />
         </View>
         <View>
-          <Text style={styles.mainText}>Новинки</Text>
+          <Text style={styles.mainText}>Yangiliklar</Text>
         </View>
         <View style={styles.mainContentBox}>
           <View style={styles.scrollItem}>

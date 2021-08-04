@@ -56,9 +56,9 @@ export default function FilterBuyHistoryScreen() {
           <HeaderInStackScreens />
         </View>
         <View style={styles.mainContentBox}>
-          <Text style={styles.mainText}>Сортировать</Text>
+          <Text style={styles.mainText}>Navlarga ajratish</Text>
           <View style={styles.dateBox}>
-            <Text style={styles.dateText}>Дата</Text>
+            <Text style={styles.dateText}>Sana</Text>
             <View style={styles.datePickersBox}>
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
@@ -136,7 +136,7 @@ export default function FilterBuyHistoryScreen() {
               }
             }}
           >
-            <Text style={styles.btnText}>Сортировать</Text>
+            <Text style={styles.btnText}>Navlarga ajratish</Text>
           </TouchableOpacity>
         </View>
       </View>

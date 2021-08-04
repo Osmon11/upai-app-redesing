@@ -112,7 +112,7 @@ export default function NotificationsScreen({ route }) {
               businessStatus ? styles.mainTxtBox : styles.businessMainTxtBox
             }
           >
-            <Text style={styles.mainText}>Уведомления</Text>
+            <Text style={styles.mainText}>Xabarnomalar</Text>
             <TouchableOpacity
               style={businessStatus ? { display: "flex" } : { display: "none" }}
               onPress={() => navigation.navigate("FilterNotificationsScreen")}
@@ -135,14 +135,16 @@ export default function NotificationsScreen({ route }) {
               style={open ? styles.active : styles.logInBtn}
             >
               <Text style={open ? styles.btnActive : styles.btnTxt}>
-                Поступления
+                Tushimlar
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setOpen(!open)}
               style={open ? styles.logInBtn : styles.active}
             >
-              <Text style={open ? styles.btnTxt : styles.btnActive}>Вывод</Text>
+              <Text style={open ? styles.btnTxt : styles.btnActive}>
+                Chiqarish
+              </Text>
             </TouchableOpacity>
           </View>
           <View
