@@ -26,33 +26,33 @@ export default function AboutAppScreen() {
             <HeaderInStackScreens />
           </View>
           <View>
-            <Text style={styles.contentName}>О приложении</Text>
+            <Text style={styles.contentName}>Dastur haqida</Text>
             <Text style={styles.contentTxt}>
-              <Text style={styles.boldTxt}>Upai </Text> - это кэшбэк сервис, где
-              пользователь может экономит на покупках получая часть потраченной
-              суммы живыми деньгами, а субъект предпринимательства увеличивает
-              продажи и получает лояльных клиентов.
+              <Text style={styles.boldTxt}>Upai </Text> - bu keshbek xizmati
+              bo'lib, unda foydalanuvchi real pulga sarflangan summaning bir
+              qismini olish orqali xaridlarni tejashi mumkin, va tadbirkorlik
+              sub'ekti sotishni ko'paytiradi va sodiq mijozlarni oladi.
             </Text>
-            <Text style={styles.contentName}>Upai (для партнеров)</Text>
+            <Text style={styles.contentName}>Upai (hamkorlar uchun)</Text>
             <Text style={styles.contentTxt}>
-              <Text style={styles.boldTxt}>Upai </Text> - это партнер Вашего
-              бизнеса. Наша миссия в том, чтобы привлекать к Вам больше
-              клиентов, которым вы будете перечислять кешбэк через сервис Upai.
-              Вы зарабатываете на продаже своих товаров и услуг, получаете
-              лояльных покупателей, экономите на рекламе.
+              <Text style={styles.boldTxt}>Upai </Text> - bu sizning biznes
+              Sherigingiz. Bizning vazifamiz sizga ko'proq mijozlarni jalb
+              qilishdir, ularga Upai xizmati orqali keshbek o'tkazasiz. Siz o'z
+              tovarlaringiz va xizmatlaringizni sotishdan daromad olasiz, sodiq
+              mijozlar topasiz, reklamaga tejaysiz.
             </Text>
             <Text style={styles.contentTxt}>
-              Barchasi что Вам нужно, это присоединится к системе Upai открыв
-              бизнес профиль, пополнить лицевой счет в нашем сервисе, средства с
-              которого будут перечисляться вашим клиентам в виде кэшбэк, при
-              этом сервис взымает определенный процент с суммы кешбэк в качестве
-              комиссии за услуги. Процентную ставку по кэшбэку Вы сможете
-              устанавить сами.
+              Barchasi sizga biznes profilini ochish orqali Upai tizimiga
+              qo'shilish, bizning xizmatimizdagi shaxsiy hisobingizni
+              to'ldirish, pul mablag'lari mijozlarga naqd pul ko'rinishida
+              o'tkaziladi, xizmat esa naqd pul miqdorining ma'lum foizini oladi.
+              xizmatlar uchun komissiya sifatida. Keshbekka foiz stavkasini
+              O'zingiz belgilashingiz mumkin.
             </Text>
           </View>
           <View>
             <Text style={styles.companyTxt}>
-              Разработано и поддерживается компанией
+              Kompaniya tomonidan ishlab chiqilgan va qo'llab –quvvatlanyapti
             </Text>
             <TouchableOpacity
               onPress={() => Linking.openURL("https://odigital.app/")}

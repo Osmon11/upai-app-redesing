@@ -124,7 +124,7 @@ export default function ReferalsScreen() {
         </View>
         <View>
           <View style={styles.mainContentBox}>
-            <Text style={styles.mainText}>Реферальная система</Text>
+            <Text style={styles.mainText}>Yo'naltiruvchi tizim</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("AboutReferalScreen")}
             >
@@ -140,10 +140,10 @@ export default function ReferalsScreen() {
           </View>
           <View style={styles.textContentBox}>
             <Text style={styles.textContent}>
-              Хочешь добавить свою компанию в УПАЙ {"\n"}
-              Укажите название , номер и мы свяжемся с вами. {"\n"}
-              {"\n"}Пригласи друга по уникальной ссылке и получай бонусы Получай
-              бонусы приглашая друзей
+              O'z kompaniyangizni UPAYga qo'shishni xohlaysizmi {"\n"}
+              Nom, raqamni kiriting va biz siz bilan bog'lanamiz. {"\n"}
+              {"\n"}Do'stingizni noyob havola orqali taklif qiling va bonuslarga
+              ega bo'ling Do'stlaringizni taklif qilib bonuslarga ega bo'ling
             </Text>
           </View>
           <View style={styles.textInputBox}>
@@ -158,11 +158,11 @@ export default function ReferalsScreen() {
           >
             <TouchableOpacity style={styles.btnStyle} onPress={copy}>
               <Image style={styles.btnIcon} source={copyLinkIcon} />
-              <Text style={styles.btnTxt}>Скопировать ссылку</Text>
+              <Text style={styles.btnTxt}>Havolani nusxasini ko'chirish</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnStyle} onPress={sendUrl}>
               <Image style={styles.btnIcon} source={shareLinkIcon} />
-              <Text style={styles.btnTxt}>Поделиться</Text>
+              <Text style={styles.btnTxt}>Baham ko'rish</Text>
             </TouchableOpacity>
           </View>
         </View>

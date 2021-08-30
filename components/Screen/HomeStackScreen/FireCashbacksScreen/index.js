@@ -53,7 +53,7 @@ export default function FireCashbacksScreen({ route }) {
           <Header />
         </View>
         <View style={styles.mainTxtBox}>
-          <Text style={styles.mainText}>Горящий кэшбэк</Text>
+          <Text style={styles.mainText}>Yonuvchi keshbek</Text>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("FilterScreen", {

@@ -156,7 +156,7 @@ export default function CompanyScreen({ route, navigation }) {
       "Мошенничество или обман",
       "Ложная информация",
       "Мне это не нравится",
-      "Другое",
+      "Boshqalar",
     ];
 
     ActionSheet.show(

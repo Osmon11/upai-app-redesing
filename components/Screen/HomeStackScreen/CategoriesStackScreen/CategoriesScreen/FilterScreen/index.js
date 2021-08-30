@@ -25,7 +25,7 @@ export default function FilterScreen({ route }) {
   const navigation = useNavigation();
 
   const [choice, setChoice] = useState({
-    label: "По рейтингу",
+    label: "Reyting bo'yicha",
     value: "rating",
   });
   const [selectedValue, setSelectedValue] = useState();
@@ -35,7 +35,7 @@ export default function FilterScreen({ route }) {
   const [answerModal, setAnswerModal] = useState(false);
   const [sortModal, setSortModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
-  const [nameOfCategory, setNameOfCategory] = useState("Выберите категорию");
+  const [nameOfCategory, setNameOfCategory] = useState("Kategoriyani tanlang");
   const [selectedName, setSelectedName] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const { name } = route?.params;
@@ -60,17 +60,17 @@ export default function FilterScreen({ route }) {
     setCategories(data);
 
     setSelectedName(name != "hot-cashback" ? name : null);
-    setNameOfCategory(name != "hot-cashback" ? name : "Выберите категорию");
+    setNameOfCategory(name != "hot-cashback" ? name : "Kategoriyani tanlang");
     setSelectedId(id ? id : null);
   };
   const getAllAboutCategory = (el) => {
     setSelectedId(el ? el.id : null);
     setSelectedName(el ? el.name : null);
-    setNameOfCategory(el ? el.name : "Выберите категорию");
+    setNameOfCategory(el ? el.name : "Kategoriyani tanlang");
   };
   const callDialog = () => {
     setAnswerModal(true);
-    setModalTxt("Выберите категорию");
+    setModalTxt("Kategoriyani tanlang");
   };
   const getResult = (value) => {
     setChoice(value);
@@ -94,7 +94,7 @@ export default function FilterScreen({ route }) {
                 <RNPickerSelect
                   items={categories}
                   placeholder={{
-                    label: 'Выберите категорию',
+                    label: 'Kategoriyani tanlang',
                     value: 'empty',
                   }}
                   style={pickerSelectStyles}

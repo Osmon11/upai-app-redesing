@@ -40,7 +40,7 @@ export default function FireCashbacksSlider() {
       <View>
         <View style={styles.nameOfCategoryGroupBox}>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.nameOfCategoryGroup}>Горящий кэшбэк</Text>
+            <Text style={styles.nameOfCategoryGroup}>Yonuvchi keshbek</Text>
             <Image style={styles.fireIcon} source={fireIcon} />
           </View>
           <TouchableOpacity

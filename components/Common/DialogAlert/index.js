@@ -26,7 +26,7 @@ export default function DialogAlert({
           <View style={styles.accessBox}>
             {visible != "none" ? (
               <TouchableOpacity onPress={() => setAnswerModal(false)}>
-                <Text style={styles.btnTxt}>Отмена</Text>
+                <Text style={styles.btnTxt}>Bekor qilish</Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity>

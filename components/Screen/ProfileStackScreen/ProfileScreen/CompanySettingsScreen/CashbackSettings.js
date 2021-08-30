@@ -70,7 +70,7 @@ export default function CasbackSettingsScreen({ route }) {
   const [modalTxt, setModalTxt] = useState(false);
   const [customDatesStyles, setCustomDatesStyles] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [nameOfCategory, setNameOfCategory] = useState("Выберите категорию");
+  const [nameOfCategory, setNameOfCategory] = useState("Kategoriyani tanlang");
   const [selectedId, setSelectedId] = useState(null);
   const [viewLoader, setViewLoader] = React.useState(false);
   React.useEffect(() => {
@@ -142,13 +142,13 @@ export default function CasbackSettingsScreen({ route }) {
       });
     setCategories(data);
 
-    setNameOfCategory(id ? id : "Выберите категорию");
+    setNameOfCategory(id ? id : "Kategoriyani tanlang");
     setSelectedId(name ? name : null);
   };
   const getAllAboutCategory = (el) => {
     setSelectedId(el ? el.id : null);
 
-    setNameOfCategory(el ? el.name : "Выберите категорию");
+    setNameOfCategory(el ? el.name : "Kategoriyani tanlang");
   };
 
   const showTimePicker = () => {
@@ -191,7 +191,7 @@ export default function CasbackSettingsScreen({ route }) {
     setImg(pickerResult);
   };
   const addPhotoToAccount = () => {
-    const btns = ["Выбрать из галереи", "Отмена"];
+    const btns = ["Galereyadan tanlash", "Bekor qilish"];
     ActionSheet.show(
       {
         options: btns,
@@ -238,7 +238,7 @@ export default function CasbackSettingsScreen({ route }) {
     } else if (!selectedId) {
       setViewLoader(false);
       setAnswerModal(true);
-      setModalTxt("выберите категорию");
+      setModalTxt("Kategoriyani tanlang");
     } else {
       !cashId &&
         data.append("img", {
@@ -369,7 +369,7 @@ export default function CasbackSettingsScreen({ route }) {
                 <RNPickerSelect
                   items={categories}
                   placeholder={{
-                    label: 'Выберите категорию',
+                    label: 'Kategoriyani tanlang',
                     value: 'empty',
                   }}
                   style={pickerSelectStyles}
@@ -504,7 +504,7 @@ export default function CasbackSettingsScreen({ route }) {
             visible='none'
             funcOk={() => {
               modalTxt == "добавьте фотографию" ||
-              modalTxt == "выберите категорию"
+              modalTxt == "Kategoriyani tanlang"
                 ? setAnswerModal(false)
                 : exit();
             }}

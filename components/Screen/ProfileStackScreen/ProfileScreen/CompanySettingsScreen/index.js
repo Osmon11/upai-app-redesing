@@ -58,7 +58,7 @@ export default function CompanySettingsScreen({ route }) {
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  const [nameOfCategory, setNameOfCategory] = useState("Выберите категорию");
+  const [nameOfCategory, setNameOfCategory] = useState("Kategoriyani tanlang");
   const [selectedId, setSelectedId] = useState(null);
   const [img, setImg] = useState();
   const [homeImg, sethomeImg] = useState();
@@ -123,13 +123,13 @@ export default function CompanySettingsScreen({ route }) {
       });
     setCategories(data);
 
-    setNameOfCategory(name ? name : "Выберите категорию");
+    setNameOfCategory(name ? name : "Kategoriyani tanlang");
     setSelectedId(id ? id : null);
   };
   const getAllAboutCategory = (el) => {
     setSelectedId(el ? el.id : null);
 
-    setNameOfCategory(el ? el.name : "Выберите категорию");
+    setNameOfCategory(el ? el.name : "Kategoriyani tanlang");
   };
   const getAllInfo = async (arr) => {
     let resp = await fetch(API + "shop/" + shopId + "/");
@@ -226,7 +226,7 @@ export default function CompanySettingsScreen({ route }) {
   };
 
   const addPhotoToAccount = (name) => {
-    const btns = ["Выбрать из галереи", "Отмена"];
+    const btns = ["Galereyadan tanlash", "Bekor qilish"];
     ActionSheet.show(
       {
         options: btns,
@@ -264,7 +264,7 @@ export default function CompanySettingsScreen({ route }) {
 
     if (selectedId == null || selectedId == undefined) {
       setAnswerModal(true);
-      setModalTxt("Выберите категорию");
+      setModalTxt("Kategoriyani tanlang");
     } else {
       data.categories = [selectedId];
 

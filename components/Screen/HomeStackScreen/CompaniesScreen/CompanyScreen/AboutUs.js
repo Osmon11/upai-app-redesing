@@ -41,7 +41,7 @@ export default function AboutUs(props) {
           onPress={() => onShare(props.data.share_link)}
         >
           <Image style={styles.shareIcon} source={shareIcon} />
-          <Text style={styles.shareBtnText}>Поделиться заведением</Text>
+          <Text style={styles.shareBtnText}>Bu joyni baham ko'ring</Text>
         </TouchableOpacity>
       </View>
       <DialogAlert

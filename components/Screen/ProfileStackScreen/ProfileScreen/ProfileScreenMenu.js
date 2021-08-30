@@ -70,7 +70,7 @@ export default function ProfileScreenMenu({ data }) {
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={CashbackIcon} />
-              <Text style={styles.btnText}>Горящий кэшбэк</Text>
+              <Text style={styles.btnText}>Yonuvchi keshbek</Text>
             </View>
           </TouchableOpacity>
         </>
@@ -137,7 +137,7 @@ export default function ProfileScreenMenu({ data }) {
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={aboutIcon} />
-              <Text style={styles.btnText}>О программе</Text>
+              <Text style={styles.btnText}>Dastur haqida</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -168,7 +168,7 @@ export default function ProfileScreenMenu({ data }) {
           >
             <View style={styles.btnContent}>
               <Image style={styles.btnIcon} source={storeSettingIcon} />
-              <Text style={styles.btnText}>Настройки</Text>
+              <Text style={styles.btnText}>Sozlamalar</Text>
             </View>
           </TouchableOpacity>
         </>
@@ -188,7 +188,7 @@ export default function ProfileScreenMenu({ data }) {
       >
         <View style={styles.btnContent}>
           <Image style={styles.btnIcon} source={SettingIcon} />
-          <Text style={styles.btnText}>Настройки кошелька</Text>
+          <Text style={styles.btnText}>Sozlamalar кошелька</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -226,7 +226,7 @@ export default function ProfileScreenMenu({ data }) {
       >
         <View style={styles.btnContent}>
           <Image style={styles.btnIcon} source={LogOutIcon} />
-          <Text style={styles.btnText}>Выйти</Text>
+          <Text style={styles.btnText}>Chiqish</Text>
         </View>
       </TouchableOpacity>
       <ExitDialog

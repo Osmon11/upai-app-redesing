@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React from "react";
+import { View, Text, StyleSheet, Platform } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
-import HeaderInStackScreens from '../../../Common/HeaderInStackScreens';
+import HeaderInStackScreens from "../../../Common/HeaderInStackScreens";
 
 export default function AboutBussines() {
   return (
@@ -16,17 +16,17 @@ export default function AboutBussines() {
         </View>
         <View style={styles.showbleView}>
           <View style={styles.namePageView}>
-            <Text style={styles.namePage}>Что такое бизнес профиль</Text>
+            <Text style={styles.namePage}>Biznes profil nima</Text>
           </View>
           <View style={styles.textContent}>
             <Text style={styles.topTxt}>
-              Upai это партнер Вашего бизнеса. Наша миссия в том, чтобы
-              привлекать к Вам больше клиентов, которым вы будете перечислять
-              кэшбэк через сервис Upai.{'\n'}
+              Upai - sizning biznes sherigingiz. Bizning vazifamiz Sizga ko'proq
+              mijozlarni jalb qiling, ularni ro'yxatiga kiritasiz Upai xizmati
+              orqali naqd pul qaytarish.{"\n"}
             </Text>
             <Text style={styles.bottomTxt}>
-              Вы зарабатываете на продаже своих товаров и услуг, получите
-              лояльных покупателей, экономите на рекламе.{' '}
+              Siz tovarlar va xizmatlarni sotishdan daromad olasiz, siz olasiz
+              sodiq mijozlar, reklama tejash.{" "}
             </Text>
           </View>
         </View>
@@ -37,44 +37,44 @@ export default function AboutBussines() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   mainContent: {
-    width: '95%',
-    alignSelf: 'center',
+    width: "95%",
+    alignSelf: "center",
   },
   headerBox: {
-    width: '100%',
-    marginTop: Platform.OS === 'ios' ? '15%' : '10%',
+    width: "100%",
+    marginTop: Platform.OS === "ios" ? "15%" : "10%",
     height: 23,
   },
   showbleView: {
-    marginTop: '5%',
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginTop: "5%",
+    marginLeft: "5%",
+    marginRight: "5%",
   },
   namePage: {
-    color: '#313131',
+    color: "#313131",
     fontSize: 24,
     lineHeight: 26,
-    marginLeft: '5%',
+    marginLeft: "5%",
   },
   textContent: {
-    marginTop: '10%',
+    marginTop: "10%",
   },
   topTxt: {
-    color: '#000',
+    color: "#000",
     fontSize: 14,
     lineHeight: 16,
-    fontFamily: 'Roboto',
-    textAlign: 'justify',
+    fontFamily: "Roboto",
+    textAlign: "justify",
   },
   bottomTxt: {
-    marginTop: '5%',
-    color: '#000',
+    marginTop: "5%",
+    color: "#000",
     fontSize: 14,
     lineHeight: 16,
-    fontFamily: 'Roboto',
-    textAlign: 'justify',
+    fontFamily: "Roboto",
+    textAlign: "justify",
   },
 });

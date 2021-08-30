@@ -27,9 +27,9 @@ const width = Dimensions.get("window").width;
 const scalePoint = width / 380;
 
 export default function SetProfileInfo() {
-  const [value, numberInput] = useState("Введите свое имя и фамилию");
-  const [value1, passInput] = useState("Введите телефонный номер");
-  const [value2, rePassInput] = useState("Введите свою почту");
+  const [value, numberInput] = useState("Ismingiz va familiyangizni kiriting");
+  const [value1, passInput] = useState("Telefon raqamini kiriting");
+  const [value2, rePassInput] = useState("O’z pochtangizni kiriting");
   const [data, setData] = useState();
   const [answerModal, setAnswerModal] = useState(false);
   const [modalTxt, setModalTxt] = useState();
@@ -69,7 +69,7 @@ export default function SetProfileInfo() {
     pickerResult.cancelled ? null : changePhoto(pickerResult);
   };
   const addPhotoToAccount = () => {
-    const btns = ["Сделать фото", "Выбрать из галереи", "Отмена"];
+    const btns = ["Suratga olish", "Galereyadan tanlash", "Bekor qilish"];
     ActionSheet.show(
       {
         options: btns,

@@ -103,7 +103,7 @@ export default function MyBuys(props) {
               </View>
             ))
           ) : (
-            <Text>Покупок пока нет</Text>
+            <Text>Hozircha xaridlar hisobda yo'q</Text>
           )}
         </View>
       </View>

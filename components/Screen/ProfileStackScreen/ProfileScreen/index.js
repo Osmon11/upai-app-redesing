@@ -186,7 +186,7 @@ export default function ProfileScreen() {
               <Text style={styles.buyNumsText}>
                 {data && data.shop ? data.total_sale : data?.total_purchase}
               </Text>
-              <Text style={styles.buyStringText}>покупок</Text>
+              <Text style={styles.buyStringText}>xarid qilish</Text>
               <Image style={styles.buyBoxImg} source={profileScreenBuyIcon} />
             </View>
             <View style={styles.buyOneBoxStyle}>
@@ -196,7 +196,7 @@ export default function ProfileScreen() {
                   : data?.total_purchase_amount}
               </Text>
               <Text style={styles.buyStringText}>
-                общая сумма {"\n"} покупок
+                xaridlarning umumiy {"\n"} miqdori
               </Text>
               <Image
                 style={styles.buyBoxImg}
@@ -214,7 +214,7 @@ export default function ProfileScreen() {
               ) : (
                 <>
                   <Text style={styles.buyNumsText}>{data && data.balance}</Text>
-                  <Text style={styles.buyStringText}>на счету</Text>
+                  <Text style={styles.buyStringText}>hisobda</Text>
                 </>
               )}
               <Image

@@ -179,7 +179,7 @@ export default function HotCashbacksInfoScreen({ route }) {
           </View>
         </View>
         <View style={styles.contentBox}>
-          <Text style={styles.contentTxt}>Горящий кэшбэк действует</Text>
+          <Text style={styles.contentTxt}>Yonuvchi keshbek действует</Text>
           <View style={styles.cashTimeBox}>
             <View style={styles.cashClockImgBox}>
               <Image source={hotCashClockImg} style={styles.clockImg} />

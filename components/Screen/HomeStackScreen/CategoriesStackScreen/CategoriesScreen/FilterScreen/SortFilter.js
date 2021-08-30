@@ -15,15 +15,15 @@ const scalePoint = window.width / 380;
 
 export default function SortFilter({ answerModal, setAnswerModal, getResult }) {
   const [label1, setLabel1] = useState({
-    label: "По рейтингу",
+    label: "Reyting bo'yicha",
     value: "rating",
   });
   const [label2, setLabel2] = useState({
-    label: "По количеству отзывов",
+    label: "Sharhlar soni bo'yicha",
     value: "review-count",
   });
   const [label3, setLabel3] = useState({
-    label: "Самые новые",
+    label: "Eng yangi",
     value: "newest",
   });
   const [choice1, setChoice1] = useState(true);

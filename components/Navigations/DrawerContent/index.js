@@ -142,7 +142,7 @@ export function DrawerContent(props) {
                 />
               )}
               label={() => (
-                <Title style={styles.linksText}>Горящий кэшбэк</Title>
+                <Title style={styles.linksText}>Yonuvchi keshbek</Title>
               )}
               onPress={() => {
                 props.navigation.navigate("CashbacksScreen");
@@ -167,7 +167,7 @@ export function DrawerContent(props) {
                 />
               )}
               label={() => (
-                <Title style={styles.linksText}>Горящий кэшбэк</Title>
+                <Title style={styles.linksText}>Yonuvchi keshbek</Title>
               )}
               onPress={() => {
                 props.navigation.navigate("CashbacksScreen");
@@ -188,7 +188,7 @@ export function DrawerContent(props) {
               />
             )}
             label={() => (
-              <Title style={styles.linksText}>Партнерская программа</Title>
+              <Title style={styles.linksText}>Hamkorlik dasturi</Title>
             )}
             onPress={() => {
               props.navigation.navigate(
@@ -211,7 +211,7 @@ export function DrawerContent(props) {
                 source={aboutIcon}
               />
             )}
-            label={() => <Title style={styles.linksText}>О программе</Title>}
+            label={() => <Title style={styles.linksText}>Dastur haqida</Title>}
             onPress={() => {
               props.navigation.navigate("AboutAppScreen");
             }}
@@ -241,7 +241,7 @@ export function DrawerContent(props) {
               icon={() => (
                 <Image style={{ width: 12, height: 12 }} source={SettingIcon} />
               )}
-              label={() => <Title style={styles.linksText}>Настройки</Title>}
+              label={() => <Title style={styles.linksText}>Sozlamalar</Title>}
               onPress={() =>
                 props.navigation.navigate("ProfileStackScreen", {
                   screen: "ProfileSettingScreen",
@@ -264,7 +264,7 @@ export function DrawerContent(props) {
                 />
               )}
               onPress={() => setIsVisible(true)}
-              label={() => <Title style={styles.linksText}>Выйти</Title>}
+              label={() => <Title style={styles.linksText}>Chiqish</Title>}
             />
           ) : (
             <DrawerItem

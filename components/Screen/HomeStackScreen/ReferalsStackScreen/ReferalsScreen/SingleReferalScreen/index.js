@@ -48,7 +48,7 @@ export default function SingleReferalScreen({ route }) {
         </View>
         <View style={styles.showbleView}>
           <View style={styles.namePageView}>
-            <Text style={styles.namePage}>Мои рефералы</Text>
+            <Text style={styles.namePage}>Mening tavsiyanomalarim</Text>
           </View>
         </View>
         <View>

@@ -33,7 +33,7 @@ export default function MyReferalsScreen({ route }) {
           <HeaderInStackScreens />
         </View>
         <View style={styles.mainContentBox}>
-          <Text style={styles.mainText}>Мои рефералы</Text>
+          <Text style={styles.mainText}>Mening tavsiyanomalarim</Text>
         </View>
 
         <View>
